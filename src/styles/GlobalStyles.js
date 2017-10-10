@@ -23,7 +23,7 @@ var Style = StyleSheet.create({
     drawerIcon: {
         width: 30,
         height: 30
-    }
+    },
 });
 
 var Color = {

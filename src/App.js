@@ -26,8 +26,8 @@ var Color = Theme.Color;
 
 const AppDrawer = DrawerNavigator({
   Home: {screen: HomePage},
-  Setting: {screen: SettingPage},
-  Transaction: {screen: TransactionPage}
+  Transaction: {screen: TransactionPage},
+  Setting: {screen: SettingPage}
 }, 
 {
   drawerWidth: 250,
@@ -41,7 +41,7 @@ const AppDrawer = DrawerNavigator({
               <Image style={Style.drawerIcon} source={require('./assets/icons/user-shape.png')}/> 
             </View>
             <View style={{flex: 3, alignItems: 'flex-end'}}>
-              <Text style={localStyles.drawerTitleText}>Parin Kobboon</Text>
+              <Text style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>Parin Kobboon</Text>
             </View>
           </View>
         </View>
@@ -93,7 +93,7 @@ var localStyles = StyleSheet.create({
   drawerTitle: {
     flex: 3,
     backgroundColor: Color.lightBlue,
-    padding: 5
+    padding: 15
   },
   drawerTitleText: {
     color: '#ffffff',
