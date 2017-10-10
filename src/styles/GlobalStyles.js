@@ -15,6 +15,14 @@ var Style = StyleSheet.create({
     },
     centerX: {
         alignItems: 'center'
+    },
+    icon: {
+        width: 24,
+        height: 24
+    },
+    drawerIcon: {
+        width: 30,
+        height: 30
     }
 });
 

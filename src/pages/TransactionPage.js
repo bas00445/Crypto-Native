@@ -10,13 +10,13 @@ import {
 var Style = Theme.Style;
 var Color = Theme.Color;
 
-export default class SettingPage extends Component {
+export default class TransactionPage extends Component {
   static navigationOptions = {
-    title: 'Setting',
+    title: 'Transaction',
     header : null,
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('../assets/icons/cog-shape.png')}
+        source={require('../assets/icons/graph-shape.png')}
         style={[Style.icon, {tintColor: tintColor}]}
       />
     ),
@@ -26,7 +26,7 @@ export default class SettingPage extends Component {
     return (
       <View>
         <Text>
-          Welcome to Setting Page
+          Welcome to Transaction Page
         </Text>
       </View>
     );

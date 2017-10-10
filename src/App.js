@@ -5,7 +5,7 @@ import Theme from './styles/GlobalStyles';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import SettingPage from './pages/SettingPage';
-import StatPage from './pages/StatPage';
+import TransactionPage from './pages/TransactionPage';
 
 import { StackNavigator } from 'react-navigation';
 import { DrawerNavigator, DrawerItems } from 'react-navigation';
@@ -27,7 +27,7 @@ var Color = Theme.Color;
 const AppDrawer = DrawerNavigator({
   Home: {screen: HomePage},
   Setting: {screen: SettingPage},
-  Stat: {screen: StatPage}
+  Transaction: {screen: TransactionPage}
 }, 
 {
   drawerWidth: 250,
@@ -38,9 +38,9 @@ const AppDrawer = DrawerNavigator({
         <View style={{flex:3, justifyContent: 'center'}}>
           <View style={Style.colContent}>
             <View style={{flex: 1}}>
-              <Image source={require('./assets/icons/user-shape.png')}/> 
+              <Image style={Style.drawerIcon} source={require('./assets/icons/user-shape.png')}/> 
             </View>
-            <View style={{flex: 3}}>
+            <View style={{flex: 3, alignItems: 'flex-end'}}>
               <Text style={localStyles.drawerTitleText}>Parin Kobboon</Text>
             </View>
           </View>
@@ -50,7 +50,7 @@ const AppDrawer = DrawerNavigator({
           <View style={{flex: 1}}>
             <Text style={localStyles.drawerTitleText}>Balance</Text>
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
             <Text style={localStyles.drawerTitleText}>$500</Text>
           </View>
         </View>
@@ -60,7 +60,7 @@ const AppDrawer = DrawerNavigator({
             <Text style={localStyles.drawerTitleText}>Profit/loss</Text>
           </View>
 
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
             <Text style={localStyles.drawerTitleText}>+50%</Text>
           </View>
         </View>
