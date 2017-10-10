@@ -31,7 +31,7 @@ var Color = {
     lightWhite: '#e6e6e6',
     white: '#cccccc',
     lightBlue: '#1a75ff',
-    bule: '#0066ff',
+    blue: '#0066ff',
     red: '#ff3333'
 }
 

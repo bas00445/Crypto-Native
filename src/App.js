@@ -28,7 +28,7 @@ const AppDrawer = DrawerNavigator({
   Home: {screen: HomePage},
   Transaction: {screen: TransactionPage},
   Setting: {screen: SettingPage}
-}, 
+},
 {
   drawerWidth: 250,
   drawerPosition: 'left',
