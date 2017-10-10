@@ -24,6 +24,59 @@ import {
 var Style = Theme.Style;
 var Color = Theme.Color;
 
+const AppDrawer = DrawerNavigator({
+  Home: {screen: HomePage},
+  Setting: {screen: SettingPage},
+  Stat: {screen: StatPage}
+}, 
+{
+  drawerWidth: 250,
+  drawerPosition: 'left',
+  contentComponent: props => 
+    <View style={{flex: 1}}>
+      <View style={localStyles.drawerTitle}>
+        <View style={{flex:3, justifyContent: 'center'}}>
+          <View style={Style.colContent}>
+            <View style={{flex: 1}}>
+              <Image source={require('./assets/icons/user-shape.png')}/> 
+            </View>
+            <View style={{flex: 3}}>
+              <Text style={localStyles.drawerTitleText}>Parin Kobboon</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={[Style.colContent, {flex: 1, justifyContent: 'center'}]}>   
+          <View style={{flex: 1}}>
+            <Text style={localStyles.drawerTitleText}>Balance</Text>
+          </View>
+          <View style={{flex: 1}}>
+            <Text style={localStyles.drawerTitleText}>$500</Text>
+          </View>
+        </View>
+
+        <View style={[Style.colContent, {flex: 1, justifyContent: 'center'}]}>   
+          <View style={{flex: 1}}>
+            <Text style={localStyles.drawerTitleText}>Profit/loss</Text>
+          </View>
+
+          <View style={{flex: 1}}>
+            <Text style={localStyles.drawerTitleText}>+50%</Text>
+          </View>
+        </View>
+        
+      </View>
+
+      <View style={localStyles.drawerItemsContainer}>
+        <ScrollView>
+          <DrawerItems {...props} />
+        </ScrollView>
+      </View> 
+
+    </View>
+});
+
+
 const CryptoApp = StackNavigator({
   Login: {
     screen: LoginPage,
@@ -36,53 +89,21 @@ const CryptoApp = StackNavigator({
   },
 });
 
-const AppDrawer = DrawerNavigator({
-  Home: {screen: HomePage},
-  Setting: {screen: SettingPage},
-  Stat: {screen: StatPage}
-}, 
-{
-  drawerWidth: 250,
-  drawerPosition: 'left',
-  contentComponent: props => 
-    <View style={{flex: 1}}>
-      <View style={localStyles.drawerTitle}>
-        <View style={{flex:2}}>
-          <Image source={require('./assets/icons/user-shape.png')}/>
-        </View>
-        <View style={{flex: 1}}>
-          <Text>Parin Kobboon</Text>
-        </View>
-        <View style={{flex: 1}}>
-          <Text>Balance $500</Text>
-        </View>
-        <View style={{flex: 1}}>
-          <Text>Profit/Loss +50%</Text>
-        </View>
-      </View>
-
-      <View style={localStyles.drawerItemsContainer}>
-        <ScrollView>
-          <DrawerItems {...props} />
-        </ScrollView>
-      </View> 
-
-    </View>
-  
-});
-
 var localStyles = StyleSheet.create({
   drawerTitle: {
-    flex: 4,
+    flex: 3,
     backgroundColor: Color.lightBlue,
+    padding: 5
+  },
+  drawerTitleText: {
+    color: '#ffffff',
+    fontSize: 20
   },
   drawerItemsContainer: {
-    flex: 6, 
+    flex: 7, 
     backgroundColor: Color.lightWhite,
     padding: 2}
   });
-  
-  
   
   AppRegistry.registerComponent('CryptoApp', () => CryptoApp);
   

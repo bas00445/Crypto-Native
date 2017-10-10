@@ -10,8 +10,10 @@ var Style = StyleSheet.create({
     colContent: {
         flexDirection: 'row'
     },
-    flexCenter: {
+    centerY: {
         justifyContent: 'center',
+    },
+    centerX: {
         alignItems: 'center'
     }
 });

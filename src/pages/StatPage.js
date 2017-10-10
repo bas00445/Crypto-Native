@@ -7,7 +7,7 @@ import {
 
 export default class StatPage extends Component {
   static navigationOptions = {
-    title: 'Setting',
+    title: 'Transaction',
     header : null
   };
 
