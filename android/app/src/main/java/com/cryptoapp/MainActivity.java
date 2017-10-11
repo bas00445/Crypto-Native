@@ -1,4 +1,4 @@
-package com.cryptoapp;
+package com.pkcryptobot;
 
 import com.facebook.react.ReactActivity;
 
