@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
+import firebase from 'react-native-firebase';
 import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Button
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -16,19 +18,24 @@ export default class HomePage extends Component {
     header : null,
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('../assets/icons/home-shape.png')}
-        style={[Style.icon, {tintColor: tintColor}]}
+      source={require('../assets/icons/home-shape.png')}
+      style={[Style.icon, {tintColor: tintColor}]}
       />
     ),
   };
+  
+  unknownSignin(){
+    firebase.auth().signInAnonymously().then(
+      (user) => {
+        alert(user.isAnonymous);
+      });
+  }
 
   render() {
     return (
       <View>
-        <Text>
-          Welcome to Home Page
-        </Text>
+        <Button title="Sign in" onPress={this.unknownSignin.bind(this)}></Button>
       </View>
-    );
+      );
+    }
   }
-}

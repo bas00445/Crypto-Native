@@ -76,7 +76,6 @@ const AppDrawer = DrawerNavigator({
     </View>
 });
 
-
 const CryptoApp = StackNavigator({
   Login: {
     screen: LoginPage,
@@ -88,6 +87,7 @@ const CryptoApp = StackNavigator({
     }),
   },
 });
+
 
 var localStyles = StyleSheet.create({
   drawerTitle: {
@@ -105,5 +105,5 @@ var localStyles = StyleSheet.create({
     padding: 2}
   });
   
-  AppRegistry.registerComponent('CryptoApp', () => CryptoApp);
+  AppRegistry.registerComponent('pkcryptobot', () => CryptoApp);
   
