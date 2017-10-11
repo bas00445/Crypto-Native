@@ -25,10 +25,12 @@ export default class HomePage extends Component {
   };
   
   unknownSignin(){
-    firebase.auth().signInAnonymously().then(
-      (user) => {
-        alert(user.isAnonymous);
-      });
+    firebase.auth().signInAnonymously()
+      .then(() => {
+        alert('Success');
+      }
+      , (error)=> {alert('Sign in error')});
+    alert('Sign in was press');
   }
 
   render() {
