@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import * as firebase from 'firebase';
-import firebaseConfig from '../services/FirebaseConfig';
+import { firebaseConfig } from '../services/FirebaseConfig';
 import {
   StyleSheet,
   Text,
@@ -45,20 +45,33 @@ export default class LoginPage extends Component {
     }
 
   async signUp() {
-    try {
-        await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass);
-        // If success
-        this.setModalVisible(false);
-        this.alert('Sign in successfully');
-        this.props.navigation.navigate('Main');
-    } catch (error) {
-        alert('Error: ' + error.toString());
-    }
+      if (this.state.newPass == this.state.newPassConfirm) {
+        try {
+            await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass);
+            // If success
+            this.setModalVisible(false);
+            this.alert('Sign in successfully');
+            this.props.navigation.navigate('Main');
+        } catch (error) {
+            alert(error.toString());
+        }
+      } else {
+          alert('Password must be the same');
+      }
   }  
 
-  signInWithGoogle() {
+  async login() {
 
-  }
+    try {
+        await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
+        // Navigate to the Home page
+        this.props.navigation.navigate('Main');
+
+    } catch (error) {
+        alert(error.toString())
+    }
+
+    }
 
 
   render() {
@@ -76,6 +89,11 @@ export default class LoginPage extends Component {
                 visible={this.state.modalVisible}
                 onRequestClose={() => {this.setModalVisible(this, false)}}>
                 <View style={{padding: 10, flex: 1}}>
+
+                    <View style={{marginBottom: 4, backgroundColor: '#ffffff'}}>
+                        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Create a new account</Text>
+                    </View>
+
                     <View style={{marginBottom: 4}}>
                         <TextInput onChangeText={(text) => {this.setState({newEmail:text})}} 
                             placeholder={"Email"}></TextInput>
@@ -138,8 +156,8 @@ export default class LoginPage extends Component {
                 </View>
                 <View style={{flex: 1, padding: 5}}>
                     <Button
-                        onPress={this.signInWithGoogle.bind(this)}
-                        title="Google+"
+                        onPress={this.login.bind(this)}
+                        title="Sign in"
                         color={Color.red}/>
                 </View>
             </View>
