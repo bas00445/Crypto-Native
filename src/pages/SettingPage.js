@@ -13,7 +13,6 @@ var Color = Theme.Color;
 export default class SettingPage extends Component {
   static navigationOptions = {
     title: 'Setting',
-    header : null,
     drawerIcon: ({ tintColor }) => (
       <Image
         source={require('../assets/icons/cog-shape.png')}

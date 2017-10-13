@@ -44,6 +44,10 @@ export default class LoginPage extends Component {
         }
     }
 
+    loginDebug() {
+        this.props.navigation.navigate('Main');        
+    }
+
   async signUp() {
       if (this.state.newPass == this.state.newPassConfirm) {
         try {
@@ -147,7 +151,7 @@ export default class LoginPage extends Component {
                 <View style={Style.colContent}>
                     <View style={{flex: 7, padding: 5}}>
                         <Button title="Sign in" color={Color.blue} 
-                            onPress={this.login.bind(this)}>
+                            onPress={this.loginDebug.bind(this)}>
                         </Button>
                     </View>
 
