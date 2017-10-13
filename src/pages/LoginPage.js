@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import * as firebase from 'firebase';
-import { firebaseConfig } from '../services/FirebaseConfig';
+import { firebaseConfig, firebaseUID, setUID } from '../services/FirebaseConfig';
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,7 @@ import {
 
 // Firebase config
 firebase.initializeApp(firebaseConfig);
+var provider = new firebase.auth.GoogleAuthProvider();
 
 var Style = Theme.Style;
 var Color = Theme.Color;
@@ -65,18 +66,25 @@ export default class LoginPage extends Component {
   }  
 
   async login() {
-
     try {
         await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              setUID(user.uid);
+              alert(firebaseUID);
+            } else {
+              setUID('');
+            }
+          });
+
         // Navigate to the Home page
         this.props.navigation.navigate('Main');
-
+        
     } catch (error) {
-        alert(error.toString())
+        alert(error.toString());
     }
 
     }
-
 
   render() {
     return (
@@ -160,7 +168,6 @@ export default class LoginPage extends Component {
                             onPress={this.setModalVisible.bind(this, true)}>
                         </Button>
                     </View>
-                    
                 </View>
 
             </View>

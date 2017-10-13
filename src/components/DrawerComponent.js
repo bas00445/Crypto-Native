@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
-import firebase from 'firebase';
+import * as firebase from "firebase";
 import { DrawerItems } from 'react-navigation';
 import { NavigationActions } from 'react-navigation'
 import {
@@ -30,6 +30,15 @@ export default class DrawerComponent extends Component {
         } catch (error) {
             alert(error.toString());
         }
+    }
+
+    logoutDebug() {
+      const actionToDispatch = NavigationActions.reset({
+        index: 0,
+        key: null,  // black magic
+        actions: [NavigationActions.navigate({ routeName: 'Login' })]
+      })
+      this.props.navigation.dispatch(actionToDispatch)
     }
   
   render() {
