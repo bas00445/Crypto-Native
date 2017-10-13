@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
+import firebase from 'firebase';
 import { DrawerItems } from 'react-navigation';
+import { NavigationActions } from 'react-navigation'
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  ScrollView
+  ScrollView,
+  Button
 } from 'react-native';
 
 var Style = Theme.Style;
 var Color = Theme.Color;
 
 export default class DrawerComponent extends Component {
+
+  async logout() {
+        try {
+            await firebase.auth().signOut();
+            // Navigate to login view
+            const actionToDispatch = NavigationActions.reset({
+              index: 0,
+              key: null,  // black magic
+              actions: [NavigationActions.navigate({ routeName: 'Login' })]
+            })
+            this.props.navigation.dispatch(actionToDispatch)
+        } catch (error) {
+            alert(error.toString());
+        }
+    }
   
   render() {
-    const { navigation } = this.props;
+    navigation = this.props;
 
     return (
       <View style={{flex: 1}}>
@@ -55,6 +73,7 @@ export default class DrawerComponent extends Component {
       <View style={localStyles.drawerItemsContainer}>
         <ScrollView>
           <DrawerItems {...this.props} />
+          <Button title="Log out" color={Color.red} onPress={this.logout.bind(this)}></Button>
         </ScrollView>
       </View> 
 

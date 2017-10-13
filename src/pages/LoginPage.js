@@ -151,7 +151,7 @@ export default class LoginPage extends Component {
                 <View style={Style.colContent}>
                     <View style={{flex: 7, padding: 5}}>
                         <Button title="Sign in" color={Color.blue} 
-                            onPress={this.loginDebug.bind(this)}>
+                            onPress={this.login.bind(this)}>
                         </Button>
                     </View>
 
