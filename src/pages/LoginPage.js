@@ -47,7 +47,7 @@ export default class LoginPage extends Component {
   async signUp() {
       if (this.state.newPass == this.state.newPassConfirm) {
         try {
-            await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass);
+            await firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass);
             // If success
             this.setModalVisible(false);
             this.alert('Sign in successfully');
@@ -56,7 +56,7 @@ export default class LoginPage extends Component {
             alert(error.toString());
         }
       } else {
-          alert('Password must be the same');
+          alert('Passwords must be the same');
       }
   }  
 
