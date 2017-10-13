@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import * as firebase from 'firebase';
 import { firebaseConfig, firebaseUID, setUID } from '../services/FirebaseConfig';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import {
   StyleSheet,
   Text,
@@ -55,7 +56,7 @@ export default class LoginPage extends Component {
             await firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass);
             // If success
             this.setModalVisible(false);
-            this.alert('Sign in successfully');
+            alert('Sign in successfully');
             this.props.navigation.navigate('Main');
         } catch (error) {
             alert(error.toString());
@@ -65,13 +66,20 @@ export default class LoginPage extends Component {
       }
   }  
 
+  getFCMToken() {
+    FCM.getFCMToken().then(token => {
+        alert('Token' + token.toString());
+        // store fcm token in your server
+    });
+  }
+
   async login() {
     try {
         await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
               setUID(user.uid);
-              alert(firebaseUID);
+              FCM.requestPermissions().then(()=> alert('granted'), (err)=> alert('Notification reject'));
             } else {
               setUID('');
             }
@@ -148,12 +156,12 @@ export default class LoginPage extends Component {
 
                 <View style={{marginBottom:4}}>
                     <TextInput onChangeText={(text) => {this.setState({email:text})}}
-                        placeholder="Enter your email"></TextInput>
+                        placeholder="Enter your email address"></TextInput>
                 </View>
 
                 <View style={{marginBottom:4}}>
                     <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
-                        placeholder="Enter your password (not your real email password)"></TextInput>
+                        placeholder="Enter your password"></TextInput>
                 </View>
 
                 <View style={Style.colContent}>
