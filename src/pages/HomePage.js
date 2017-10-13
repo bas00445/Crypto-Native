@@ -24,7 +24,7 @@ export default class HomePage extends Component {
 
   render() {
     return (
-      <View>
+      <View>      
         <Text>
           Welcome to Home Page
         </Text>

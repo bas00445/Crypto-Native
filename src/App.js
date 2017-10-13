@@ -76,7 +76,6 @@ const AppDrawer = DrawerNavigator({
     </View>
 });
 
-
 const CryptoApp = StackNavigator({
   Login: {
     screen: LoginPage,
@@ -104,6 +103,6 @@ var localStyles = StyleSheet.create({
     backgroundColor: Color.lightWhite,
     padding: 2}
   });
-  
+
   AppRegistry.registerComponent('CryptoApp', () => CryptoApp);
   

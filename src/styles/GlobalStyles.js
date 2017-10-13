@@ -29,6 +29,7 @@ var Style = StyleSheet.create({
 var Color = {
     lightBlack: '#262626',
     lightWhite: '#e6e6e6',
+    pureWhite: '#ffffff',
     white: '#cccccc',
     lightBlue: '#1a75ff',
     blue: '#0066ff',

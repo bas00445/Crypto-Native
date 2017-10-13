@@ -77,9 +77,9 @@ export default class LoginPage extends Component {
   render() {
     return (
       <View style={localStyles.container}>
-          
         <View style={localStyles.imageContainer}>
-            <Image style={{resizeMode: 'stretch'}} source={require('../assets/images/pksLogo.png')}/>
+            <Image style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined, resizeMode: 'cover'}} 
+            source={require('../assets/images/pksLogo.png')}/>
         </View>
 
         <View style={localStyles.formContainer}>
@@ -90,7 +90,7 @@ export default class LoginPage extends Component {
                 onRequestClose={() => {this.setModalVisible(this, false)}}>
                 <View style={{padding: 10, flex: 1}}>
 
-                    <View style={{marginBottom: 4, backgroundColor: '#ffffff'}}>
+                    <View style={{marginBottom: 4}}>
                         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Create a new account</Text>
                     </View>
 
@@ -128,38 +128,37 @@ export default class LoginPage extends Component {
                     
                 </View>
             </Modal>
+            
+            <View style={localStyles.cardContainer}>
+                <View style={{marginBottom: 4}}>
+                        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Log in to the system</Text>
+                </View>
 
-            <View style={Style.colContent}>
-                <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start'}}>
-                    <Text>Email:</Text>
+                <View style={{marginBottom:4}}>
+                    <TextInput onChangeText={(text) => {this.setState({email:text})}}
+                        placeholder="Enter your email"></TextInput>
                 </View>
-                <View style={{flex: 7}}>
-                    <TextInput onChangeText={(text) => {this.setState({email:text})}}></TextInput>
-                </View>
-            </View>
 
-            <View style={Style.colContent}>
-                <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-start'}}>
-                    <Text>Password:</Text>
+                <View style={{marginBottom:4}}>
+                    <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
+                        placeholder="Enter your password (not your real email password)"></TextInput>
                 </View>
-                <View style={{flex: 7}}>
-                    <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}></TextInput>
-                </View>
-            </View>
 
-            <View style={Style.colContent}>
-                <View style={{flex: 1, padding: 5}}>
-                    <Button
-                        onPress={this.setModalVisible.bind(this, true)}
-                        title="Sign up"
-                        color={Color.blue}/>
+                <View style={Style.colContent}>
+                    <View style={{flex: 7, padding: 5}}>
+                        <Button title="Sign in" color={Color.blue} 
+                            onPress={this.login.bind(this)}>
+                        </Button>
+                    </View>
+
+                    <View style={{flex: 3, padding: 5}}>
+                        <Button title="Sign up" color={Color.red} 
+                            onPress={this.setModalVisible.bind(this, true)}>
+                        </Button>
+                    </View>
+                    
                 </View>
-                <View style={{flex: 1, padding: 5}}>
-                    <Button
-                        onPress={this.login.bind(this)}
-                        title="Sign in"
-                        color={Color.red}/>
-                </View>
+
             </View>
 
         </View>
@@ -176,11 +175,25 @@ var localStyles = StyleSheet.create({
     imageContainer: {
         flex: 4,
         backgroundColor: '#444444',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     formContainer: {
         flex: 6,
         backgroundColor: Color.white,
         padding: 10   
+    },
+    cardContainer: {
+        backgroundColor: Color.pureWhite,
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 2,
+        borderColor: '#ddd',
+        borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+        elevation: 1,
     }
 });
