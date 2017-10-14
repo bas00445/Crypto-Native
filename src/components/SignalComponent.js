@@ -27,6 +27,7 @@ export default class SignalComponent extends Component {
       } break;
       case 'buy': {
         this.icon = require('../assets/icons/shopping.png');
+        this.tintColor = Color.darkGreen;
       } break;
       case 'sellUp': {
         this.icon = require('../assets/icons/arrow-up.png');

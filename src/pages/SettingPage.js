@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -17,10 +18,18 @@ export default class SettingPage extends Component {
 
   render() {
     return (
-      <View>
-        <Text>
-          Welcome to Setting Page
-        </Text>
+      <View style={{flex: 1}}>      
+        <View style={[Style.headerLabel, Style.colContent]}>
+          <View style={{marginRight: 10, justifyContent: 'center'}}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('DrawerOpen')}>
+              <Image style={[Style.icon, {tintColor: Color.pureWhite}]}
+                source={require('../assets/icons/hamburger.png')}></Image>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={Style.headerLabelText}>Setting</Text>
+          </View>
+        </View>
       </View>
     );
   }
