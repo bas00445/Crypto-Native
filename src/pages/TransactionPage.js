@@ -44,7 +44,7 @@ export default class TransactionPage extends Component {
       <View style={{flex: 1}}>
         <View style={Style.headerLabel}>
           <Text style={Style.headerLabelText}>Transaction</Text>
-          </View>
+        </View>
         <Tab></Tab> 
       </View>
     );

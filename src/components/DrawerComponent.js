@@ -24,6 +24,10 @@ export default class DrawerComponent extends Component {
     }
   }
 
+  navigateTo(pageName) {
+    this.drawerNavigation.navigate(pageName);
+  } 
+
   async logout() {
         try {
             await firebase.auth().signOut();
@@ -50,50 +54,50 @@ export default class DrawerComponent extends Component {
   
   render() {
     const { navigation } = this.props;
-
+    this.drawerNavigation = navigation;
     return (
       <View style={{flex: 1}}>
-      <View style={localStyles.drawerTitle}>
-        <View style={{flex:3, justifyContent: 'center'}}>
-          <View style={Style.colContent}>
+        <View style={localStyles.drawerTitle}>
+          <View style={{flex:2, justifyContent: 'center'}}>
+            <View style={Style.colContent}>
+              <View style={{flex: 1}}>
+                <Image style={[Style.drawerIcon, {tintColor: Color.pureWhite}]} source={require('../assets/icons/account.png')}/> 
+              </View>
+              <View style={{flex: 3, alignItems: 'flex-end'}}>
+                <Text style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>Parin Kobboon</Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={[Style.colContent, {flex: 1, justifyContent: 'center', marginBottom: 4}]}>   
             <View style={{flex: 1}}>
-              <Image style={[Style.drawerIcon, {tintColor: Color.pureWhite}]} source={require('../assets/icons/account.png')}/> 
+              <Text style={localStyles.drawerTitleText}>Balance</Text>
             </View>
-            <View style={{flex: 3, alignItems: 'flex-end'}}>
-              <Text style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>Parin Kobboon</Text>
+            <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <Text style={localStyles.drawerTitleText}>$500</Text>
             </View>
           </View>
+
+          <View style={[Style.colContent, {flex: 1, justifyContent: 'center'}]}>   
+            <View style={{flex: 1}}>
+              <Text style={localStyles.drawerTitleText}>Profit/loss</Text>
+            </View>
+
+            <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <Text style={localStyles.drawerTitleText}>+60%</Text>
+            </View>
+          </View>
+          
         </View>
 
-        <View style={[Style.colContent, {flex: 1, justifyContent: 'center'}]}>   
-          <View style={{flex: 1}}>
-            <Text style={localStyles.drawerTitleText}>Balance</Text>
-          </View>
-          <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <Text style={localStyles.drawerTitleText}>$500</Text>
-          </View>
-        </View>
-
-        <View style={[Style.colContent, {flex: 1, justifyContent: 'center'}]}>   
-          <View style={{flex: 1}}>
-            <Text style={localStyles.drawerTitleText}>Profit/loss</Text>
-          </View>
-
-          <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <Text style={localStyles.drawerTitleText}>+50%</Text>
-          </View>
-        </View>
-        
-      </View>
-
-      <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
-        <ScrollView>
-          <DrawerItem iconName={"Home"} onPress={() => navigation.navigate('Home')}></DrawerItem>
-          <DrawerItem iconName={"Transaction"} onPress={() => navigation.navigate('Transaction')}></DrawerItem>
-          <DrawerItem iconName={"Setting"} onPress={() => navigation.navigate('Setting')}></DrawerItem>
-          <DrawerItem iconName={"Sign out"} onPress={this.logoutDebug.bind(this)}></DrawerItem>
-        </ScrollView>
-      </View> 
+        <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
+          <ScrollView>
+            <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}></DrawerItem>
+            <DrawerItem iconName={"Transaction"} onPress={this.navigateTo.bind(this, 'Transaction')}></DrawerItem>
+            <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}></DrawerItem>
+            <DrawerItem iconName={"Sign out"} onPress={this.logoutDebug.bind(this)}></DrawerItem>
+          </ScrollView>
+        </View> 
 
     </View>
     );

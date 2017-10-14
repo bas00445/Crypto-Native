@@ -29,8 +29,8 @@ const AppDrawer = DrawerNavigator({
 {
   drawerWidth: 250,
   drawerPosition: 'left',
+  initialRouteName: 'Transaction',
   contentComponent: props => <DrawerComponent {...props}></DrawerComponent>
-    
 });
 
 const CryptoApp = StackNavigator({
