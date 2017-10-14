@@ -61,7 +61,7 @@ export default class DrawerItem extends Component {
 var localStyles = StyleSheet.create({
   drawerItem: {
     paddingLeft: 0,
-    paddingTop: 4,
-    paddingBottom: 4
+    paddingTop: 8,
+    paddingBottom: 8
   },
 });

@@ -27,11 +27,6 @@ var Style = StyleSheet.create({
     headerLabel: {
         backgroundColor: '#0b7dda',
         padding: 10,
-        borderBottomWidth: 1,
-        shadowColor: '#262626',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 1,
-        elevation: 0.5,
     },
     headerLabelText: {
         color: '#ffffff',

@@ -30,11 +30,11 @@ export default class SignalComponent extends Component {
         this.tintColor = Color.darkGreen;
       } break;
       case 'sellUp': {
-        this.icon = require('../assets/icons/arrow-up.png');
+        this.icon = require('../assets/icons/trend-up.png');
         this.tintColor = Color.green;
       } break;
       case 'sellDown': {
-        this.icon = require('../assets/icons/arrow-down.png');
+        this.icon = require('../assets/icons/trend-down.png');
         this.tintColor = Color.red;
       } break;
     }
