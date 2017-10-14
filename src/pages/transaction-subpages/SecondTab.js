@@ -6,7 +6,8 @@ import {
   Text,
   View,
   Image,
-  ScrollView
+  ScrollView,
+  DatePickerAndroid
 } from 'react-native';
 
 var Style = Theme.Style;
