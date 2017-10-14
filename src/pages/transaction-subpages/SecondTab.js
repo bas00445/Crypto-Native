@@ -13,7 +13,12 @@ var Color = Theme.Color;
 export default class SecondTab extends Component {
   static navigationOptions = {
     title: 'Second',
-    header : null,
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/icons/dollar-shape.png')}
+        style={[Style.icon, {tintColor: tintColor}]}
+      />
+    ),
   };
 
   render() {

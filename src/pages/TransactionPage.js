@@ -24,8 +24,13 @@ const Tab = TabNavigator({
   tabBarPosition: 'top',
   animationEnabled: true,
   tabBarOptions: {
-    activeTintColor: Color.white,
-    indicatorStyle: Color.blue
+    activeTintColor: Color.pureWhite,
+    inactiveTintColor: Color.darkBlue,
+    indicatorStyle: {
+      backgroundColor: Color.pureWhite
+    },
+    showIcon: true,
+    showLabel: false
   },
 });
 
@@ -42,7 +47,12 @@ export default class TransactionPage extends Component {
 
   render() {
     return (
-      <Tab></Tab> 
+      <View style={{flex: 1}}>
+        <View style={Style.headerLabel}>
+          <Text style={Style.headerLabelText}>Transaction</Text>
+          </View>
+        <Tab></Tab> 
+      </View>
     );
   }
 }

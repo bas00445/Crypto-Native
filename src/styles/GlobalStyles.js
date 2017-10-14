@@ -24,6 +24,15 @@ var Style = StyleSheet.create({
         width: 30,
         height: 30
     },
+    headerLabel: {
+        backgroundColor: '#0b7dda',
+        padding: 10
+    },
+    headerLabelText: {
+        color: '#ffffff',
+        fontSize: 22,
+        fontWeight: 'bold'
+    }
 });
 
 var Color = {
@@ -31,8 +40,9 @@ var Color = {
     lightWhite: '#e6e6e6',
     pureWhite: '#ffffff',
     white: '#cccccc',
-    lightBlue: '#1a75ff',
-    blue: '#0066ff',
+    lightBlue: '#2196f3',
+    blue: '#0b7dda',
+    darkBlue: '#0a6fc2',
     red: '#ff3333'
 }
 

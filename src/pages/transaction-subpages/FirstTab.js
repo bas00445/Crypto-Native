@@ -12,15 +12,20 @@ var Color = Theme.Color;
 
 export default class FirstTab extends Component {
   static navigationOptions = {
-    title: 'First',
-    header : null,
+    title: 'First Tab',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/icons/line-chart-shape.png')}
+        style={[Style.icon, {tintColor: tintColor}]}
+      />
+    ),
   };
 
   render() {
     return (
       <View>
         <Text>
-          First Tab
+          I am the first tab
         </Text>
       </View>
     );
