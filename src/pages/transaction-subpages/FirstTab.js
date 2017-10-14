@@ -18,7 +18,7 @@ export default class FirstTab extends Component {
     title: 'First Tab',
     tabBarIcon: ({ tintColor }) => (
       <Image
-        source={require('../../assets/icons/trend-up.png')}
+        source={require('../../assets/icons/history.png')}
         style={[Style.icon, {tintColor: tintColor}]}
       />
     ),

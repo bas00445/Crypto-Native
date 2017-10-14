@@ -23,10 +23,8 @@ export default class SecondTab extends Component {
 
   render() {
     return (
-      <View>
-        <Text>
-          Second Tab
-        </Text>
+      <View style={{flex: 1, padding: 10}}>
+        <View style={[Style.cardContainer, {flex: 1}]}></View>
       </View>
     );
   }

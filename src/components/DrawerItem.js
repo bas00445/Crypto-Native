@@ -43,12 +43,13 @@ export default class DrawerItem extends Component {
       var itemColor = null;
     }
     return (
-      <TouchableOpacity onPress={this.props.onPress} style={localStyles.drawerItem}>
-        <View style={[Style.colContent, {backgroundColor: itemColor}]}>
+      <TouchableOpacity onPress={this.props.onPress} 
+        style={[localStyles.drawerItem, {backgroundColor: itemColor}]}>
+        <View style={Style.colContent}>
           <View style={{flex: 1, alignItems: 'center'}}>
             <Image style={[Style.drawerIcon, {tintColor: tintColor}]} source={this.icon}></Image>
           </View>
-          <View style={{flex: 3}}>
+          <View style={{flex: 3, justifyContent: 'center'}}>
             <Text style={{fontSize: 18, color: tintColor}}>{this.props.iconName}</Text>
           </View>
         </View>
@@ -60,6 +61,7 @@ export default class DrawerItem extends Component {
 var localStyles = StyleSheet.create({
   drawerItem: {
     paddingLeft: 0,
-    paddingTop: 8
+    paddingTop: 4,
+    paddingBottom: 4
   },
 });

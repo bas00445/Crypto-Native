@@ -26,6 +26,25 @@ export default class DrawerComponent extends Component {
 
   navigateTo(pageName) {
     this.drawerNavigation.navigate(pageName);
+    
+    switch(pageName) {
+      case 'Home': {
+        this.setState({
+          currentScreen: 0
+        });
+      }; break;
+      case 'Transaction': {
+        this.setState({
+          currentScreen: 1
+        });
+      }; break;
+      case 'Setting': {
+        this.setState({
+          currentScreen: 2
+        });
+      }; break;
+      
+    }
   } 
 
   async logout() {
@@ -92,9 +111,12 @@ export default class DrawerComponent extends Component {
 
         <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
           <ScrollView>
-            <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}></DrawerItem>
-            <DrawerItem iconName={"Transaction"} onPress={this.navigateTo.bind(this, 'Transaction')}></DrawerItem>
-            <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}></DrawerItem>
+            <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
+              active={ this.state.currentScreen == 0 }></DrawerItem>
+            <DrawerItem iconName={"Transaction"} onPress={this.navigateTo.bind(this, 'Transaction')}
+              active={ this.state.currentScreen == 1 }></DrawerItem>
+            <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}
+              active={ this.state.currentScreen == 2 }></DrawerItem>
             <DrawerItem iconName={"Sign out"} onPress={this.logoutDebug.bind(this)}></DrawerItem>
           </ScrollView>
         </View> 
