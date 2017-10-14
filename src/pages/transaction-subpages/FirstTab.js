@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
+import SignalComponent from '../../components/SignalComponent';
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  DatePickerAndroid
+  DatePickerAndroid,
+  ScrollView
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -63,7 +65,7 @@ export default class FirstTab extends Component {
   render() {
     return (
       <View style={{flex: 1, padding: 10}}>
-        <View style={Style.cardContainer}>
+        <View style={[Style.cardContainer, {marginBottom: 5}]}>
           <View style={Style.colContent}>
             <View style={{flex: 1, alignItems: 'flex-start'}}>
               <Text style={{fontSize: 18}}>Select a date</Text>
@@ -75,6 +77,23 @@ export default class FirstTab extends Component {
               </Text>
             </View>
           </View>
+        </View>
+        <View style={[Style.cardContainer, {flex: 1}]}>
+          <ScrollView>
+            <SignalComponent signalType={'buy'} coinType={'BTC'} 
+              detail={'xxxxx'} value={100}></SignalComponent>
+            <SignalComponent signalType={'buy'} coinType={'BTC'} 
+              detail={'xxxxx'} value={100}></SignalComponent>
+            <SignalComponent signalType={'buy'} coinType={'BTC'} 
+              detail={'xxxxx'} value={100}></SignalComponent>
+            <SignalComponent signalType={'buy'} coinType={'BTC'} 
+              detail={'xxxxx'} value={100}></SignalComponent>
+            <SignalComponent signalType={'buy'} coinType={'BTC'} 
+              detail={'xxxxx'} value={100}></SignalComponent>
+            <SignalComponent signalType={'buy'} coinType={'BTC'} 
+              detail={'xxxxx'} value={100}></SignalComponent>      
+                        
+          </ScrollView>
         </View>
       </View>
     );
