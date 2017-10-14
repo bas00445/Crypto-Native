@@ -93,7 +93,7 @@ export default class DrawerComponent extends Component {
 
 var localStyles = StyleSheet.create({
   drawerTitle: {
-    flex: 3,
+    flex: 2,
     backgroundColor: Color.lightBlue,
     padding: 15
   },
@@ -102,7 +102,7 @@ var localStyles = StyleSheet.create({
     fontSize: 20
   },
   drawerItemsContainer: {
-    flex: 7, 
+    flex: 8, 
     backgroundColor: Color.lightWhite,
     padding: 2}
 });

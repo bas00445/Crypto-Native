@@ -149,7 +149,7 @@ export default class LoginPage extends Component {
                 </View>
             </Modal>
             
-            <View style={localStyles.cardContainer}>
+            <View style={Style.cardContainer}>
                 <View style={{marginBottom: 4}}>
                         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Log in to the system</Text>
                 </View>
@@ -202,17 +202,5 @@ var localStyles = StyleSheet.create({
         backgroundColor: Color.white,
         padding: 10   
     },
-    cardContainer: {
-        backgroundColor: Color.pureWhite,
-        padding: 10,
-        borderWidth: 1,
-        borderRadius: 2,
-        borderColor: '#ddd',
-        borderBottomWidth: 0,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.7,
-        shadowRadius: 2,
-        elevation: 1,
-    }
+    
 });

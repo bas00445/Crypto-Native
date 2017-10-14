@@ -32,6 +32,19 @@ var Style = StyleSheet.create({
         color: '#ffffff',
         fontSize: 22,
         fontWeight: 'bold'
+    },
+    cardContainer: {
+        backgroundColor: '#ffffff',
+        padding: 10,
+        borderWidth: 1,
+        borderRadius: 2,
+        borderColor: '#ddd',
+        borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+        elevation: 1,
     }
 });
 
