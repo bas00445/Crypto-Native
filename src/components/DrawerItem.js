@@ -4,13 +4,14 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 var Style = Theme.Style;
 var Color = Theme.Color;
 
-export default class CustomButton extends Component {
+export default class DrawerItem extends Component {
 
   constructor(props) {
     super(props);
@@ -19,47 +20,45 @@ export default class CustomButton extends Component {
     switch(this.props.iconName) {
       case 'Home': {
         this.icon = require('../assets/icons/home.png');
-        this.tintColor = Color.yellow;
       } break;
       case 'Transaction': {
         this.icon = require('../assets/icons/history.png');
       } break;
       case 'Setting': {
         this.icon = require('../assets/icons/setting.png');
-        this.tintColor = Color.green;
       } break;
       case 'Sign out': {
         this.icon = require('../assets/icons/close.png');
-        this.tintColor = Color.red;
       } break;
     }
   }
 
   render() {
-    var itemColor = this.props.itemColor == null ? "#333333": this.props.itemColor;
-    var textColor = this.props.textColor == null ? "#ffffff": this.props.textColor;
     var active = this.props.active == null ? false: this.props.active;
+    if (active) {
+      var tintColor = Color.blue;
+      var itemColor = Color.white;
+    } else {
+      var tintColor = Color.grey;
+      var itemColor = null;
+    }
     return (
-      <TouchableHighlight style={[Style.colContent, {backgroundColor: itemColor}]} 
-        onPress={this.props.onPress}>
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <Image style={[Style.drawerIcon, {tintColor: Color.grey}]} source={this.icon}></Image>
+      <TouchableOpacity onPress={this.props.onPress} style={localStyles.drawerItem}>
+        <View style={[Style.colContent, {backgroundColor: itemColor}]}>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Image style={[Style.drawerIcon, {tintColor: tintColor}]} source={this.icon}></Image>
+          </View>
+          <View style={{flex: 3}}>
+            <Text style={{fontSize: 18, color: tintColor}}>{this.props.iconName}</Text>
+          </View>
         </View>
-        <View style={{flex: 3}}>
-         <Text style={localStyles.drawerItemText}>{this.props.iconName}</Text>
-        </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }
 
-var Style = StyleSheet.create({
-  drawerItemText: {
-    color: Color.grey,
-    fontSize: 18
-  },
+var localStyles = StyleSheet.create({
   drawerItem: {
-    flexDirection: 'row',
     paddingLeft: 0,
     paddingTop: 8
   },
