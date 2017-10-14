@@ -26,8 +26,7 @@ export default class SignalComponent extends Component {
         this.tintColor = Color.yellow;
       } break;
       case 'buy': {
-        this.icon = require('../assets/icons/dollar-shape.png');
-        this.tintColor = Color.darkGreen;
+        this.icon = require('../assets/icons/buy-shape.png');
       } break;
       case 'sellUp': {
         this.icon = require('../assets/icons/arrow-up-shape.png');
@@ -43,7 +42,8 @@ export default class SignalComponent extends Component {
 
   render() {
     return (
-      <View style={[Style.centerY, {flex: 1, borderBottomColor: '#ccc', borderBottomWidth: 1}]}>  
+      <View style={[Style.centerY, {flex: 1, borderBottomColor: 
+      '#ccc', borderBottomWidth: 1, padding: 5}]}>  
         <View style={[Style.colContent, {flex: 1}]}>
           <View style={[Style.centerX, Style.centerY, {flex: 2}]}>
             <Image style={[{tintColor: this.tintColor}, Style.icon]} source={this.icon}>

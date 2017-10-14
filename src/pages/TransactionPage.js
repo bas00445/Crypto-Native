@@ -39,7 +39,7 @@ export default class TransactionPage extends Component {
     title: 'Transaction',
     drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('../assets/icons/graph-shape.png')}
+        source={require('../assets/icons/history-shape.png')}
         style={[Style.icon, {tintColor: tintColor}]}
       />
     ),
