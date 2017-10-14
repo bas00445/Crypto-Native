@@ -69,27 +69,33 @@ export default class FirstTab extends Component {
     return (
       <View>
         <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'xxxxx'} value={100}></SignalComponent>
+        detail={'detail'} value={100}></SignalComponent>
         <SignalComponent signalType={'sellUp'} coinType={'QTUM'} 
-        detail={'xxxxx'} value={2000}></SignalComponent>
+        detail={'detail'} value={2000}></SignalComponent>
         <SignalComponent signalType={'sellDown'} coinType={'DASH'} 
-        detail={'xxxxx'} value={54}></SignalComponent>
-        <SignalComponent signalType={'signal'} coinType={'OMG'} 
-        detail={'xxxxx'} value={100}></SignalComponent>
+        detail={'detail'} value={54}></SignalComponent>
         <SignalComponent signalType={'buy'} coinType={'QTUM'} 
-        detail={'xxxxx'} value={100}></SignalComponent>
+        detail={'detail'} value={100}></SignalComponent>
         <SignalComponent signalType={'sellDown'} coinType={'BTC'} 
-        detail={'xxxxx'} value={100}></SignalComponent>    
+        detail={'detail'} value={100}></SignalComponent>    
         <SignalComponent signalType={'sellUp'} coinType={'OMG'} 
-        detail={'xxxxx'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'signal'} coinType={'OMG'} 
-        detail={'xxxxx'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'signal'} coinType={'BTC'} 
-        detail={'xxxxx'} value={100}></SignalComponent>    
+        detail={'detail'} value={100}></SignalComponent>    
         <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'xxxxx'} value={100}></SignalComponent>    
+        detail={'detail'} value={100}></SignalComponent>    
         <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'xxxxx'} value={100}></SignalComponent> 
+        detail={'detail'} value={100}></SignalComponent> 
+        <SignalComponent signalType={'sellDown'} coinType={'DASH'} 
+        detail={'detail'} value={54}></SignalComponent>
+        <SignalComponent signalType={'buy'} coinType={'QTUM'} 
+        detail={'detail'} value={100}></SignalComponent>
+        <SignalComponent signalType={'sellDown'} coinType={'BTC'} 
+        detail={'detail'} value={100}></SignalComponent>    
+        <SignalComponent signalType={'sellUp'} coinType={'OMG'} 
+        detail={'detail'} value={100}></SignalComponent>    
+        <SignalComponent signalType={'buy'} coinType={'BTC'} 
+        detail={'detail'} value={100}></SignalComponent>    
+        <SignalComponent signalType={'buy'} coinType={'BTC'} 
+        detail={'detail'} value={100}></SignalComponent> 
       </View> 
     );
   }

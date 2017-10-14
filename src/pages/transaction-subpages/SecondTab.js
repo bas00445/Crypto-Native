@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
+import SignalComponent from '../../components/SignalComponent';
 import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -24,8 +26,47 @@ export default class SecondTab extends Component {
   render() {
     return (
       <View style={{flex: 1, padding: 10}}>
-        <View style={[Style.cardContainer, {flex: 1}]}></View>
+        <View style={[Style.cardContainer, {marginBottom: 5}]}>
+          <Text style={localStyles.signalText}>Signals</Text>
+        </View>
+        <View style={[Style.cardContainer, {flex: 1}]}>
+          <ScrollView>
+            <SignalComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={100}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'DASH'} 
+              detail={'detail'} value={300}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={25}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'QTUM'} 
+              detail={'detail'} value={5000}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={100}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'BTC'} 
+              detail={'detail'} value={1000}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={25}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'QTUM'} 
+              detail={'detail'} value={5000}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={100}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'BTC'} 
+              detail={'detail'} value={1000}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={100}></SignalComponent>    
+            <SignalComponent signalType={'signal'} coinType={'BTC'} 
+              detail={'detail'} value={1000}></SignalComponent>    
+          </ScrollView>
+        </View>
       </View>
     );
   }
 }
+
+var localStyles = StyleSheet.create({
+  signalText: {
+    paddingLeft: 4, 
+    color: Color.grey,
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+});
