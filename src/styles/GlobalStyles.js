@@ -56,7 +56,10 @@ var Color = {
     lightBlue: '#2196f3',
     blue: '#0b7dda',
     darkBlue: '#0a6fc2',
-    red: '#ff3333'
+    red: '#ff3333',
+    yellow: '#ffcc00',
+    green: '#00cc66',
+    darkGreen: '#009933'
 }
 
 var Theme = {Style, Color};
