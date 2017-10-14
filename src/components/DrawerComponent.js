@@ -50,7 +50,7 @@ export default class DrawerComponent extends Component {
         <View style={{flex:3, justifyContent: 'center'}}>
           <View style={Style.colContent}>
             <View style={{flex: 1}}>
-              <Image style={Style.drawerIcon} source={require('../assets/icons/user-shape.png')}/> 
+              <Image style={[Style.drawerIcon, {tintColor: Color.pureWhite}]} source={require('../assets/icons/account.png')}/> 
             </View>
             <View style={{flex: 3, alignItems: 'flex-end'}}>
               <Text style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>Parin Kobboon</Text>
@@ -79,10 +79,46 @@ export default class DrawerComponent extends Component {
         
       </View>
 
-      <View style={localStyles.drawerItemsContainer}>
+      <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
         <ScrollView>
-          <DrawerItems {...this.props} />
-          <Button title="Log out" color={Color.red} onPress={this.logout.bind(this)}></Button>
+          {/* <DrawerItems {...this.props} />
+          <Button title="Log out" color={Color.red} onPress={this.logout.bind(this)}></Button> */}
+          <View style={localStyles.drawerItem}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Image style={[Style.drawerIcon, {tintColor: Color.grey}]} source={require('../assets/icons/home.png')}></Image>
+            </View>
+            <View style={{flex: 3}}>
+              <Text style={localStyles.drawerItemText}>Home</Text>
+            </View>
+          </View>
+
+          <View style={localStyles.drawerItem}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Image style={[Style.drawerIcon, {tintColor: Color.grey}]} source={require('../assets/icons/history.png')}></Image>
+            </View>
+            <View style={{flex: 3}}>
+              <Text style={localStyles.drawerItemText}>Transaction</Text>
+            </View>
+          </View>
+
+          <View style={localStyles.drawerItem}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Image style={[Style.drawerIcon, {tintColor: Color.grey}]} source={require('../assets/icons/setting.png')}></Image>
+            </View>
+            <View style={{flex: 3}}>
+              <Text style={localStyles.drawerItemText}>Setting</Text>
+            </View>
+          </View>
+
+          <View style={localStyles.drawerItem}>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <Image style={[Style.drawerIcon, {tintColor: Color.grey}]} source={require('../assets/icons/close.png')}></Image>
+            </View>
+            <View style={{flex: 3}}>
+              <Text style={localStyles.drawerItemText}>Sign out</Text>
+            </View>
+          </View>
+
         </ScrollView>
       </View> 
 
@@ -94,12 +130,12 @@ export default class DrawerComponent extends Component {
 var localStyles = StyleSheet.create({
   drawerTitle: {
     flex: 2,
-    backgroundColor: Color.lightBlue,
+    backgroundColor: Color.blue,
     padding: 15
   },
   drawerTitleText: {
-    color: '#ffffff',
-    fontSize: 20
+    color: Color.pureWhite,
+    fontSize: 18
   },
   drawerItemsContainer: {
     flex: 8, 

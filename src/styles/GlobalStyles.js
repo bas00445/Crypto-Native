@@ -53,6 +53,7 @@ var Color = {
     lightWhite: '#e6e6e6',
     pureWhite: '#ffffff',
     white: '#cccccc',
+    grey: '#262626',
     lightBlue: '#2196f3',
     blue: '#0b7dda',
     darkBlue: '#0a6fc2',

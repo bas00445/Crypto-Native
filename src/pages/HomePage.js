@@ -14,12 +14,6 @@ var Color = Theme.Color;
 export default class HomePage extends Component {
   static navigationOptions = {
     title: 'Home',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('../assets/icons/home-shape.png')}
-        style={[Style.icon, {tintColor: tintColor}]}
-      />
-    ),
   };
 
   constructor(props) {

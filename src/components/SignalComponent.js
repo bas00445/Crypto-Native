@@ -22,18 +22,18 @@ export default class SignalComponent extends Component {
     
     switch(this.signalType) {
       case 'signal': {
-        this.icon = require('../assets/icons/star-shape.png');
+        this.icon = require('../assets/icons/star.png');
         this.tintColor = Color.yellow;
       } break;
       case 'buy': {
-        this.icon = require('../assets/icons/buy-shape.png');
+        this.icon = require('../assets/icons/shopping.png');
       } break;
       case 'sellUp': {
-        this.icon = require('../assets/icons/arrow-up-shape.png');
+        this.icon = require('../assets/icons/arrow-up.png');
         this.tintColor = Color.green;
       } break;
       case 'sellDown': {
-        this.icon = require('../assets/icons/arrow-down-shape.png');
+        this.icon = require('../assets/icons/arrow-down.png');
         this.tintColor = Color.red;
       } break;
     }

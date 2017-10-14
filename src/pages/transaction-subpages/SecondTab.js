@@ -15,7 +15,7 @@ export default class SecondTab extends Component {
     title: 'Signal',
     tabBarIcon: ({ tintColor }) => (
       <Image
-        source={require('../../assets/icons/dollar-shape.png')}
+        source={require('../../assets/icons/alarm.png')}
         style={[Style.icon, {tintColor: tintColor}]}
       />
     ),

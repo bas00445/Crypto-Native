@@ -37,12 +37,6 @@ const Tab = TabNavigator({
 export default class TransactionPage extends Component {
   static navigationOptions = {
     title: 'Transaction',
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={require('../assets/icons/history-shape.png')}
-        style={[Style.icon, {tintColor: tintColor}]}
-      />
-    ),
   };
 
   render() {
