@@ -40,7 +40,7 @@ export default class FirstTab extends Component {
       selectedDate: day + '/' + month + '/' + year
     }
   }
-
+  
   async openDatePicker() {
     try {
       const {action, year, month, day} = await DatePickerAndroid.open({

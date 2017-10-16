@@ -98,8 +98,8 @@ export default class LoginPage extends Component {
     return (
       <View style={localStyles.container}>
         <View style={localStyles.imageContainer}>
-            <Image style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined, resizeMode: 'cover'}} 
-            source={require('../assets/images/pksLogo.png')}/>
+            <Image style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined, resizeMode: 'contain'}} 
+            source={require('../assets/images/pk.png')}/>
         </View>
 
         <View style={localStyles.formContainer}>
@@ -193,7 +193,7 @@ var localStyles = StyleSheet.create({
     },
     imageContainer: {
         flex: 4,
-        backgroundColor: '#444444',
+        backgroundColor: '#25292f',
         alignItems: 'center',
         justifyContent: 'center'
     },
