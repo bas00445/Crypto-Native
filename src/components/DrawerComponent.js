@@ -154,7 +154,7 @@ export default class DrawerComponent extends Component {
 
 var localStyles = StyleSheet.create({
   drawerTitle: {
-    flex: 2,
+    height: 150,
     backgroundColor: Color.blue,
     padding: 15
   },
