@@ -36,8 +36,11 @@ export default class LoginPage extends Component {
             modalVisible: false
         }
 
-        const { navigation } = this.props;
+    }
 
+    componentDidMount() {
+        const { navigation } = this.props;
+        
         firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             setUID(user.uid);

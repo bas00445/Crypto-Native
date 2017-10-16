@@ -37,7 +37,7 @@ export default class DrawerComponent extends Component {
         number: notif.number,                                         // Android only
         ticker: notif.ticker,                   // Android only
         auto_cancel: true,                                  // Android only (default true)
-        large_icon: "ic_launcher",                           // Android only
+        large_icon: null,                           // Android only
         icon: "ic_launcher",                                // as FCM payload, you can relace this with custom icon you put in mipmap
         big_text: notif.big_text,     // Android only
         sub_text: notif.sub_text,                      // Android only
