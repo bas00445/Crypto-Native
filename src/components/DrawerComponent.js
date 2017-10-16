@@ -91,21 +91,12 @@ export default class DrawerComponent extends Component {
               key: null,  // black magic
               actions: [NavigationActions.navigate({ routeName: 'Login' })]
             })
-            this.props.navigation.dispatch(actionToDispatch)
+            this.props.navigation.dispatch(actionToDispatch);
         } catch (error) {
             alert(error.toString());
         }
     }
 
-    logoutDebug() {
-      const actionToDispatch = NavigationActions.reset({
-        index: 0,
-        key: null,  // black magic
-        actions: [NavigationActions.navigate({ routeName: 'Login' })]
-      })
-      this.props.navigation.dispatch(actionToDispatch)
-    }
-  
   render() {
     const { navigation } = this.props;
     this.drawerNavigation = navigation;
