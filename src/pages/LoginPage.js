@@ -15,7 +15,6 @@ import {
 
 // Firebase config
 firebase.initializeApp(firebaseConfig);
-var provider = new firebase.auth.GoogleAuthProvider();
 
 var Style = Theme.Style;
 var Color = Theme.Color;
@@ -36,8 +35,23 @@ export default class LoginPage extends Component {
             newPassConfirm: '',
             modalVisible: false
         }
+
+        const { navigation } = this.props;
+
+        firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            setUID(user.uid);
+            // alert('Log in with: ' + user.uid);
+            navigation.navigate('Main');
+            FCM.requestPermissions().then(
+                ()=> {}, 
+                (err)=> alert('Notification reject'));
+        } else {
+            setUID('');
+        }
+        });
     }
-    
+
     setModalVisible(isVisible) {
         if (isVisible == true) {
             this.setState({modalVisible: true});
@@ -54,10 +68,8 @@ export default class LoginPage extends Component {
       if (this.state.newPass == this.state.newPassConfirm) {
         try {
             await firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass);
-            // If success
             this.setModalVisible(false);
-            alert('Sign in successfully');
-            this.props.navigation.navigate('Main');
+            alert('New account is created.');
         } catch (error) {
             alert(error.toString());
         }
@@ -76,18 +88,6 @@ export default class LoginPage extends Component {
   async login() {
     try {
         await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              setUID(user.uid);
-              FCM.requestPermissions().then(()=> alert('granted'), (err)=> alert('Notification reject'));
-            } else {
-              setUID('');
-            }
-          });
-
-        // Navigate to the Home page
-        this.props.navigation.navigate('Main');
-        
     } catch (error) {
         alert(error.toString());
     }
@@ -167,7 +167,7 @@ export default class LoginPage extends Component {
                 <View style={Style.colContent}>
                     <View style={{flex: 7, padding: 5}}>
                         <Button title="Sign in" color={Color.blue} 
-                            onPress={this.loginDebug.bind(this)}>
+                            onPress={this.login.bind(this)}>
                         </Button>
                     </View>
 

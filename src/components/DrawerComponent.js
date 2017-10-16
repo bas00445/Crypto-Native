@@ -3,6 +3,7 @@ import Theme from '../styles/GlobalStyles';
 import * as firebase from "firebase";
 import DrawerItem from '../components/DrawerItem';
 import { NavigationActions } from 'react-navigation';
+import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import {
   StyleSheet,
   Text,
@@ -20,13 +21,46 @@ export default class DrawerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentScreen: 0
+      currentScreen: 1
     }
+
+    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
+      // optional, do some component related stuff
+      FCM.presentLocalNotification({
+        id: notif.id,                               // (optional for instant notification)
+        title: notif.title,                     // as FCM payload
+        body: notif.title,                    // as FCM payload (required)
+        sound: notif.sound,                                   // as FCM payload
+        priority: notif.priority,                                   // as FCM payload
+        click_action: "ACTION",                             // as FCM payload
+        badge: notif.badge,                                          // as FCM payload IOS only, set 0 to clear badges
+        number: notif.number,                                         // Android only
+        ticker: notif.ticker,                   // Android only
+        auto_cancel: true,                                  // Android only (default true)
+        large_icon: "ic_launcher",                           // Android only
+        icon: "ic_launcher",                                // as FCM payload, you can relace this with custom icon you put in mipmap
+        big_text: notif.big_text,     // Android only
+        sub_text: notif.sub_text,                      // Android only
+        color: "red",                                       // Android only
+        vibrate: 300,                                       // Android only default: 300, no vibration if you pass null
+        group: notif.group,                                     // Android only
+        picture: notif.picture,                      // Android only bigPicture style
+        ongoing: true,                                      // Android only
+        my_custom_data:'my_custom_field_value',             // extra data you want to throw
+        lights: true,                                       // Android only, LED blinking (default false)
+        show_in_foreground: true                                  // notification when app is in foreground (local & remote)
+    });
+
+    });
+
   }
 
   navigateTo(pageName) {
     this.drawerNavigation.navigate(pageName);
-    
+    this.activeDrawerItem(pageName);
+  } 
+  
+  activeDrawerItem(pageName) {
     switch(pageName) {
       case 'Home': {
         this.setState({
@@ -45,11 +79,12 @@ export default class DrawerComponent extends Component {
       }; break;
       
     }
-  } 
+  }
 
   async logout() {
         try {
             await firebase.auth().signOut();
+            alert('Sign out');
             // Navigate to login view
             const actionToDispatch = NavigationActions.reset({
               index: 0,
@@ -117,7 +152,7 @@ export default class DrawerComponent extends Component {
               active={ this.state.currentScreen == 1 }></DrawerItem>
             <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}
               active={ this.state.currentScreen == 2 }></DrawerItem>
-            <DrawerItem iconName={"Sign out"} onPress={this.logoutDebug.bind(this)}></DrawerItem>
+            <DrawerItem iconName={"Sign out"} onPress={this.logout.bind(this)}></DrawerItem>
           </ScrollView>
         </View> 
 
