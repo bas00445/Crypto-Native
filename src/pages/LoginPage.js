@@ -37,7 +37,9 @@ export default class LoginPage extends Component {
             signupVisible: false,
             loading: false
         }
-        
+    }
+    
+    componentWillMount() {
         const { navigation } = this.props;
         
         firebase.auth().onAuthStateChanged(function(user) {
@@ -49,8 +51,7 @@ export default class LoginPage extends Component {
                 (err)=> alert('Notification reject'));
         } else {
             setUID('');
-        }
-        });
+        }});
     }
 
     openSignupModal(isVisible) {

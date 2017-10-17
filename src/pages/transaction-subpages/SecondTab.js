@@ -97,16 +97,6 @@ export default class SecondTab extends Component {
               detail={'detail'} value={1000}></SignalComponent>    
             <SignalComponent signalType={'signal'} coinType={'OMG'} 
               detail={'detail'} value={25}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'QTUM'} 
-              detail={'detail'} value={5000}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'BTC'} 
-              detail={'detail'} value={1000}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'BTC'} 
-              detail={'detail'} value={1000}></SignalComponent>    
           </ScrollView>
         </View>
       </View>

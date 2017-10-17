@@ -80,22 +80,6 @@ export default class FirstTab extends Component {
         detail={'detail'} value={100}></SignalComponent>    
         <SignalComponent signalType={'sellUp'} coinType={'OMG'} 
         detail={'detail'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'detail'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'detail'} value={100}></SignalComponent> 
-        <SignalComponent signalType={'sellDown'} coinType={'DASH'} 
-        detail={'detail'} value={54}></SignalComponent>
-        <SignalComponent signalType={'buy'} coinType={'QTUM'} 
-        detail={'detail'} value={100}></SignalComponent>
-        <SignalComponent signalType={'sellDown'} coinType={'BTC'} 
-        detail={'detail'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'sellUp'} coinType={'OMG'} 
-        detail={'detail'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'detail'} value={100}></SignalComponent>    
-        <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'detail'} value={100}></SignalComponent> 
       </View> 
     );
   }
