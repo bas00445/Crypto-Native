@@ -137,8 +137,8 @@ export default class DrawerComponent extends Component {
 
         <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
           <ScrollView>
-            <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
-              active={ this.state.currentScreen == 0 }></DrawerItem>
+            {/* <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
+              active={ this.state.currentScreen == 0 }></DrawerItem> */}
             <DrawerItem iconName={"Transaction"} onPress={this.navigateTo.bind(this, 'Transaction')}
               active={ this.state.currentScreen == 1 }></DrawerItem>
             <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}

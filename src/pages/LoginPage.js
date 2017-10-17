@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import * as firebase from 'firebase';
-import { firebaseConfig, firebaseUID, setUID } from '../services/FirebaseConfig';
+import { firebaseConfig, firebaseUID, setUID } from '../globalvars/FirebaseConfig';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import {
   StyleSheet,
@@ -10,7 +10,8 @@ import {
   Image,
   TextInput,
   Button,
-  Modal
+  Modal,
+  ActivityIndicator
 } from 'react-native';
 
 // Firebase config
@@ -33,18 +34,15 @@ export default class LoginPage extends Component {
             newEmail: '',
             newPass: '',
             newPassConfirm: '',
-            modalVisible: false
+            signupVisible: false,
+            loading: false
         }
-
-    }
-
-    componentDidMount() {
+        
         const { navigation } = this.props;
         
         firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             setUID(user.uid);
-            // alert('Log in with: ' + user.uid);
             navigation.navigate('Main');
             FCM.requestPermissions().then(
                 ()=> {}, 
@@ -55,23 +53,19 @@ export default class LoginPage extends Component {
         });
     }
 
-    setModalVisible(isVisible) {
+    openSignupModal(isVisible) {
         if (isVisible == true) {
-            this.setState({modalVisible: true});
+            this.setState({signupVisible: true});
         } else {
-            this.setState({modalVisible: false});            
+            this.setState({signupVisible: false});            
         }
-    }
-
-    loginDebug() {
-        this.props.navigation.navigate('Main');        
     }
 
   async signUp() {
       if (this.state.newPass == this.state.newPassConfirm) {
         try {
             await firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass);
-            this.setModalVisible(false);
+            this.openSignupModal(false);
             alert('New account is created.');
         } catch (error) {
             alert(error.toString());
@@ -109,10 +103,9 @@ export default class LoginPage extends Component {
             <Modal
                 animationType="slide"
                 transparent={false}
-                visible={this.state.modalVisible}
-                onRequestClose={() => {this.setModalVisible(this, false)}}>
+                visible={this.state.signupVisible}
+                onRequestClose={() => {this.openSignupModal(this, false)}}>
                 <View style={{padding: 10, flex: 1}}>
-
                     <View style={{marginBottom: 4}}>
                         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Create a new account</Text>
                     </View>
@@ -143,7 +136,7 @@ export default class LoginPage extends Component {
                         </View>
                         <View style={{flex: 1, padding: 5}}>
                             <Button
-                                onPress={this.setModalVisible.bind(this, false)}
+                                onPress={this.openSignupModal.bind(this, false)}
                                 title="Cancel"
                                 color={Color.red}/>
                         </View>
@@ -166,7 +159,7 @@ export default class LoginPage extends Component {
                     <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
                         placeholder="Enter your password"></TextInput>
                 </View>
-
+                
                 <View style={Style.colContent}>
                     <View style={{flex: 7, padding: 5}}>
                         <Button title="Sign in" color={Color.blue} 
@@ -176,7 +169,7 @@ export default class LoginPage extends Component {
 
                     <View style={{flex: 3, padding: 5}}>
                         <Button title="Sign up" color={Color.red} 
-                            onPress={this.setModalVisible.bind(this, true)}>
+                            onPress={this.openSignupModal.bind(this, true)}>
                         </Button>
                     </View>
                 </View>
