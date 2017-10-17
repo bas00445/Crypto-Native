@@ -3,7 +3,7 @@ import Theme from './styles/GlobalStyles';
 
 // Pages
 import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
+// import HomePage from './pages/HomePage';
 import SettingPage from './pages/SettingPage';
 import TransactionPage from './pages/TransactionPage';
 
@@ -22,7 +22,6 @@ var Style = Theme.Style;
 var Color = Theme.Color;
 
 const AppDrawer = DrawerNavigator({
-  Home: {screen: HomePage},
   Transaction: {screen: TransactionPage},
   Setting: {screen: SettingPage}
 },
