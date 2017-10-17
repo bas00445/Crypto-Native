@@ -102,7 +102,7 @@ export default class LoginPage extends Component {
       <View style={localStyles.container}>
         <View style={localStyles.imageContainer}>
             <Image style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined, resizeMode: 'contain'}} 
-            source={require('../assets/images/pk.png')}/>
+            source={require('../assets/images/pk-black.png')}/>
         </View>
 
         <View style={localStyles.formContainer}>
