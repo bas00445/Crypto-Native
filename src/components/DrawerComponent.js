@@ -21,7 +21,8 @@ export default class DrawerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentScreen: 1
+      currentScreen: 1,
+      email: firebase.auth().currentUser.email
     }
 
     
@@ -84,7 +85,6 @@ export default class DrawerComponent extends Component {
   async logout() {
         try {
             await firebase.auth().signOut();
-            alert('Sign out');
             // Navigate to login view
             const actionToDispatch = NavigationActions.reset({
               index: 0,
@@ -109,7 +109,9 @@ export default class DrawerComponent extends Component {
                 <Image style={[Style.drawerIcon, {tintColor: Color.pureWhite}]} source={require('../assets/icons/account.png')}/> 
               </View>
               <View style={{flex: 3, alignItems: 'flex-end'}}>
-                <Text style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>Parin Kobboon</Text>
+                <Text numberOfLines={1} ellipsizeMode='tail' style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>
+                  {this.state.email}
+                  </Text>
               </View>
             </View>
           </View>
