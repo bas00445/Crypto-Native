@@ -33,27 +33,24 @@ export default class SettingPage extends Component {
           </View>
         </View>
         <View style={{flex: 1, padding: 10}}>
-          <View style={Style.cardContainer}>
-            <ScrollView>
-              <View style={[Style.colContent, {padding: 4, 
-              borderBottomColor: '#ccc', borderBottomWidth: 1}]}>
-                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
-                  <Text style={{fontWeight: 'bold'}}>Auto Trading</Text>
-                </View>
-                <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch></Switch>
-                </View>
+          <View style={[Style.cardContainer, {padding: 4}]}>
+            <View style={[Style.colContent, {padding: 4, borderBottomColor: '#ccc', borderBottomWidth: 1}]}>
+              <View style={{flex: 1, alignItems:'flex-start'}}>
+                <Text style={{fontSize: 16, justifyContent: 'center'}}>Auto Trading</Text>
               </View>
+              <View style={{flex: 1, alignItems:'flex-end'}}>
+                <Switch style={{justifyContent: 'center'}}></Switch>
+              </View>
+            </View>
 
-              <View style={[Style.colContent, {padding: 4}]}>
-                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
-                  <Text style={{fontWeight: 'bold'}}>Semi-auto Trading</Text>
-                </View>
-                <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch></Switch>
-                </View>
+            <View style={[Style.colContent, {padding: 4}]}>
+              <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
+                <Text style={{fontSize: 16, justifyContent: 'center'}}>Semi-auto Trading</Text>
               </View>
-            </ScrollView>
+              <View style={{flex: 1, alignItems:'flex-end'}}>
+                <Switch style={{justifyContent: 'center'}} value={true}></Switch>
+              </View>
+            </View>
           </View>
         </View>
       </View>
