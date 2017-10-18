@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import * as firebase from 'firebase';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { firebaseConfig, firebaseUID, setUID } from '../globalvars/FirebaseConfig';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import {
@@ -11,7 +12,6 @@ import {
   TextInput,
   Button,
   Modal,
-  ActivityIndicator
 } from 'react-native';
 
 // Firebase config
@@ -41,17 +41,24 @@ export default class LoginPage extends Component {
     
     componentWillMount() {
         const { navigation } = this.props;
-        
-        firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            setUID(user.uid);
-            navigation.navigate('Main');
-            FCM.requestPermissions().then(
-                ()=> {}, 
-                (err)=> alert('Notification reject'));
-        } else {
-            setUID('');
-        }});
+        this.auth = firebase.auth().onAuthStateChanged(
+            function(user) {
+              if (user) {
+                setUID(user.uid);
+                this.setState({loading: true});
+                FCM.requestPermissions().then(
+                    ()=> {}, 
+                    (err)=> alert('Notification reject'));
+                setTimeout(() => {
+                    navigation.navigate('Main');
+                    this.setState({loading: false});
+                }, 1000);
+              } else {
+                setUID('');
+              }
+            }.bind(this)
+          );
+
     }
 
     openSignupModal(isVisible) {
@@ -160,6 +167,8 @@ export default class LoginPage extends Component {
                     <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
                         placeholder="Enter your password"></TextInput>
                 </View>
+
+                <Spinner visible={this.state.loading} textContent={"Logging in..."} textStyle={{color: '#FFF'}} />
                 
                 <View style={Style.colContent}>
                     <View style={{flex: 7, padding: 5}}>

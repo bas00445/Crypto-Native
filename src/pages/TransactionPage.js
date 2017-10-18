@@ -30,8 +30,7 @@ const Tab = TabNavigator({
     indicatorStyle: {
       backgroundColor: Color.pureWhite
     },
-    showIcon: true,
-    showLabel: false
+    showLabel: true
   },
 });
 

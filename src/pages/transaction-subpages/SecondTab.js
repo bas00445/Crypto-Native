@@ -16,12 +16,6 @@ var Color = Theme.Color;
 export default class SecondTab extends Component {
   static navigationOptions = {
     title: 'Signal',
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={require('../../assets/icons/alarm.png')}
-        style={[Style.icon, {tintColor: tintColor}]}
-      />
-    ),
   };
 
   constructor(props) {

@@ -5,7 +5,9 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Switch,
+  ScrollView
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -28,6 +30,30 @@ export default class SettingPage extends Component {
           </View>
           <View>
             <Text style={Style.headerLabelText}>Setting</Text>
+          </View>
+        </View>
+        <View style={{flex: 1, padding: 10}}>
+          <View style={Style.cardContainer}>
+            <ScrollView>
+              <View style={[Style.colContent, {padding: 4, 
+              borderBottomColor: '#ccc', borderBottomWidth: 1}]}>
+                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
+                  <Text style={{fontWeight: 'bold'}}>Auto Trading</Text>
+                </View>
+                <View style={{flex: 1, alignItems:'flex-end'}}>
+                  <Switch></Switch>
+                </View>
+              </View>
+
+              <View style={[Style.colContent, {padding: 4}]}>
+                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
+                  <Text style={{fontWeight: 'bold'}}>Semi-auto Trading</Text>
+                </View>
+                <View style={{flex: 1, alignItems:'flex-end'}}>
+                  <Switch></Switch>
+                </View>
+              </View>
+            </ScrollView>
           </View>
         </View>
       </View>

@@ -15,13 +15,7 @@ var Color = Theme.Color;
 
 export default class FirstTab extends Component {
   static navigationOptions = {
-    title: 'First Tab',
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={require('../../assets/icons/history.png')}
-        style={[Style.icon, {tintColor: tintColor}]}
-      />
-    ),
+    title: 'Simulator',
   };
 
   constructor(props) {
