@@ -6,16 +6,16 @@ import {
   Text,
   View,
   Image,
-  ScrollView,
-  DatePickerAndroid
+  DatePickerAndroid,
+  ScrollView
 } from 'react-native';
 
 var Style = Theme.Style;
 var Color = Theme.Color;
 
-export default class SecondTab extends Component {
+export default class TradingSimulator extends Component {
   static navigationOptions = {
-    title: 'Signal',
+    title: 'Trading Simulator',
   };
 
   constructor(props) {
@@ -34,7 +34,7 @@ export default class SecondTab extends Component {
       selectedDate: day + '/' + month + '/' + year
     }
   }
-
+  
   async openDatePicker() {
     try {
       const {action, year, month, day} = await DatePickerAndroid.open({
@@ -59,6 +59,25 @@ export default class SecondTab extends Component {
     }
   }
 
+  renderSignalComponent() {
+    return (
+      <View>
+        <SignalComponent signalType={'buy'} coinType={'BTC'} 
+        detail={'detail'} value={100}></SignalComponent>
+        <SignalComponent signalType={'sellUp'} coinType={'QTUM'} 
+        detail={'detail'} value={2000}></SignalComponent>
+        <SignalComponent signalType={'sellDown'} coinType={'DASH'} 
+        detail={'detail'} value={54}></SignalComponent>
+        <SignalComponent signalType={'buy'} coinType={'QTUM'} 
+        detail={'detail'} value={100}></SignalComponent>
+        <SignalComponent signalType={'sellDown'} coinType={'BTC'} 
+        detail={'detail'} value={100}></SignalComponent>    
+        <SignalComponent signalType={'sellUp'} coinType={'OMG'} 
+        detail={'detail'} value={100}></SignalComponent>    
+      </View> 
+    );
+  }
+
   render() {
     return (
       <View style={{flex: 1, padding: 10}}>
@@ -77,32 +96,10 @@ export default class SecondTab extends Component {
         </View>
         <View style={[Style.cardContainer, {flex: 1}]}>
           <ScrollView>
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'DASH'} 
-              detail={'detail'} value={300}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={25}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'QTUM'} 
-              detail={'detail'} value={5000}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'BTC'} 
-              detail={'detail'} value={1000}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={25}></SignalComponent>    
+            {this.renderSignalComponent()}          
           </ScrollView>
         </View>
       </View>
     );
   }
 }
-
-var localStyles = StyleSheet.create({
-  signalText: {
-    paddingLeft: 4, 
-    color: Color.grey,
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-});

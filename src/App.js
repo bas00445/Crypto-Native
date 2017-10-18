@@ -5,7 +5,7 @@ import Theme from './styles/GlobalStyles';
 import LoginPage from './pages/LoginPage';
 // import HomePage from './pages/HomePage';
 import SettingPage from './pages/SettingPage';
-import TransactionPage from './pages/TransactionPage';
+import { TransactionStack } from './pages/TransactionStack';
 
 // Components
 import DrawerComponent from './components/DrawerComponent';
@@ -22,13 +22,12 @@ var Style = Theme.Style;
 var Color = Theme.Color;
 
 const AppDrawer = DrawerNavigator({
-  Transaction: {screen: TransactionPage},
+  Transaction: {screen: TransactionStack},
   Setting: {screen: SettingPage}
 },
 {
   drawerWidth: 250,
   drawerPosition: 'left',
-  initialRouteName: 'Transaction',
   contentComponent: props => <DrawerComponent {...props}></DrawerComponent>
 });
 

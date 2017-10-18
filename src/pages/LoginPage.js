@@ -35,22 +35,23 @@ export default class LoginPage extends Component {
             newPass: '',
             newPassConfirm: '',
             signupVisible: false,
-            loading: false
+            loading: false,
         }
     }
     
-    componentWillMount() {
+    componentDidMount() {
         const { navigation } = this.props;
         
         firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            setUID(user.uid);
-            navigation.navigate('Main');
-            FCM.requestPermissions().then(
-                ()=> {}, 
-                (err)=> alert('Notification reject'));
-        } else {
-            setUID('');
+            if (user != null) {
+                setUID(user.uid);
+                FCM.requestPermissions().then(
+                    ()=> {}, 
+                    (err)=> alert('Notification reject'
+                ));
+                navigation.navigate('Main');
+            } else {
+                setUID('');
         }});
     }
 

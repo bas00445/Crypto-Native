@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
-import FirstTab from './transaction-subpages/FirstTab';
+import { FirstTabStack } from './transaction-subpages/FirstTab';
 import SecondTab from './transaction-subpages/SecondTab';
 import { TabNavigator } from 'react-navigation';
 import {
@@ -16,7 +16,7 @@ var Color = Theme.Color;
 
 const Tab = TabNavigator({
   First: {
-    screen: FirstTab,
+    screen: FirstTabStack,
   },
   Second: {
     screen: SecondTab,
@@ -30,10 +30,10 @@ const Tab = TabNavigator({
     indicatorStyle: {
       backgroundColor: Color.pureWhite
     },
-    showIcon: true,
-    showLabel: false
   },
 });
+
+
 
 export default class TransactionPage extends Component {
   static navigationOptions = {

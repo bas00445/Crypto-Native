@@ -10,7 +10,6 @@ import {
   View,
   Image,
   ScrollView,
-  Button
 } from 'react-native';
 
 var Style = Theme.Style;
