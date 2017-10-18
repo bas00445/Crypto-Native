@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
 import SignalComponent from '../../components/SignalComponent';
+import { NavigationActions } from 'react-navigation';
 import {
   StyleSheet,
   Text,
@@ -59,11 +60,15 @@ export default class TradingSimulator extends Component {
     }
   }
 
+  showBuySellDetail() {
+    const {navigation} = this.props;
+  }
+
   renderSignalComponent() {
     return (
       <View>
         <SignalComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'detail'} value={100}></SignalComponent>
+        detail={'detail'} value={100} onPress={this.showBuySellDetail.bind(this)}></SignalComponent>
         <SignalComponent signalType={'sellUp'} coinType={'QTUM'} 
         detail={'detail'} value={2000}></SignalComponent>
         <SignalComponent signalType={'sellDown'} coinType={'DASH'} 

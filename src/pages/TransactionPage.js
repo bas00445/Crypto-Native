@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
-import { FirstTabStack } from './transaction-subpages/FirstTab';
+import TradingSimulator from './transaction-subpages/TradingSimulator';
 import SecondTab from './transaction-subpages/SecondTab';
 import { TabNavigator } from 'react-navigation';
 import {
@@ -16,7 +16,7 @@ var Color = Theme.Color;
 
 const Tab = TabNavigator({
   First: {
-    screen: FirstTabStack,
+    screen: TradingSimulator,
   },
   Second: {
     screen: SecondTab,
@@ -32,8 +32,6 @@ const Tab = TabNavigator({
     },
   },
 });
-
-
 
 export default class TransactionPage extends Component {
   static navigationOptions = {
