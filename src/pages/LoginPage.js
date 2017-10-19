@@ -166,15 +166,17 @@ export default class LoginPage extends Component {
                 <View style={{marginBottom:4}}>
                     <TextInput onChangeText={(text) => {this.setState({email:text})}}
                         placeholder="Email" selectionColor={Color.white}
-                        underlineColorAndroid={Color.white}
-                        placeholderTextColor={Color.white}></TextInput>
+                        underlineColorAndroid={'#8c8c8c'}
+                        placeholderTextColor={'#8c8c8c'}
+                        style={{color: Color.white}}></TextInput>
                 </View>
 
                 <View style={{marginBottom:4}}>
                     <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
                         placeholder="Password" selectionColor={Color.white}
-                        underlineColorAndroid={Color.white}
-                        placeholderTextColor={Color.white}></TextInput>
+                        underlineColorAndroid={'#8c8c8c'}
+                        placeholderTextColor={'#8c8c8c'}
+                        style={{color: Color.white}}></TextInput>
                 </View>
 
                 <Spinner visible={this.state.loading} textContent={"Logging in..."} textStyle={{color: '#FFF'}} />
@@ -187,7 +189,8 @@ export default class LoginPage extends Component {
                 </View>
 
                 <View style={{alignItems: 'center'}}>
-                    <Text style={{color: Color.white, fontSize: 14}}>Forgot your password ?</Text>
+                    <Text
+                        style={{color: Color.white, fontSize: 14}}>Forgot your password ?</Text>
                 </View>
                 
             </View>
