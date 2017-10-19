@@ -61,7 +61,7 @@ export default class TradingSimulator extends Component {
   }
 
   showBuySellDetail() {
-    const {navigation} = this.props;
+    this.props.txStackNavigation.navigation.navigate('BuySell');
   }
 
   renderSignalComponent() {

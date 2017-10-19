@@ -51,7 +51,7 @@ export default class TransactionPage extends Component {
             <Text style={Style.headerLabelText}>Transaction</Text>
           </View>
         </View>
-        <Tab></Tab> 
+        <Tab screenProps={{txStackNavigation: this.props.txStackNavigation}}></Tab> 
       </View>
     );
   }

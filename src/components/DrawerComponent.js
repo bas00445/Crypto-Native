@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import * as firebase from "firebase";
 import DrawerItem from '../components/DrawerItem';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, NavigationSetParamsActionPayload } from 'react-navigation';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import {
   StyleSheet,
@@ -10,6 +10,7 @@ import {
   View,
   Image,
   ScrollView,
+  Button
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -20,39 +21,38 @@ export default class DrawerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentScreen: 1,
-      email: firebase.auth().currentUser.email
+      currentScreen: 1
     }
 
-    
     this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
       // optional, do some component related stuff
-      
       FCM.presentLocalNotification({
-        id: "UNIQ_ID_STRING",                               // (optional for instant notification)
-        title: "My Notification Title",                     // as FCM payload
-        body: "My Notification Message",                    // as FCM payload (required)
-        sound: "default",                                   // as FCM payload
-        priority: "high",                                   // as FCM payload
+        id: notif.id,                               // (optional for instant notification)
+        title: notif.title,                     // as FCM payload
+        body: notif.title,                    // as FCM payload (required)
+        sound: notif.sound,                                   // as FCM payload
+        priority: notif.priority,                                   // as FCM payload
         click_action: "ACTION",                             // as FCM payload
-        badge: 10,                                          // as FCM payload IOS only, set 0 to clear badges
-        number: 10,                                         // Android only
-        ticker: "My Notification Ticker",                   // Android only
+        badge: notif.badge,                                          // as FCM payload IOS only, set 0 to clear badges
+        number: notif.number,                                         // Android only
+        ticker: notif.ticker,                   // Android only
         auto_cancel: true,                                  // Android only (default true)
-        large_icon: "ic_launcher",                           // Android only
+        large_icon: null,                           // Android only
         icon: "ic_launcher",                                // as FCM payload, you can relace this with custom icon you put in mipmap
-        big_text: "Show when notification is expanded",     // Android only
-        sub_text: "This is a subText",                      // Android only
+        big_text: notif.big_text,     // Android only
+        sub_text: notif.sub_text,                      // Android only
         color: "red",                                       // Android only
         vibrate: 300,                                       // Android only default: 300, no vibration if you pass null
-        group: "group",                                     // Android only
-        picture: "https://google.png",                      // Android only bigPicture style
+        group: notif.group,                                     // Android only
+        picture: notif.picture,                      // Android only bigPicture style
         ongoing: true,                                      // Android only
         my_custom_data:'my_custom_field_value',             // extra data you want to throw
-        lights: true,                                       // Android only, LED blinking (default false) 
-        show_in_foreground: true                           // notification when app is in foreground (local & remote)
+        lights: true,                                       // Android only, LED blinking (default false)
+        show_in_foreground: true                                  // notification when app is in foreground (local & remote)
     });
+
     });
+
   }
 
   navigateTo(pageName) {
@@ -84,6 +84,7 @@ export default class DrawerComponent extends Component {
   async logout() {
         try {
             await firebase.auth().signOut();
+            alert('Sign out');
             // Navigate to login view
             const actionToDispatch = NavigationActions.reset({
               index: 0,
@@ -108,9 +109,7 @@ export default class DrawerComponent extends Component {
                 <Image style={[Style.drawerIcon, {tintColor: Color.pureWhite}]} source={require('../assets/icons/account.png')}/> 
               </View>
               <View style={{flex: 3, alignItems: 'flex-end'}}>
-                <Text numberOfLines={1} ellipsizeMode='tail' style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>
-                  {this.state.email}
-                  </Text>
+                <Text style={[localStyles.drawerTitleText, {fontWeight: 'bold'}]}>Parin Kobboon</Text>
               </View>
             </View>
           </View>
@@ -138,8 +137,8 @@ export default class DrawerComponent extends Component {
 
         <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
           <ScrollView>
-            {/* <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
-              active={ this.state.currentScreen == 0 }></DrawerItem> */}
+            <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
+              active={ this.state.currentScreen == 0 }></DrawerItem>
             <DrawerItem iconName={"Transaction"} onPress={this.navigateTo.bind(this, 'Transaction')}
               active={ this.state.currentScreen == 1 }></DrawerItem>
             <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}
