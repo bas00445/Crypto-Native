@@ -35,6 +35,7 @@ export default class LoginPage extends Component {
             newPass: '',
             newPassConfirm: '',
             signupVisible: false,
+            api_key: 'Bas13879477',
             loading: false
         }
     }
@@ -58,6 +59,25 @@ export default class LoginPage extends Component {
 
     }
 
+    sendUserUID(uid) {
+        let data = {
+            method: 'POST',
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              uid: uid,
+              api_key: this.state.api_key
+            })
+          }
+        fetch('http://52.221.73.154:1521/api/register', data)
+        .then(
+            (res) => {alert('Res: ' + res.toString())}, 
+            (err) => {alert('Err: ' + err.toString())},
+            () => {alert('Done')})  // promise
+    }
+
     openSignupModal(isVisible) {
         if (isVisible == true) {
             this.setState({signupVisible: true});
@@ -71,18 +91,7 @@ export default class LoginPage extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass).then(
             (user) => {
                 this.openSignupModal(false);
-
-                fetch('http://52.221.73.154:1521/api/register', {
-                    method: 'POST',
-                    header: 'Create a user',
-                    body: JSON.stringify({
-                        api_key: 'sj234k32432j4',
-                        uid: user.uid
-                    })
-                }).then(
-                    (res) => {alert('Uid was sent to server')},
-                    (err) => {alert('Unale to send uid to server')}
-                );
+                this.sendUserUID(user.uid);
             },
             (err) => {
                 alert(err.toString());
@@ -91,13 +100,18 @@ export default class LoginPage extends Component {
       } else {
           alert('Passwords must be the same');
       }
-  }  
-  getFCMToken() {
-    FCM.getFCMToken().then(token => {
-        alert('Token' + token.toString());
-        // store fcm token in your server
-    });
-  }
+    }  
+
+    forgotPassword(){
+
+    }
+
+    getFCMToken() {
+        FCM.getFCMToken().then(token => {
+            alert('Token' + token.toString());
+            // store fcm token in your server
+        });
+    }
 
   async login() {
     try {
@@ -115,7 +129,6 @@ export default class LoginPage extends Component {
             <Image style={{flex: 1, alignSelf: 'stretch', width: undefined, height: undefined, resizeMode: 'contain'}} 
             source={require('../assets/images/pk-black.png')}/>
         </View>
-
         <View style={localStyles.formContainer}>
             <Modal 
                 animationType="slide"
@@ -200,7 +213,7 @@ export default class LoginPage extends Component {
                 </View>
 
                 <View style={{alignItems: 'center'}}>
-                    <Text
+                    <Text onPress={this.forgotPassword.bind(this)}
                         style={{color: Color.white, fontSize: 14}}>Forgot your password ?</Text>
                 </View>
                 

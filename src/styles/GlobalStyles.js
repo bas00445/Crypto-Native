@@ -21,8 +21,8 @@ var Style = StyleSheet.create({
         height: 24
     },
     drawerIcon: {
-        width: 30,
-        height: 30
+        width: 24,
+        height: 24
     },
     headerLabel: {
         backgroundColor: '#0b7dda',
