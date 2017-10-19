@@ -25,6 +25,10 @@ export default class DrawerComponent extends Component {
       email: firebase.auth().currentUser.email
     }
 
+    FCM.requestPermissions().then(
+      ()=> {}, 
+      (err)=> alert('Notification reject')
+    );
     
     this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
       // optional, do some component related stuff
