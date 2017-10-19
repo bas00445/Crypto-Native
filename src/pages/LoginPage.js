@@ -117,45 +117,56 @@ export default class LoginPage extends Component {
         </View>
 
         <View style={localStyles.formContainer}>
-            <Modal
+            <Modal 
                 animationType="slide"
                 transparent={false}
                 visible={this.state.signupVisible}
                 onRequestClose={() => {this.openSignupModal(this, false)}}>
-                <View style={{padding: 10, flex: 1}}>
-                    <View style={{marginBottom: 4}}>
-                        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Create a new account</Text>
-                    </View>
-
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({newEmail:text})}} 
-                            placeholder={"Email"}></TextInput>
-                    </View>
-
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({newPass:text})}} 
-                            placeholder={"Password"}
-                            secureTextEntry={true}></TextInput>
-                    </View>
-                    
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({newPassConfirm:text})}} 
-                            placeholder={"Confirm Password"}
-                            secureTextEntry={true}></TextInput>
-                    </View>
-
-                    <View style={Style.colContent}>
-                        <View style={{flex: 1, padding: 5}}>
-                            <Button
-                                onPress={this.signUp.bind(this)}
-                                title="Confirm"
-                                color={Color.blue}/>
+                <View style={{padding: 15, flex: 1, backgroundColor: Color.greyBlue}}>
+                    <View style={{backgroundColor: Color.whiteGreyBlue, padding: 15}}>
+                        <View style={{marginBottom: 4}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.pink}}>Create a new account</Text>
                         </View>
-                        <View style={{flex: 1, padding: 5}}>
-                            <Button
-                                onPress={this.openSignupModal.bind(this, false)}
-                                title="Cancel"
-                                color={Color.red}/>
+
+                        <View style={{marginBottom: 4}}>
+                            <TextInput onChangeText={(text) => {this.setState({newEmail:text})}} 
+                                placeholder={"Email"} selectionColor={Color.pureWhite}
+                                underlineColorAndroid={Color.white}
+                                placeholderTextColor={'#8c8c8c'}
+                                style={{color: Color.pureWhite}}></TextInput>
+                        </View>
+
+                        <View style={{marginBottom: 4}}>
+                            <TextInput onChangeText={(text) => {this.setState({newPass:text})}} 
+                                placeholder={"Password"}
+                                secureTextEntry={true} selectionColor={Color.pureWhite}
+                                underlineColorAndroid={Color.white}
+                                placeholderTextColor={'#8c8c8c'}
+                                style={{color: Color.pureWhite}}></TextInput>
+                        </View>
+                        
+                        <View style={{marginBottom: 4}}>
+                            <TextInput onChangeText={(text) => {this.setState({newPassConfirm:text})}} 
+                                placeholder={"Confirm Password"}
+                                secureTextEntry={true} selectionColor={Color.pureWhite}
+                                underlineColorAndroid={Color.white}
+                                placeholderTextColor={'#8c8c8c'}
+                                style={{color: Color.pureWhite}}></TextInput>
+                        </View>
+
+                        <View style={Style.colContent}>
+                            <View style={{flex: 6, padding: 5}}>
+                                <Button
+                                    onPress={this.signUp.bind(this)}
+                                    title="Confirm"
+                                    color={'#2b313b'}/>
+                            </View>
+                            <View style={{flex: 4, padding: 5}}>
+                                <Button
+                                    onPress={this.openSignupModal.bind(this, false)}
+                                    title="Cancel"
+                                    color={'#2b313b'}/>
+                            </View>
                         </View>
                     </View>
                     
@@ -165,21 +176,21 @@ export default class LoginPage extends Component {
             <View style={{flex:1, padding: 20, paddingTop: 5}}>
                 <View style={{marginBottom:4}}>
                     <TextInput onChangeText={(text) => {this.setState({email:text})}}
-                        placeholder="Email" selectionColor={Color.white}
-                        underlineColorAndroid={'#8c8c8c'}
+                        placeholder="Email" selectionColor={Color.pureWhite}
+                        underlineColorAndroid={Color.white}
                         placeholderTextColor={'#8c8c8c'}
-                        style={{color: Color.white}}></TextInput>
+                        style={{color: Color.pureWhite}}></TextInput>
                 </View>
 
                 <View style={{marginBottom:4}}>
                     <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
-                        placeholder="Password" selectionColor={Color.white}
-                        underlineColorAndroid={'#8c8c8c'}
+                        placeholder="Password" selectionColor={Color.pureWhite}
+                        underlineColorAndroid={Color.white}
                         placeholderTextColor={'#8c8c8c'}
-                        style={{color: Color.white}}></TextInput>
+                        style={{color: Color.pureWhite}}></TextInput>
                 </View>
 
-                <Spinner visible={this.state.loading} textContent={"Logging in..."} textStyle={{color: '#FFF'}} />
+                <Spinner visible={this.state.loading} textContent={""} textStyle={{color: '#FFF'}} />
                 
 
                 <View style={{padding: 5, marginBottom: 5}}>
