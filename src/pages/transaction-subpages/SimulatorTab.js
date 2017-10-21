@@ -40,6 +40,8 @@ export default class SimulatorTab extends Component {
       },
       selectedDate: day + '/' + month + '/' + year
     }
+
+    this.generateBuySellComponent();
   }
   
   async openDatePicker() {
@@ -68,23 +70,21 @@ export default class SimulatorTab extends Component {
     }
   }
 
-  renderSignalComponent() {
-    return (
-      <View>
-        <BuySellComponent signalType={'buy'} coinType={'BTC'} 
-        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
-        <BuySellComponent signalType={'sellUp'} coinType={'QTUM'} 
-        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
-        <BuySellComponent signalType={'sellDown'} coinType={'DASH'} 
-        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
-        <BuySellComponent signalType={'buy'} coinType={'QTUM'} 
-        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
-        <BuySellComponent signalType={'sellDown'} coinType={'BTC'} 
-        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
-        <BuySellComponent signalType={'sellUp'} coinType={'OMG'} 
-        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent> 
-      </View> 
-    );
+  generateBuySellComponent() {
+    var views = [];
+    var coinList = ['Dash', 'BTC', 'QTUM'];
+    var typeList = ['buy', 'sellUp', 'sellDown']
+    for(var i=0; i < 7; i++) {
+      var stamp = new Date().toString();
+      var v1 = Math.random(), v3 = Math.random()*1000, 
+          v2 = Math.random()*1200, v4 = Math.random()*1100;
+      var coin = coinList[i%3];
+      var type = typeList[i%3];
+      views.push(<BuySellComponent value1={v1.toFixed(8)} value2={v2.toFixed(2)} key={i} signalType={type}
+        timeStamp={stamp} coinType={coin}></BuySellComponent>);
+    }
+
+    this.buySellList = views;
   }
 
   render() {
@@ -106,7 +106,7 @@ export default class SimulatorTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
-            {this.renderSignalComponent()}          
+            {this.buySellList}
           </ScrollView>  
         </View>
       </View>

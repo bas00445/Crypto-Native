@@ -43,6 +43,26 @@ export default class SignalTab extends Component {
       selectedDate: day + '/' + month + '/' + year,
       showModal: false,
     }
+
+    this.generateSignalComponent();
+  }
+
+  generateSignalComponent() {
+    var views = [];
+    var coinList = ['Dash', 'BTC', 'QTUM']
+    for(var i=0; i < 7; i++) {
+      var stamp = new Date().toString();
+      var v1 = Math.random(), v3 = Math.random()*1000, 
+          v2 = Math.random()*1200, v4 = Math.random()*1100;
+      var coin = coinList[i%3];
+      views.push(
+        <SignalComponent value1={v1.toFixed(6)} value2={v2.toFixed(2)} value3={v3.toFixed(2)} 
+          value4={v4.toFixed(2)} key={i}
+        timeStamp={stamp} coinType={coin} onPress={this.showModal.bind(this, true)}></SignalComponent>
+      );
+    }
+
+    this.signalList = views;
   }
 
   async openDatePicker() {
@@ -95,7 +115,8 @@ export default class SignalTab extends Component {
 
           <View style={{backgroundColor: '#f5f5f5', padding: 10, opacity: 0.7,}}>
             <View style={{marginBottom: 10}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.grey}}>Do you want to buy ?</Text>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.grey}}>
+                Do you want to buy this order ?</Text>
             </View>
 
             <View style={Style.colContent}>
@@ -139,24 +160,7 @@ export default class SignalTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'} 
-              onPress={this.showModal.bind(this,true)}
-              value1={0.00000008} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
-              onPress={this.showModal.bind(this,true)}
-              value1={0.000047} value2={2000.14} value3={3222} value4={2027}></SignalComponent>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
-              onPress={this.showModal.bind(this,true)}
-              value1={0.10455} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
-              onPress={this.showModal.bind(this,true)}
-              value1={0.00007} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
-              onPress={this.showModal.bind(this,true)}
-              value1={0.088888} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
-              onPress={this.showModal.bind(this,true)}
-              value1={0.0090008} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
+            {this.signalList}
           </ScrollView>
         </View>
       </View>
