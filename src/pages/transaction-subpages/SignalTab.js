@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
-import SignalComponent from '../../components/SignalComponent';
+import BuySellComponent from '../../components/BuySellComponent';
 import {
   StyleSheet,
   Text,
@@ -14,7 +14,7 @@ import {
 var Style = Theme.Style;
 var Color = Theme.Color;
 
-export default class SecondTab extends Component {
+export default class SignalTab extends Component {
   static navigationOptions = {
     title: 'Signal',
     tabBarIcon: ({ tintColor }) => (
@@ -85,20 +85,20 @@ export default class SecondTab extends Component {
         </View>
         <View style={{flex: 1}}>
           <ScrollView>
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'DASH'} 
-              detail={'detail'} value={300}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={25}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'QTUM'} 
-              detail={'detail'} value={5000}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'BTC'} 
-              detail={'detail'} value={1000}></SignalComponent>    
-            <SignalComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={25}></SignalComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={100}></BuySellComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'DASH'} 
+              detail={'detail'} value={300}></BuySellComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={25}></BuySellComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'QTUM'} 
+              detail={'detail'} value={5000}></BuySellComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={100}></BuySellComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'BTC'} 
+              detail={'detail'} value={1000}></BuySellComponent>    
+            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
+              detail={'detail'} value={25}></BuySellComponent>    
           </ScrollView>
         </View>
       </View>

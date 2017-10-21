@@ -11,7 +11,7 @@ import {
 var Style = Theme.Style;
 var Color = Theme.Color;
 
-export default class SignalComponent extends Component {
+export default class BuySellComponent extends Component {
 
   constructor(props) {
     super(props);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
-import FirstTab from './transaction-subpages/FirstTab';
-import SecondTab from './transaction-subpages/SecondTab';
+import SignalTab from './transaction-subpages/SignalTab';
+import SimulatorTab from './transaction-subpages/SimulatorTab';
 import { TabNavigator } from 'react-navigation';
 import {
   StyleSheet,
@@ -15,11 +15,11 @@ var Style = Theme.Style;
 var Color = Theme.Color;
 
 const Tab = TabNavigator({
-  First: {
-    screen: FirstTab,
+  SignalTab: {
+    screen: SignalTab,
   },
-  Second: {
-    screen: SecondTab,
+  SimulatorTab: {
+    screen: SimulatorTab,
   },
 }, {
   tabBarPosition: 'top',
