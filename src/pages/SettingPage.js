@@ -142,7 +142,7 @@ var localStyles = StyleSheet.create({
   },
   subItemText: {
     flexDirection: 'row',
-    fontSize: 14,
+    fontSize: 16,
     paddingLeft: 10,
     color: Color.grey
   },

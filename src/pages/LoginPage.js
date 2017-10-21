@@ -141,77 +141,82 @@ export default class LoginPage extends Component {
 
     }
 
+    renderModal() {
+        return(
+            <Modal 
+            animationType="slide"
+            transparent={false}
+            visible={this.state.signupVisible}
+            onRequestClose={() => {this.openSignupModal(this, false)}}>
+            <View style={{padding: 20, flex: 1, backgroundColor: Color.grey}}>
+                <View style={{marginBottom: 4}}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.pureWhite}}>Create a new account</Text>
+                </View>
+
+                <View style={{marginBottom: 4}}>
+                    <TextInput onChangeText={(text) => {this.setState({newEmail:text})}} 
+                        placeholder={"Email"} selectionColor={Color.pureWhite}
+                        underlineColorAndroid={Color.white}
+                        placeholderTextColor={'#8c8c8c'}
+                        style={{color: Color.pureWhite}}></TextInput>
+                </View>
+
+                <View style={{marginBottom: 4}}>
+                    <TextInput onChangeText={(text) => {this.setState({newPass:text})}} 
+                        placeholder={"Password"}
+                        secureTextEntry={true} selectionColor={Color.pureWhite}
+                        underlineColorAndroid={Color.white}
+                        placeholderTextColor={'#8c8c8c'}
+                        style={{color: Color.pureWhite}}></TextInput>
+                </View>
+                
+                <View style={{marginBottom: 4}}>
+                    <TextInput onChangeText={(text) => {this.setState({newPassConfirm:text})}} 
+                        placeholder={"Confirm Password"}
+                        secureTextEntry={true} selectionColor={Color.pureWhite}
+                        underlineColorAndroid={Color.white}
+                        placeholderTextColor={'#8c8c8c'}
+                        style={{color: Color.pureWhite}}></TextInput>
+                </View>
+
+                <View style={{marginBottom: 4}}>
+                    <TextInput onChangeText={(text) => {this.setState({api_key:text})}} 
+                        placeholder={"API Key"}
+                        selectionColor={Color.pureWhite}
+                        underlineColorAndroid={Color.white}
+                        placeholderTextColor={'#8c8c8c'}
+                        style={{color: Color.pureWhite}}></TextInput>
+                </View>
+
+                <View style={Style.colContent}>
+                    <View style={{flex: 6, padding: 5}}>
+                        <Button
+                            onPress={this.signUp.bind(this)}
+                            title="Confirm"
+                            color={Color.whiteGrey2}/>
+                    </View>
+                    <View style={{flex: 4, padding: 5}}>
+                        <Button
+                            onPress={this.openSignupModal.bind(this, false)}
+                            title="Cancel"
+                            color={Color.whiteGrey2}/>
+                    </View>
+                </View>
+            </View>
+
+        </Modal>
+        );
+    }
+
   render() {
     return (
       <View style={localStyles.container}>
+        {this.renderModal()}
         <View style={localStyles.imageContainer}>
             <Image style={{flex: 1, alignSelf: 'center', width: 150, height: 150, resizeMode: 'contain'}} 
             source={require('../assets/images/pk-black.png')}/>
         </View>
         <View style={localStyles.formContainer}>
-            <Modal 
-                animationType="slide"
-                transparent={false}
-                visible={this.state.signupVisible}
-                onRequestClose={() => {this.openSignupModal(this, false)}}>
-                <View style={{padding: 20, flex: 1, backgroundColor: Color.grey}}>
-                    <View style={{marginBottom: 4}}>
-                        <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.pureWhite}}>Create a new account</Text>
-                    </View>
-
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({newEmail:text})}} 
-                            placeholder={"Email"} selectionColor={Color.pureWhite}
-                            underlineColorAndroid={Color.white}
-                            placeholderTextColor={'#8c8c8c'}
-                            style={{color: Color.pureWhite}}></TextInput>
-                    </View>
-
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({newPass:text})}} 
-                            placeholder={"Password"}
-                            secureTextEntry={true} selectionColor={Color.pureWhite}
-                            underlineColorAndroid={Color.white}
-                            placeholderTextColor={'#8c8c8c'}
-                            style={{color: Color.pureWhite}}></TextInput>
-                    </View>
-                    
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({newPassConfirm:text})}} 
-                            placeholder={"Confirm Password"}
-                            secureTextEntry={true} selectionColor={Color.pureWhite}
-                            underlineColorAndroid={Color.white}
-                            placeholderTextColor={'#8c8c8c'}
-                            style={{color: Color.pureWhite}}></TextInput>
-                    </View>
-
-                    <View style={{marginBottom: 4}}>
-                        <TextInput onChangeText={(text) => {this.setState({api_key:text})}} 
-                            placeholder={"API Key"}
-                            selectionColor={Color.pureWhite}
-                            underlineColorAndroid={Color.white}
-                            placeholderTextColor={'#8c8c8c'}
-                            style={{color: Color.pureWhite}}></TextInput>
-                    </View>
-
-                    <View style={Style.colContent}>
-                        <View style={{flex: 6, padding: 5}}>
-                            <Button
-                                onPress={this.signUp.bind(this)}
-                                title="Confirm"
-                                color={Color.whiteGrey2}/>
-                        </View>
-                        <View style={{flex: 4, padding: 5}}>
-                            <Button
-                                onPress={this.openSignupModal.bind(this, false)}
-                                title="Cancel"
-                                color={Color.whiteGrey2}/>
-                        </View>
-                    </View>
-                </View>
-
-            </Modal>
-            
             <View style={{flex:1, padding: 20, paddingTop: 5}}>
                 <View style={{marginBottom:4}}>
                     <TextInput onChangeText={(text) => {this.setState({email:text})}}

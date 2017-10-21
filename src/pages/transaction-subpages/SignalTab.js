@@ -8,7 +8,9 @@ import {
   Image,
   ScrollView,
   DatePickerAndroid,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
+  Button,
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -38,7 +40,8 @@ export default class SignalTab extends Component {
         month: month,
         year: year
       },
-      selectedDate: day + '/' + month + '/' + year
+      selectedDate: day + '/' + month + '/' + year,
+      showModal: false,
     }
   }
 
@@ -66,9 +69,60 @@ export default class SignalTab extends Component {
     }
   }
 
+  showModal(visible) {
+    if (visible == true) {
+        this.setState({showModal: true});
+    } else {
+        this.setState({showModal: false});            
+    }
+}
+
+  buyOrder() {
+    alert('Buying is successful');
+    this.showModal(false);
+  }
+
+  renderModal() {
+    return(
+      <Modal 
+        animationType="slide"
+        transparent={false}
+        visible={this.state.showModal}
+        onRequestClose={() => {this.showModal(this, false)}}>
+
+        <View style={{flex: 1, padding: 20, backgroundColor: Color.grey, 
+          justifyContent: 'center'}}>
+
+          <View style={{backgroundColor: '#f5f5f5', padding: 10, opacity: 0.7,}}>
+            <View style={{marginBottom: 10}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.grey}}>Do you want to buy ?</Text>
+            </View>
+
+            <View style={Style.colContent}>
+              <View style={{flex: 1, padding: 5}}>
+                  <Button
+                      onPress={this.buyOrder.bind(this)}
+                      title="Yes"
+                      color={Color.whiteGrey2}/>
+              </View>
+              <View style={{flex: 1, padding: 5}}>
+                  <Button
+                      onPress={this.showModal.bind(this, false)}
+                      title="No"
+                      color={Color.whiteGrey2}/>
+              </View>
+            </View>
+          </View>
+        </View>
+
+      </Modal>
+    );
+  }
+
   render() {
     return (
       <View style={{flex: 1, paddingLeft: 10, paddingTop: 10, backgroundColor: Color.whiteGrey1}}>
+        {this.renderModal()}
         <View style={Style.datePickerContainer}>
           <TouchableOpacity onPress={this.openDatePicker.bind(this)}>  
             <View style={Style.colContent}>
@@ -85,17 +139,23 @@ export default class SignalTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
-            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'} 
+              onPress={this.showModal.bind(this,true)}
               value1={0.00000008} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
             <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              onPress={this.showModal.bind(this,true)}
               value1={0.000047} value2={2000.14} value3={3222} value4={2027}></SignalComponent>
             <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              onPress={this.showModal.bind(this,true)}
               value1={0.10455} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
             <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              onPress={this.showModal.bind(this,true)}
               value1={0.00007} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
             <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              onPress={this.showModal.bind(this,true)}
               value1={0.088888} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
             <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              onPress={this.showModal.bind(this,true)}
               value1={0.0090008} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
           </ScrollView>
         </View>
