@@ -104,7 +104,7 @@ export default class SimulatorTab extends Component {
               </View>
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
             {this.renderSignalComponent()}          
           </ScrollView>  

@@ -83,7 +83,7 @@ export default class SignalTab extends Component {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
             <BuySellComponent signalType={'signal'} coinType={'OMG'} 
               detail={'detail'} value={100}></BuySellComponent>    
