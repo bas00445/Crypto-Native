@@ -26,11 +26,14 @@ const Tab = TabNavigator({
   animationEnabled: true,
   tabBarOptions: {
     activeTintColor: Color.pureWhite,
-    inactiveTintColor: Color.darkBlue,
+    inactiveTintColor: Color.whiteGrey2,
     indicatorStyle: {
-      backgroundColor: Color.pureWhite
+      backgroundColor: Color.pink
     },
-    showLabel: true
+    showLabel: true,
+    style: {
+      backgroundColor: Color.grey
+    }
   },
 });
 

@@ -36,7 +36,7 @@ export default class DrawerItem extends Component {
   render() {
     var active = this.props.active == null ? false: this.props.active;
     if (active) {
-      var tintColor = Color.blue;
+      var tintColor = Color.grey;
       var itemColor = Color.white;
     } else {
       var tintColor = Color.grey;

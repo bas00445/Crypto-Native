@@ -25,7 +25,7 @@ var Style = StyleSheet.create({
         height: 24
     },
     headerLabel: {
-        backgroundColor: '#0b7dda',
+        backgroundColor: '#25282f',
         padding: 10,
     },
     headerLabelText: {
@@ -34,17 +34,9 @@ var Style = StyleSheet.create({
         fontWeight: 'bold'
     },
     cardContainer: {
-        backgroundColor: '#ffffff',
-        padding: 10,
-        borderWidth: 1,
-        borderRadius: 2,
-        borderColor: '#ddd',
-        borderBottomWidth: 0,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.7,
-        shadowRadius: 2,
-        elevation: 1,
+        padding: 10, 
+        borderRadius: 4,
+        backgroundColor: '#3c4552'
     }
 });
 
@@ -53,6 +45,7 @@ var Color = {
     lightWhite: '#e6e6e6',
     pureWhite: '#ffffff',
     white: '#bdbdbd',
+    whiteGrey3: '#ccc',
     whiteGrey2: '#424242',
     whiteGrey1: '#2d3139',
     grey: '#25282f',

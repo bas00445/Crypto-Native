@@ -61,21 +61,21 @@ export default class SecondTab extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, padding: 10}}>
+      <View style={{flex: 1, padding: 10, backgroundColor: Color.whiteGrey1}}>
         <View style={[Style.cardContainer, {marginBottom: 5}]}>
           <View style={Style.colContent}>
             <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 18}}>Select a date</Text>
+              <Text style={{fontSize: 18, color: Color.pink}}>Select a date</Text>
             </View>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={{fontSize: 18}}
+              <Text style={{fontSize: 18, color: Color.pink}}
                 onPress={this.openDatePicker.bind(this)}>
                 {this.state.selectedDate}
               </Text>
             </View>
           </View>
         </View>
-        <View style={[Style.cardContainer, {flex: 1}]}>
+        <View style={{flex: 1, borderRadius: 4, padding: 10, backgroundColor: Color.whiteGrey3}}>
           <ScrollView>
             <SignalComponent signalType={'signal'} coinType={'OMG'} 
               detail={'detail'} value={100}></SignalComponent>    

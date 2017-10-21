@@ -45,7 +45,7 @@ export default class SignalComponent extends Component {
   render() {
     return (
       <TouchableOpacity style={[Style.centerY, {flex: 1, borderBottomColor: 
-      '#ccc', borderBottomWidth: 1, padding: 5}]} onPress={this.props.onPress}>  
+      Color.white, borderBottomWidth: 1, padding: 5}]} onPress={this.props.onPress}>  
         <View style={[Style.colContent, {flex: 1}]}>
           <View style={[Style.centerX, Style.centerY, {flex: 2}]}>
             <Image style={[{tintColor: this.tintColor}, Style.icon]} source={this.icon}>

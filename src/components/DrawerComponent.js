@@ -161,7 +161,7 @@ export default class DrawerComponent extends Component {
 var localStyles = StyleSheet.create({
   drawerTitle: {
     height: 150,
-    backgroundColor: Color.blue,
+    backgroundColor: Color.grey,
     padding: 15
   },
   drawerTitleText: {

@@ -20,7 +20,7 @@ export default class SettingPage extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>      
+      <View style={{flex: 1, backgroundColor: Color.whiteGrey1}}>      
         <View style={[Style.headerLabel, Style.colContent]}>
           <View style={{marginRight: 10, justifyContent: 'center'}}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('DrawerOpen')}>
@@ -36,7 +36,7 @@ export default class SettingPage extends Component {
           <View style={[Style.cardContainer, {padding: 4}]}>
             <View style={[Style.colContent, {padding: 4, borderBottomColor: '#ccc', borderBottomWidth: 1}]}>
               <View style={{flex: 1, alignItems:'flex-start'}}>
-                <Text style={{fontSize: 16, justifyContent: 'center'}}>Auto Trading</Text>
+                <Text style={{fontSize: 16, justifyContent: 'center', color: Color.white}}>Auto Trading</Text>
               </View>
               <View style={{flex: 1, alignItems:'flex-end'}}>
                 <Switch style={{justifyContent: 'center'}}></Switch>
@@ -44,8 +44,8 @@ export default class SettingPage extends Component {
             </View>
 
             <View style={[Style.colContent, {padding: 4}]}>
-              <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
-                <Text style={{fontSize: 16, justifyContent: 'center'}}>Semi-auto Trading</Text>
+              <View style={{flex: 1, alignItems:'flex-start'}}>
+                <Text style={{fontSize: 16, justifyContent: 'center', color: Color.white}}>Semi-auto Trading</Text>
               </View>
               <View style={{flex: 1, alignItems:'flex-end'}}>
                 <Switch style={{justifyContent: 'center'}} value={true}></Switch>
