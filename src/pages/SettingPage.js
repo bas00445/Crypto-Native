@@ -22,12 +22,20 @@ export default class SettingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isNotify: false,
+      isNotify: true,
       isSimulator: false,
       isAuto: false,
-      isSemi: false,
+      isSemi: true,
       bitTrexKey: '557-996-4447'
     }
+  }
+
+  toggleSemiAndAuto() {
+    var temp = this.state.isSemi, temp2 = this.state.isAuto;
+    this.setState({
+      isAuto: temp,
+      isSemi: temp2
+    })
   }
 
   render() {
@@ -53,7 +61,8 @@ export default class SettingPage extends Component {
                 <Text style={localStyles.settingItemText}>Notification</Text>
               </View>
               <View style={{flex: 1, alignItems:'flex-end'}}>
-                <Switch style={{justifyContent: 'center'}}></Switch>
+                <Switch style={{justifyContent: 'center'}} value={this.state.isNotify}
+                  onValueChange={(value) => { this.setState({isNotify: !this.state.isNotify})}}></Switch>
               </View>
             </View>
             
@@ -62,7 +71,8 @@ export default class SettingPage extends Component {
                 <Text style={localStyles.settingItemText}>Simulator</Text>
               </View>
               <View style={{flex: 1, alignItems:'flex-end'}}>
-                <Switch style={{justifyContent: 'center'}}></Switch>
+                <Switch style={{justifyContent: 'center'}} value={this.state.isSimulator}
+                  onValueChange={(value) => { this.setState({isSimulator: !this.state.isSimulator})}}></Switch>
               </View>
             </View>
             
@@ -71,10 +81,11 @@ export default class SettingPage extends Component {
 
               <View style={localStyles.settingItem}>
                 <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
-                  <Text style={localStyles.subItemText}>Auto</Text>
+                  <Text style={localStyles.subItemText} value={this.state.isAuto}>Auto</Text>
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch style={{justifyContent: 'center'}}></Switch>
+                  <Switch style={{justifyContent: 'center'}} value={this.state.isAuto}
+                    onValueChange={(value) => {this.toggleSemiAndAuto()}}></Switch>
                 </View>
               </View>
 
@@ -83,7 +94,8 @@ export default class SettingPage extends Component {
                   <Text style={localStyles.subItemText}>Semi-auto</Text>
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch style={{justifyContent: 'center'}}></Switch>
+                  <Switch style={{justifyContent: 'center'}} value={this.state.isSemi}
+                    onValueChange={(value) => {this.toggleSemiAndAuto()}}></Switch>
                 </View>
               </View>
             </View>
@@ -93,7 +105,7 @@ export default class SettingPage extends Component {
                 <Text style={localStyles.settingItemText}>Bitrex API Key</Text>
               </View>
               <View style={{flex: 1}}>
-                <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({pass: text})}}
+                <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({bitTrexKey: text})}}
                   placeholder="555-777-2" selectionColor={Color.grey}
                   underlineColorAndroid={Color.whiteGrey1}
                   placeholderTextColor={Color.whiteGrey1}
