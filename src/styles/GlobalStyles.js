@@ -26,7 +26,7 @@ var Style = StyleSheet.create({
     },
     headerLabel: {
         backgroundColor: '#25282f',
-        padding: 14,
+        padding: 10,
     },
     headerLabelText: {
         color: '#ffffff',

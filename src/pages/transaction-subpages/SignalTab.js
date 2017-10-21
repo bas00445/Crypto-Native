@@ -113,9 +113,9 @@ export default class SignalTab extends Component {
         <View style={{flex: 1, padding: 20, backgroundColor: Color.grey, 
           justifyContent: 'center'}}>
 
-          <View style={{backgroundColor: '#f5f5f5', padding: 10, opacity: 0.7,}}>
+          <View style={{backgroundColor: '#f5f5f5', padding: 10, opacity: 0.7, borderRadius: 4}}>
             <View style={{marginBottom: 10}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.grey}}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: Color.grey}}>
                 Do you want to buy this order ?</Text>
             </View>
 
