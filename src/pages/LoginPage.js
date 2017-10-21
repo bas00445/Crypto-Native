@@ -36,6 +36,7 @@ export default class LoginPage extends Component {
             newPassConfirm: '',
             signupVisible: false,
             api_key: '',
+            correctKey: true,
             loading: false
         }
     }
@@ -45,12 +46,19 @@ export default class LoginPage extends Component {
         this.auth = firebase.auth().onAuthStateChanged(
             function(user) {
               if (user) {
-                setUID(user.uid);
-                this.setState({loading: true});
-                setTimeout(() => {
-                    navigation.navigate('Main');
-                    this.setState({loading: false});
-                }, 1000);
+                
+                if (this.state.correctKey == true) {
+                    setUID(user.uid);
+                    this.setState({loading: true});
+                    setTimeout(() => {
+                        navigation.navigate('Main');
+                        this.setState({loading: false});
+                    }, 1000);
+                } else {
+                    firebase.auth().signOut();
+                    alert('Wrong API Key!');
+                }
+
               } else {
                 setUID('');
               }
@@ -59,7 +67,7 @@ export default class LoginPage extends Component {
 
     }
 
-    async sendUserUID(uid) {
+    sendUserUID(uid) {
         let data = {
             method: 'POST',
             headers: {
@@ -71,14 +79,22 @@ export default class LoginPage extends Component {
               api_key: this.state.api_key
             })
           }
-        await fetch('http://52.221.73.154:1521/api/register', data)
+         fetch('http://52.221.73.154:1521/api/register', data)
         .then(
-            (res) => {console.log(res.json())}, 
-            (err) => {console.log(err.json())},
-            () => {console.log('Done')}
-        );
-
-        
+            (res) => {
+                console.log(res.json());
+                var result = res.json();
+                if (result._55 == 'OK') {
+                    this.setState({correctKey: true});
+                } else if (result._55 == 'not found') {
+                    this.setState({correctKey: false});
+                }
+            }, 
+            (err) => {
+                console.log(err.json());
+                this.setState({correctKey: false});
+            },
+            () => {console.log('Done')})  // promise
     }
 
     openSignupModal(isVisible) {
@@ -134,7 +150,7 @@ export default class LoginPage extends Component {
         </View>
         <View style={localStyles.formContainer}>
             <Modal 
-                animationType="fade"
+                animationType="slide"
                 transparent={false}
                 visible={this.state.signupVisible}
                 onRequestClose={() => {this.openSignupModal(this, false)}}>

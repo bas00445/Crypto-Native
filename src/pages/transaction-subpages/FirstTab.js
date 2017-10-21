@@ -7,7 +7,8 @@ import {
   View,
   Image,
   DatePickerAndroid,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -81,18 +82,19 @@ export default class FirstTab extends Component {
   render() {
     return (
       <View style={{flex: 1, padding: 10, backgroundColor: Color.whiteGrey1}}>
-        <View style={[Style.cardContainer, {marginBottom: 5}]}>
-          <View style={Style.colContent}>
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={{fontSize: 18, color: Color.pink}}>Select a date</Text>
+        <View style={[Style.cardContainer, {marginBottom: 5, backgroundColor: Color.whiteGrey2}]}>
+        <TouchableOpacity onPress={this.openDatePicker.bind(this)}>  
+            <View style={Style.colContent}>
+              <View style={{flex: 1, alignItems: 'flex-start'}}>
+                <Text style={{fontSize: 16, color: Color.pureWhite}}>Select a date</Text>
+              </View>
+              <View style={{flex: 1, alignItems: 'flex-end'}}>
+                <Text style={{fontSize: 16, color: Color.pureWhite}}>
+                  {this.state.selectedDate}
+                </Text>
+              </View>
             </View>
-            <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={{fontSize: 18, color: Color.pink}}
-                onPress={this.openDatePicker.bind(this)}>
-                {this.state.selectedDate}
-              </Text>
-            </View>
-          </View>
+        </TouchableOpacity>
         </View>
         <View style={{flex: 1, borderRadius: 4, padding: 10, backgroundColor: Color.whiteGrey3}}>
           <ScrollView>

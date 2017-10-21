@@ -3,6 +3,7 @@ import Theme from '../styles/GlobalStyles';
 import * as firebase from "firebase";
 import DrawerItem from '../components/DrawerItem';
 import { NavigationActions } from 'react-navigation';
+import { firebaseUID } from '../globalvars/FirebaseConfig';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
 import {
   StyleSheet,
@@ -24,6 +25,8 @@ export default class DrawerComponent extends Component {
       currentScreen: 1,
       email: firebase.auth().currentUser.email
     }
+
+    // alert('UID: '+ firebaseUID);
 
     FCM.requestPermissions().then(
       ()=> {}, 
@@ -122,20 +125,20 @@ export default class DrawerComponent extends Component {
 
           <View style={[Style.colContent, {flex: 1, justifyContent: 'center', marginBottom: 4}]}>   
             <View style={{flex: 1}}>
-              <Text style={localStyles.drawerTitleText}>Balance</Text>
+              <Text style={localStyles.drawerTitleSecondaryText}>Balance</Text>
             </View>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={localStyles.drawerTitleText}>$500</Text>
+              <Text style={localStyles.drawerTitleSecondaryText}>$500</Text>
             </View>
           </View>
 
           <View style={[Style.colContent, {flex: 1, justifyContent: 'center'}]}>   
             <View style={{flex: 1}}>
-              <Text style={localStyles.drawerTitleText}>Profit/loss</Text>
+              <Text style={localStyles.drawerTitleSecondaryText}>Profit/loss</Text>
             </View>
 
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={localStyles.drawerTitleText}>+60%</Text>
+              <Text style={localStyles.drawerTitleSecondaryText}>+60%</Text>
             </View>
           </View>
           
@@ -166,7 +169,11 @@ var localStyles = StyleSheet.create({
   },
   drawerTitleText: {
     color: Color.pureWhite,
-    fontSize: 18
+    fontSize: 16
+  },
+  drawerTitleSecondaryText: {
+    color: Color.pureWhite,
+    fontSize: 14
   },
   drawerItemsContainer: {
     flex: 8, 

@@ -36,7 +36,6 @@ var Style = StyleSheet.create({
     cardContainer: {
         padding: 10, 
         borderRadius: 4,
-        backgroundColor: '#3c4552'
     }
 });
 

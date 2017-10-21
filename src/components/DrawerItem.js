@@ -50,7 +50,7 @@ export default class DrawerItem extends Component {
             <Image style={[Style.drawerIcon, {tintColor: tintColor}]} source={this.icon}></Image>
           </View>
           <View style={{flex: 3, justifyContent: 'center'}}>
-            <Text style={{fontSize: 16, color: tintColor}}>{this.props.iconName}</Text>
+            <Text style={{fontSize: 14, color: tintColor}}>{this.props.iconName}</Text>
           </View>
         </View>
       </TouchableOpacity>
