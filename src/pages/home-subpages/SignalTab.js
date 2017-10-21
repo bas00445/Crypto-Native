@@ -40,7 +40,7 @@ export default class SignalTab extends Component {
         month: month,
         year: year
       },
-      selectedDate: day + '/' + month + '/' + year,
+      selectedDate: year + '/' + month + '/' + day,
       showModal: false,
     }
 
@@ -81,7 +81,7 @@ export default class SignalTab extends Component {
         };
         this.setState({
           date: selectedDate, 
-          selectedDate: day + '/' + month + '/' + year
+          selectedDate: year + '/' + month + '/' + day
         });
       }
     } catch ({code, message}) {

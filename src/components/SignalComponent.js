@@ -50,22 +50,22 @@ export default class SignalComponent extends Component {
         <View style={[Style.colContent, {marginTop: 5}]}>
           <View style={{marginRight: 10}}>
             <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-            <Text style={{alignItems:'flex-start'}}>{this.value1}</Text>
+            <Text style={localStyles.valueText}>{this.value1}</Text>
           </View>
 
           <View style={{marginRight: 10}}>
             <Text style={localStyles.priceTitle}>Base Volume</Text>
-            <Text style={{alignItems:'flex-start'}}>{this.value2}</Text>
+            <Text style={localStyles.valueText}>{this.value2}</Text>
           </View>
 
           <View style={{marginRight: 10}}>
             <Text style={localStyles.priceTitle}>Buy Order</Text>
-            <Text style={{alignItems:'flex-start'}}>{this.value3}</Text>
+            <Text style={localStyles.valueText}>{this.value3}</Text>
           </View>
 
           <View>
             <Text style={localStyles.priceTitle}>Sell Order</Text>
-            <Text style={{alignItems:'flex-start'}}>{this.value4}</Text>
+            <Text style={localStyles.valueText}>{this.value4}</Text>
           </View>
           
         </View> 
@@ -90,7 +90,7 @@ var localStyles = StyleSheet.create({
     
   },
   priceTitle: {
-    fontSize: 14, 
+    fontSize: 12, 
     fontWeight: 'bold', 
     color: Color.whiteGrey1
   },
@@ -111,5 +111,9 @@ var localStyles = StyleSheet.create({
     backgroundColor: '#808080', 
     padding: 5,
     alignItems: 'center',
+  },
+  valueText: {
+    alignItems:'flex-start', 
+    fontSize: 12, 
   }
 });

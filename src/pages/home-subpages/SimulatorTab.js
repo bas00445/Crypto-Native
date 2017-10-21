@@ -38,7 +38,7 @@ export default class SimulatorTab extends Component {
         month: month,
         year: year
       },
-      selectedDate: day + '/' + month + '/' + year
+      selectedDate: year + '/' + month + '/' + day
     }
 
     this.generateBuySellComponent();

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
-import SignalTab from './transaction-subpages/SignalTab';
-import SimulatorTab from './transaction-subpages/SimulatorTab';
+import SignalTab from './home-subpages/SignalTab';
+import SimulatorTab from './home-subpages/SimulatorTab';
 import { TabNavigator } from 'react-navigation';
 import {
   StyleSheet,

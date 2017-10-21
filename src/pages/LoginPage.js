@@ -12,6 +12,8 @@ import {
   TextInput,
   Button,
   Modal,
+  Animated,
+  Easing
 } from 'react-native';
 
 // Firebase config
@@ -37,8 +39,14 @@ export default class LoginPage extends Component {
             signupVisible: false,
             api_key: '',
             correctKey: true,
-            loading: false
+            loading: false,
+            spinValue: new Animated.Value(0)
         }
+
+        this.spinValue = this.state.spinValue.interpolate({
+            inputRange: [0, 0.25],
+            outputRange: ['0deg', '360deg']
+        })
     }
     
     componentWillMount() {
@@ -50,6 +58,7 @@ export default class LoginPage extends Component {
                 if (this.state.correctKey == true) {
                     setUID(user.uid);
                     this.setState({loading: true});
+                    this.spinIcon();
                     setTimeout(() => {
                         navigation.navigate('Main');
                         this.setState({loading: false});
@@ -63,7 +72,7 @@ export default class LoginPage extends Component {
                 setUID('');
               }
             }.bind(this)
-          );
+        );
 
     }
 
@@ -139,6 +148,18 @@ export default class LoginPage extends Component {
         alert(error.toString());
     }
 
+    }
+
+    spinIcon () {
+        this.state.spinValue.setValue(0)
+        Animated.timing(
+          this.state.spinValue,
+          {
+            toValue: 1,
+            duration: 4000,
+            easing: Easing.linear
+          }
+        ).start();
     }
 
     renderModal() {
@@ -234,7 +255,11 @@ export default class LoginPage extends Component {
                         style={{color: Color.pureWhite}}></TextInput>
                 </View>
 
-                <Spinner visible={this.state.loading} textContent={""} textStyle={{color: '#FFF'}} />
+                <Spinner visible={this.state.loading} textContent={""} textStyle={{color: '#FFF'}}>
+                    <Animated.Image style={{flex: 1, alignSelf: 'center', width: 80, height: 80,
+                        resizeMode: 'contain', borderRadius: 80, transform: [{rotate: this.spinValue}]}} 
+                        source={require('../assets/images/pk-black.png')}/>
+                </Spinner>
                 
 
                 <View style={{padding: 5, marginBottom: 5}}>

@@ -66,12 +66,12 @@ export default class BuySellComponent extends Component {
         <View style={[Style.colContent, {marginTop: 5}]}>
           <View style={{marginRight: 20}}>
             <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-            <Text style={{alignItems:'flex-start'}}>{this.value1}</Text>
+            <Text style={localStyles.valueText}>{this.value1}</Text>
           </View>
 
           <View>
             <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-            <Text style={{alignItems:'flex-start', fontSize: 12, color: Color.grey}}>{this.value2 + '%'}</Text>
+            <Text style={localStyles.valueText}>{this.value2 + '%'}</Text>
           </View>
         </View> 
 
@@ -95,7 +95,7 @@ var localStyles = StyleSheet.create({
     
   },
   priceTitle: {
-    fontSize: 14, 
+    fontSize: 12, 
     fontWeight: 'bold', 
     color: Color.whiteGrey1
   },
@@ -116,5 +116,9 @@ var localStyles = StyleSheet.create({
     backgroundColor: '#808080', 
     padding: 5,
     alignItems: 'center',
+  },
+  valueText: {
+    alignItems:'flex-start', 
+    fontSize: 12, 
   }
 });
