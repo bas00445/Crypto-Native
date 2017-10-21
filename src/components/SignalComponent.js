@@ -17,71 +17,60 @@ export default class SignalComponent extends Component {
     super(props);
 
     this.coinType = this.props.coinType;
-    this.signalType = this.props.signalType;
     this.timeStamp = this.props.timeStamp;
     this.value1 = this.props.value1;
     this.value2 = this.props.value2;
-    this.type = '';
+    this.value3 = this.props.value3;
+    this.value4 = this.props.value4;
 
-    switch(this.signalType) {
-      case 'signal': {
-        this.icon = require('../assets/icons/star.png');
-        this.tintColor = Color.yellow;
-        this.type = 'Signal';
-      } break;
-      case 'buy': {
-        this.icon = require('../assets/icons/shopping.png');
-        this.tintColor = Color.darkGreen;
-        this.type = 'Buy';
-      } break;
-      case 'sellUp': {
-        this.icon = require('../assets/icons/trend-up.png');
-        this.tintColor = Color.green;
-        this.type = 'Sell';
-      } break;
-      case 'sellDown': {
-        this.icon = require('../assets/icons/trend-down.png');
-        this.tintColor = Color.red;
-        this.type = 'Sell';
-      } break;
-    }
-
+    this.icon = require('../assets/icons/star.png');
   }
 
   render() {
     return (
-      <View style={{marginTop: 20}}>
-          <View style={[Style.colContent, localStyles.container]}>
-            <View style={{flex: 7}}>
-              <View style={{borderBottomWidth: 1, borderBottomColor: Color.white, 
-                paddingBottom: 5, marginBottom: 5}}>
-                <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
-                <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
-              </View>
-              <View style={Style.colContent}>
-                <View style={{marginRight: 10}}>
-                  <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-                  <Text style={{alignItems:'flex-start'}}>0.00000008</Text>
-                </View>
-
-                <View>
-                  <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-                  <Text style={{alignItems:'flex-start', fontSize: 12, color: Color.grey}}>+0.66%</Text>
-                </View>
-
-              </View>
-            </View>
-
-            <View style={{flex: 3, justifyContent: 'center'}}>
-              <View style={localStyles.floatIcon}>
-                <Image source={this.icon} style={{tintColor: this.tintColor, width: 40, height: 40}}></Image>
-              </View>
-              <Text style={{fontSize: 12, fontWeight: 'bold', textAlign: 'center'}}>
-                {this.type}</Text>
-            </View>
-
+      <View style={[localStyles.container, {marginTop: 20}]}>
+        <View style={[Style.colContent]}>
+          <View style={{flex: 8, borderBottomWidth: 1, borderBottomColor: Color.whiteGrey1, 
+            paddingBottom: 5}}>
+            <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
+            <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
           </View>
-         
+
+          <View style={{flex: 2, justifyContent: 'center', paddingBottom: 5}}>
+            <TouchableOpacity style={localStyles.floatIcon} onPress={this.props.onPress}>
+              <Image source={this.icon} style={{tintColor: Color.yellow, width: 25, height: 25}}></Image>
+            </TouchableOpacity>
+            <Text style={{fontSize: 10, fontWeight: 'bold', textAlign: 'center'}}>
+              Signal</Text>
+          </View>
+
+        </View>
+
+        
+        <View style={[Style.colContent, {marginTop: 5}]}>
+          <View style={{marginRight: 10}}>
+            <Text style={localStyles.priceTitle}>Price (BTC)</Text>
+            <Text style={{alignItems:'flex-start'}}>{this.value1}</Text>
+          </View>
+
+          <View style={{marginRight: 10}}>
+            <Text style={localStyles.priceTitle}>Base Volume</Text>
+            <Text style={{alignItems:'flex-start'}}>{this.value2}</Text>
+          </View>
+
+          <View style={{marginRight: 10}}>
+            <Text style={localStyles.priceTitle}>Buy Order</Text>
+            <Text style={{alignItems:'flex-start'}}>{this.value3}</Text>
+          </View>
+
+          <View>
+            <Text style={localStyles.priceTitle}>Sell Order</Text>
+            <Text style={{alignItems:'flex-start'}}>{this.value4}</Text>
+          </View>
+          
+        </View> 
+
+          
       </View>
     );
   }
@@ -90,22 +79,24 @@ export default class SignalComponent extends Component {
 
 var localStyles = StyleSheet.create({
   container: {
+    opacity: 0.7,
     padding: 10,
     paddingRight: 0,
     backgroundColor: '#f5f5f5',
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,
-    borderBottomRightRadius: 0
+    borderBottomRightRadius: 0,
+    
   },
   priceTitle: {
     fontSize: 14, 
     fontWeight: 'bold', 
-    color: Color.white
+    color: Color.whiteGrey1
   },
   timeStampText: {
     fontSize: 10, 
-    color: Color.white
+    color: Color.whiteGrey1
   },
   coinTypeText: {
     fontSize: 20, 
@@ -117,8 +108,8 @@ var localStyles = StyleSheet.create({
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-    backgroundColor: Color.white, 
-    padding: 10,
+    backgroundColor: '#808080', 
+    padding: 5,
     alignItems: 'center',
   }
 });

@@ -72,17 +72,17 @@ export default class SimulatorTab extends Component {
     return (
       <View>
         <BuySellComponent signalType={'buy'} coinType={'BTC'} 
-        detail={'detail'} value={100}></BuySellComponent>
+        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
         <BuySellComponent signalType={'sellUp'} coinType={'QTUM'} 
-        detail={'detail'} value={2000}></BuySellComponent>
+        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
         <BuySellComponent signalType={'sellDown'} coinType={'DASH'} 
-        detail={'detail'} value={54}></BuySellComponent>
+        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
         <BuySellComponent signalType={'buy'} coinType={'QTUM'} 
-        detail={'detail'} value={100}></BuySellComponent>
+        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
         <BuySellComponent signalType={'sellDown'} coinType={'BTC'} 
-        detail={'detail'} value={100}></BuySellComponent>    
+        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent>
         <BuySellComponent signalType={'sellUp'} coinType={'OMG'} 
-        detail={'detail'} value={100}></BuySellComponent>    
+        value1={0.00007} value2={0.66} timeStamp={'2017-10-21 22:00'}></BuySellComponent> 
       </View> 
     );
   }

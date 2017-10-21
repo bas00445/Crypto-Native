@@ -4,8 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TouchableOpacity
+  Image
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -24,11 +23,6 @@ export default class BuySellComponent extends Component {
     this.type = '';
 
     switch(this.signalType) {
-      case 'signal': {
-        this.icon = require('../assets/icons/star.png');
-        this.tintColor = Color.yellow;
-        this.type = 'Signal';
-      } break;
       case 'buy': {
         this.icon = require('../assets/icons/shopping.png');
         this.tintColor = Color.darkGreen;
@@ -51,12 +45,11 @@ export default class BuySellComponent extends Component {
   render() {
     return (
       <View style={[localStyles.container, {marginTop: 20}]}>
-
         <View style={[Style.colContent]}>
           <View style={{flex: 8, borderBottomWidth: 1, borderBottomColor: Color.whiteGrey1, 
             paddingBottom: 5}}>
             <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
-            <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
+            <Text style={localStyles.timeStampText}>{this.timeStamp}</Text>
           </View>
 
           <View style={{flex: 2, justifyContent: 'center', paddingBottom: 5}}>
@@ -73,12 +66,12 @@ export default class BuySellComponent extends Component {
         <View style={[Style.colContent, {marginTop: 5}]}>
           <View style={{marginRight: 20}}>
             <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-            <Text style={{alignItems:'flex-start'}}>0.00000008</Text>
+            <Text style={{alignItems:'flex-start'}}>{this.value1}</Text>
           </View>
 
           <View>
             <Text style={localStyles.priceTitle}>Price (BTC)</Text>
-            <Text style={{alignItems:'flex-start', fontSize: 12, color: Color.grey}}>+0.66%</Text>
+            <Text style={{alignItems:'flex-start', fontSize: 12, color: Color.grey}}>{this.value2 + '%'}</Text>
           </View>
         </View> 
 

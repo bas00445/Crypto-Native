@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
-import BuySellComponent from '../../components/BuySellComponent';
+import SignalComponent from '../../components/SignalComponent';
 import {
   StyleSheet,
   Text,
@@ -85,20 +85,18 @@ export default class SignalTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
-            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></BuySellComponent>    
-            <BuySellComponent signalType={'signal'} coinType={'DASH'} 
-              detail={'detail'} value={300}></BuySellComponent>    
-            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={25}></BuySellComponent>    
-            <BuySellComponent signalType={'signal'} coinType={'QTUM'} 
-              detail={'detail'} value={5000}></BuySellComponent>    
-            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={100}></BuySellComponent>    
-            <BuySellComponent signalType={'signal'} coinType={'BTC'} 
-              detail={'detail'} value={1000}></BuySellComponent>    
-            <BuySellComponent signalType={'signal'} coinType={'OMG'} 
-              detail={'detail'} value={25}></BuySellComponent>    
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              value1={0.00000008} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              value1={0.000047} value2={2000.14} value3={3222} value4={2027}></SignalComponent>
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              value1={0.10455} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              value1={0.00007} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              value1={0.088888} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
+            <SignalComponent timeStamp={'2017-10-21 22:00'} coinType={'Dash'}
+              value1={0.0090008} value2={2000.14} value3={3013} value4={2027}></SignalComponent>
           </ScrollView>
         </View>
       </View>
