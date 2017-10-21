@@ -16,11 +16,12 @@ export default class SignalComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.signalType = this.props.signalType;
     this.coinType = this.props.coinType;
-    this.detail = this.props.detail;
-    this.value = this.props.value;
-    
+    this.signalType = this.props.signalType;
+    this.timeStamp = this.props.timeStamp;
+    this.value1 = this.props.value1;
+    this.value2 = this.props.value2;
+
     switch(this.signalType) {
       case 'signal': {
         this.icon = require('../assets/icons/star.png');
@@ -44,31 +45,70 @@ export default class SignalComponent extends Component {
 
   render() {
     return (
-      <TouchableOpacity style={[Style.centerY, {flex: 1, borderBottomColor: 
-      Color.white, borderBottomWidth: 1, padding: 5}]} onPress={this.props.onPress}>  
-        <View style={[Style.colContent, {flex: 1}]}>
-          <View style={[Style.centerX, Style.centerY, {flex: 2}]}>
-            <Image style={[{tintColor: this.tintColor}, Style.icon]} source={this.icon}>
-            </Image>
+      <View style={{marginTop: 20}}>
+          <View style={{backgroundColor: Color.whiteGrey1, height: 20}}>
           </View>
-
-          <View style={[Style.centerX, Style.centerY, {flex: 4}]}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              {this.coinType}
-            </Text>
+          <View style={localStyles.floatIcon}>
+            <Image source={this.icon} style={{tintColor: '#757575'}}></Image>
           </View>
+          <View style={[Style.colContent, localStyles.container]}>
+            <View style={{flex: 8}}>
+              <View>
+                <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
+              </View>
+              <View>
+                <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
+              </View>
+              <View style={Style.colContent}>
+                <View style={{flex: 1}}>
+                  <Text style={localStyles.priceTitle}>Price (BTC)</Text>
+                  <Text style={{alignItems:'flex-start'}}>0.00000008</Text>
+                </View>
 
-          <View style={[Style.centerX, Style.centerY, {flex: 4}]}>
-            <View>
-              <Text>{this.detail}</Text>
+                <View style={{flex: 1}}>
+                  <Text style={localStyles.priceTitle}>Price (BTC)</Text>
+                  <Text style={{alignItems:'flex-start', fontSize: 12, color: Color.grey}}>+0.66%</Text>
+                </View>
+
+              </View>
             </View>
-            <View>
-              <Text>{this.value}</Text>
-            </View>
-          </View>
 
-        </View>
-      </TouchableOpacity>
+            <View style={{flex: 2}}></View>
+
+          </View>
+         
+      </View>
     );
   }
 }
+
+
+var localStyles = StyleSheet.create({
+  container: {
+    padding: 10,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 4,
+  },
+  priceTitle: {
+    fontSize: 14, 
+    fontWeight: 'bold', 
+    color: Color.white
+  },
+  timeStampText: {
+    fontSize: 10, 
+    color: Color.white
+  },
+  coinTypeText: {
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    color: Color.pink
+  },
+  floatIcon: {
+    borderRadius: 4, 
+    backgroundColor: Color.white, 
+    position: 'absolute', 
+    right: 20, 
+    zIndex: 2, 
+    padding: 10
+  }
+});
