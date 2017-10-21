@@ -22,7 +22,7 @@ export default class DrawerComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentScreen: 1,
+      currentScreen: 0,
       email: firebase.auth().currentUser.email
     }
 
@@ -75,17 +75,11 @@ export default class DrawerComponent extends Component {
           currentScreen: 0
         });
       }; break;
-      case 'Transaction': {
+      case 'Setting': {
         this.setState({
           currentScreen: 1
         });
       }; break;
-      case 'Setting': {
-        this.setState({
-          currentScreen: 2
-        });
-      }; break;
-      
     }
   }
 
@@ -146,12 +140,10 @@ export default class DrawerComponent extends Component {
 
         <View style={[localStyles.drawerItemsContainer, {paddingTop: 10}]}>
           <ScrollView>
-            {/* <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
-              active={ this.state.currentScreen == 0 }></DrawerItem> */}
-            <DrawerItem iconName={"Transaction"} onPress={this.navigateTo.bind(this, 'Transaction')}
-              active={ this.state.currentScreen == 1 }></DrawerItem>
+            <DrawerItem iconName={"Home"} onPress={this.navigateTo.bind(this, 'Home')}
+              active={ this.state.currentScreen == 0 }></DrawerItem>
             <DrawerItem iconName={"Setting"} onPress={this.navigateTo.bind(this, 'Setting')}
-              active={ this.state.currentScreen == 2 }></DrawerItem>
+              active={ this.state.currentScreen == 1 }></DrawerItem>
             <DrawerItem iconName={"Sign out"} onPress={this.logout.bind(this)}></DrawerItem>
           </ScrollView>
         </View> 

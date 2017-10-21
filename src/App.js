@@ -3,16 +3,15 @@ import Theme from './styles/GlobalStyles';
 
 // Pages
 import LoginPage from './pages/LoginPage';
-// import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage';
 import SettingPage from './pages/SettingPage';
-import TransactionPage from './pages/TransactionPage';
 
 // Components
 import DrawerComponent from './components/DrawerComponent';
 
 import { StackNavigator } from 'react-navigation';
 import { DrawerNavigator} from 'react-navigation';
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import {
   AppRegistry,
@@ -22,13 +21,13 @@ var Style = Theme.Style;
 var Color = Theme.Color;
 
 const AppDrawer = DrawerNavigator({
-  Transaction: {screen: TransactionPage},
+  Home: {screen: HomePage},
   Setting: {screen: SettingPage}
 },
 {
   drawerWidth: 250,
   drawerPosition: 'left',
-  initialRouteName: 'Transaction',
+  initialRouteName: 'Home',
   contentComponent: props => <DrawerComponent {...props}></DrawerComponent>
 });
 
