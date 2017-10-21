@@ -17,6 +17,12 @@ var Color = Theme.Color;
 export default class FirstTab extends Component {
   static navigationOptions = {
     title: 'Simulator',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/icons/line-chart.png')}
+        style={[Style.icon, {tintColor: tintColor}]}
+      />
+    ),
   };
 
   constructor(props) {
@@ -83,9 +89,8 @@ export default class FirstTab extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, padding: 10, backgroundColor: Color.whiteGrey1}}>
-        <ScrollView>
-          <View style={[Style.cardContainer, {marginBottom: 5, backgroundColor: Color.whiteGrey2}]}>
+      <View style={{flex: 1, paddingLeft: 10, paddingTop: 10, backgroundColor: Color.whiteGrey1}}>
+        <View style={Style.datePickerContainer}>
           <TouchableOpacity onPress={this.openDatePicker.bind(this)}>  
               <View style={Style.colContent}>
                 <View style={{flex: 1, alignItems: 'flex-start'}}>
@@ -98,12 +103,47 @@ export default class FirstTab extends Component {
                 </View>
               </View>
           </TouchableOpacity>
-          </View>
-          <View style={{flex: 1}}>
+        </View>
+        <View style={{flex: 1}}>
+          <ScrollView>
             {this.renderSignalComponent()}          
-          </View>
-        </ScrollView>
+          </ScrollView>  
+        </View>
       </View>
     );
   }
 }
+
+var localStyles = StyleSheet.create({
+  container: {
+    padding: 10,
+    paddingRight: 0,
+    backgroundColor: '#f5f5f5',
+    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0
+  },
+  priceTitle: {
+    fontSize: 14, 
+    fontWeight: 'bold', 
+    color: Color.white
+  },
+  timeStampText: {
+    fontSize: 10, 
+    color: Color.white
+  },
+  coinTypeText: {
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    color: Color.pink
+  },
+  floatIcon: {
+    borderRadius: 4, 
+    backgroundColor: Color.white, 
+    position: 'absolute', 
+    right: 20, 
+    zIndex: 2, 
+    padding: 10
+  }
+});

@@ -30,7 +30,8 @@ const Tab = TabNavigator({
     indicatorStyle: {
       backgroundColor: Color.pink
     },
-    showLabel: true,
+    showLabel: false,
+    showIcon: true,
     style: {
       backgroundColor: Color.grey
     }
@@ -39,7 +40,7 @@ const Tab = TabNavigator({
 
 export default class TransactionPage extends Component {
   static navigationOptions = {
-    title: 'Transaction',
+    title: 'Home',
   };
 
   render() {

@@ -17,6 +17,12 @@ var Color = Theme.Color;
 export default class SecondTab extends Component {
   static navigationOptions = {
     title: 'Signal',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/icons/alarm.png')}
+        style={[Style.icon, {tintColor: tintColor}]}
+      />
+    ),
   };
 
   constructor(props) {
@@ -62,8 +68,8 @@ export default class SecondTab extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, padding: 10, backgroundColor: Color.whiteGrey1}}>
-        <View style={[Style.cardContainer, {marginBottom: 5, backgroundColor: Color.whiteGrey2}]}>
+      <View style={{flex: 1, paddingLeft: 10, paddingTop: 10, backgroundColor: Color.whiteGrey1}}>
+        <View style={Style.datePickerContainer}>
           <TouchableOpacity onPress={this.openDatePicker.bind(this)}>  
             <View style={Style.colContent}>
               <View style={{flex: 1, alignItems: 'flex-start'}}>
@@ -77,7 +83,7 @@ export default class SecondTab extends Component {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1, borderRadius: 4, padding: 10, backgroundColor: Color.whiteGrey3}}>
+        <View style={{flex: 1}}>
           <ScrollView>
             <SignalComponent signalType={'signal'} coinType={'OMG'} 
               detail={'detail'} value={100}></SignalComponent>    

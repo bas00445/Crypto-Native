@@ -36,6 +36,16 @@ var Style = StyleSheet.create({
     cardContainer: {
         padding: 10, 
         borderRadius: 4,
+    },
+    datePickerContainer: {
+        padding: 10, 
+        borderRadius: 4,
+        marginBottom: 5, 
+        backgroundColor: '#424242',
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 4,
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0
     }
 });
 

@@ -21,23 +21,28 @@ export default class SignalComponent extends Component {
     this.timeStamp = this.props.timeStamp;
     this.value1 = this.props.value1;
     this.value2 = this.props.value2;
+    this.type = '';
 
     switch(this.signalType) {
       case 'signal': {
         this.icon = require('../assets/icons/star.png');
         this.tintColor = Color.yellow;
+        this.type = 'Signal';
       } break;
       case 'buy': {
         this.icon = require('../assets/icons/shopping.png');
         this.tintColor = Color.darkGreen;
+        this.type = 'Buy';
       } break;
       case 'sellUp': {
         this.icon = require('../assets/icons/trend-up.png');
         this.tintColor = Color.green;
+        this.type = 'Sell';
       } break;
       case 'sellDown': {
         this.icon = require('../assets/icons/trend-down.png');
         this.tintColor = Color.red;
+        this.type = 'Sell';
       } break;
     }
 
@@ -46,17 +51,11 @@ export default class SignalComponent extends Component {
   render() {
     return (
       <View style={{marginTop: 20}}>
-          <View style={{backgroundColor: Color.whiteGrey1, height: 20}}>
-          </View>
-          <View style={localStyles.floatIcon}>
-            <Image source={this.icon} style={{tintColor: '#757575'}}></Image>
-          </View>
           <View style={[Style.colContent, localStyles.container]}>
-            <View style={{flex: 8}}>
-              <View>
+            <View style={{flex: 7}}>
+              <View style={{borderBottomWidth: 1, borderBottomColor: Color.white, 
+                paddingBottom: 5, marginBottom: 5}}>
                 <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
-              </View>
-              <View>
                 <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
               </View>
               <View style={Style.colContent}>
@@ -73,7 +72,13 @@ export default class SignalComponent extends Component {
               </View>
             </View>
 
-            <View style={{flex: 2}}></View>
+            <View style={{flex: 3, justifyContent: 'center'}}>
+              <View style={localStyles.floatIcon}>
+                <Image source={this.icon} style={{tintColor: this.tintColor, width: 40, height: 40}}></Image>
+              </View>
+              <Text style={{fontSize: 12, fontWeight: 'bold', textAlign: 'center'}}>
+                {this.type}</Text>
+            </View>
 
           </View>
          
@@ -86,8 +91,12 @@ export default class SignalComponent extends Component {
 var localStyles = StyleSheet.create({
   container: {
     padding: 10,
+    paddingRight: 0,
     backgroundColor: '#f5f5f5',
-    borderRadius: 4,
+    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0
   },
   priceTitle: {
     fontSize: 14, 
@@ -104,11 +113,12 @@ var localStyles = StyleSheet.create({
     color: Color.pink
   },
   floatIcon: {
-    borderRadius: 4, 
+    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
     backgroundColor: Color.white, 
-    position: 'absolute', 
-    right: 20, 
-    zIndex: 2, 
-    padding: 10
+    padding: 10,
+    alignItems: 'center'
   }
 });
