@@ -53,7 +53,7 @@ export default class BuySellComponent extends Component {
       <View style={[localStyles.container, {marginTop: 20}]}>
 
         <View style={[Style.colContent]}>
-          <View style={{flex: 8, borderBottomWidth: 1, borderBottomColor: Color.white, 
+          <View style={{flex: 8, borderBottomWidth: 1, borderBottomColor: Color.whiteGrey1, 
             paddingBottom: 5}}>
             <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
             <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
@@ -91,22 +91,24 @@ export default class BuySellComponent extends Component {
 
 var localStyles = StyleSheet.create({
   container: {
+    opacity: 0.7,
     padding: 10,
     paddingRight: 0,
     backgroundColor: '#f5f5f5',
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,
-    borderBottomRightRadius: 0
+    borderBottomRightRadius: 0,
+    
   },
   priceTitle: {
     fontSize: 14, 
     fontWeight: 'bold', 
-    color: Color.white
+    color: Color.whiteGrey1
   },
   timeStampText: {
     fontSize: 10, 
-    color: Color.white
+    color: Color.whiteGrey1
   },
   coinTypeText: {
     fontSize: 20, 
@@ -118,7 +120,7 @@ var localStyles = StyleSheet.create({
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-    backgroundColor: Color.white, 
+    backgroundColor: '#808080', 
     padding: 5,
     alignItems: 'center',
   }
