@@ -8,7 +8,7 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 var Style = Theme.Style;

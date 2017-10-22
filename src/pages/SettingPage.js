@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
+import { firebaseConfig, firebaseUID, setUID } from '../globalvars/FirebaseConfig';
 import {
   StyleSheet,
   Text,
@@ -8,7 +9,7 @@ import {
   TouchableOpacity,
   Switch,
   ScrollView,
-  TextInput
+  TextInput,
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -24,10 +25,12 @@ export default class SettingPage extends Component {
     this.state = {
       isNotify: true,
       isSimulator: false,
+      isTrading: false,
       isAuto: false,
       isSemi: true,
       bitTrexKey: '557-996-4447'
-    }
+    } 
+
   }
 
   toggleSemiAndAuto() {
@@ -35,6 +38,12 @@ export default class SettingPage extends Component {
     this.setState({
       isAuto: temp,
       isSemi: temp2
+    })
+  }
+
+  toggleTrading() {
+    this.setState({
+      isTrading: !this.state.isTrading
     })
   }
 
@@ -77,7 +86,15 @@ export default class SettingPage extends Component {
             </View>
             
             <View>
-              <Text style={localStyles.settingType}>Trading</Text>
+               <View style={localStyles.settingItem}>
+                <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
+                  <Text style={localStyles.settingItemText}>Trading</Text>
+                </View>
+                <View style={{flex: 1, alignItems:'flex-end'}}>
+                  <Switch style={{justifyContent: 'center'}} value={this.state.isTrading}
+                    onValueChange={(value) => {this.toggleTrading()}}></Switch>
+                </View>
+              </View> 
 
               <View style={localStyles.settingItem}>
                 <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
@@ -85,7 +102,8 @@ export default class SettingPage extends Component {
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
                   <Switch style={{justifyContent: 'center'}} value={this.state.isAuto}
-                    onValueChange={(value) => {this.toggleSemiAndAuto()}}></Switch>
+                    onValueChange={(value) => {this.toggleSemiAndAuto()}}
+                    disabled={!this.state.isTrading}></Switch>
                 </View>
               </View>
 
@@ -95,7 +113,8 @@ export default class SettingPage extends Component {
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
                   <Switch style={{justifyContent: 'center'}} value={this.state.isSemi}
-                    onValueChange={(value) => {this.toggleSemiAndAuto()}}></Switch>
+                    onValueChange={(value) => {this.toggleSemiAndAuto()}}
+                    disabled={!this.state.isTrading}></Switch>
                 </View>
               </View>
             </View>
