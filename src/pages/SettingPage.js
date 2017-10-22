@@ -51,7 +51,9 @@ export default class SettingPage extends Component {
     this.setState({
       isAuto: temp,
       isSemi: temp2
-    })
+    });
+    AsyncStorage.setItem('isAuto', temp);              
+    AsyncStorage.setItem('isSemi', temp2);              
   }
 
   notBool(sbool) {
@@ -65,11 +67,23 @@ export default class SettingPage extends Component {
   toggleSwitch(switchName) {
     switch(switchName) {
       case 'notify': 
-        {this.setState({isNotify: this.notBool(this.state.isNotify)})} break;
+        {
+          var opposite = this.notBool(this.state.isNotify);
+          this.setState({isNotify: opposite});
+          AsyncStorage.setItem('isNotify', opposite);          
+        } break;
        case 'simulator': 
-        {this.setState({isSimulator: this.notBool(this.state.isSimulator)})} break;
+        {
+          var opposite = this.notBool(this.state.isSimulator);
+          this.setState({isSimulator: opposite});
+          AsyncStorage.setItem('isSimulator', opposite);                    
+        } break;
        case 'trading': 
-        {this.setState({isTrading: this.notBool(this.state.isTrading)})} break;
+        {
+          var opposite = this.notBool(this.state.isSimulator);          
+          this.setState({isTrading: opposite});
+          AsyncStorage.setItem('isTrading', opposite);                              
+        } break;
       
     }
   }
