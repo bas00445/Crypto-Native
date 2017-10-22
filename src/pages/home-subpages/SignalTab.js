@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Modal,
   Button,
+  AsyncStorage
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -44,6 +45,14 @@ export default class SignalTab extends Component {
       showModal: false,
     }
 
+    
+    const value = AsyncStorage.getItem('isNotify').then(
+      (value) => {
+        console.log(value);
+      }
+    )
+      
+    
     this.generateSignalComponent();
   }
 

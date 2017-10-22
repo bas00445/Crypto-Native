@@ -11,7 +11,8 @@ import {
   View,
   Image,
   ScrollView,
-  Button
+  Button,
+  AsyncStorage
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -26,16 +27,19 @@ export default class DrawerComponent extends Component {
       email: firebase.auth().currentUser.email
     }
 
-    // alert('UID: '+ firebaseUID);
+    // Initial default setting
+    this.initialDefaultSetting();
+    this.initialFCMService();
+  }
 
+  initialFCMService() {
     FCM.requestPermissions().then(
       ()=> {}, 
       (err)=> alert('Notification reject')
     );
-    
+
     this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
       // optional, do some component related stuff
-      
       FCM.presentLocalNotification({
         id: "UNIQ_ID_STRING",                               // (optional for instant notification)
         title: "My Notification Title",                     // as FCM payload
@@ -61,6 +65,34 @@ export default class DrawerComponent extends Component {
         show_in_foreground: true                           // notification when app is in foreground (local & remote)
     });
     });
+  }
+
+  initialDefaultSetting() {
+    try {
+      const isNotify = AsyncStorage.getItem('isNotify');
+      const isSimulator = AsyncStorage.getItem('isSimulator');
+      const isTrading = AsyncStorage.getItem('isTrading');
+      const isAuto = AsyncStorage.getItem('isAuto');
+      const isSemi = AsyncStorage.getItem('isSemi');
+
+      if (isNotify == null) {
+        AsyncStorage.setItem('isNotify', 'true');
+      }
+      if (isSimulator == null) {
+        AsyncStorage.setItem('isSimulator', 'false');
+      }
+      if (isTrading == null) {
+        AsyncStorage.setItem('isTrading', 'false');
+      }
+      if (isAuto == null) {
+        AsyncStorage.setItem('isAuto', 'false');
+      }
+      if (isSemi == null) {
+        AsyncStorage.setItem('isSemi', 'true');
+      }
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   navigateTo(pageName) {

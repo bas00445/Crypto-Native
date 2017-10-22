@@ -10,6 +10,7 @@ import {
   Switch,
   ScrollView,
   TextInput,
+  AsyncStorage
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -22,15 +23,27 @@ export default class SettingPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isNotify: true,
-      isSimulator: false,
-      isTrading: false,
-      isAuto: false,
-      isSemi: true,
-      bitTrexKey: '557-996-4447'
-    } 
+  }
 
+  componentWillMount() {
+    try {
+      AsyncStorage.getItem('isNotify').then(
+        (value) => {this.setState({isNotify: value})}
+      ); AsyncStorage.getItem('isSimulator').then(
+        (value) => {this.setState({isSimulator: value})}
+      ); AsyncStorage.getItem('isTrading').then(
+        (value) => {this.setState({isTrading: value})}
+      ); AsyncStorage.getItem('isAuto').then(
+        (value) => {this.setState({isAuto: value})}
+      ); AsyncStorage.getItem('isSemi').then(
+        (value) => {this.setState({isSemi: value})}
+      );
+      this.setState({
+        bitTrexKey: '557-996-4447'
+      }); 
+    } catch(err) {
+      console.log('Err');
+    }
   }
 
   toggleSemiAndAuto() {
@@ -41,10 +54,24 @@ export default class SettingPage extends Component {
     })
   }
 
-  toggleTrading() {
-    this.setState({
-      isTrading: !this.state.isTrading
-    })
+  notBool(sbool) {
+    if(sbool == 'true'){
+      return 'false';
+    } else {
+      return 'true'
+    }
+  }
+
+  toggleSwitch(switchName) {
+    switch(switchName) {
+      case 'notify': 
+        {this.setState({isNotify: this.notBool(this.state.isNotify)})} break;
+       case 'simulator': 
+        {this.setState({isSimulator: this.notBool(this.state.isSimulator)})} break;
+       case 'trading': 
+        {this.setState({isTrading: this.notBool(this.state.isTrading)})} break;
+      
+    }
   }
 
   render() {
@@ -70,8 +97,8 @@ export default class SettingPage extends Component {
                 <Text style={localStyles.settingItemText}>Notification</Text>
               </View>
               <View style={{flex: 1, alignItems:'flex-end'}}>
-                <Switch style={{justifyContent: 'center'}} value={this.state.isNotify}
-                  onValueChange={(value) => { this.setState({isNotify: !this.state.isNotify})}}></Switch>
+                <Switch style={{justifyContent: 'center'}} value={this.state.isNotify == 'true'}
+                  onValueChange={(value) => {this.toggleSwitch('notify')}}></Switch>
               </View>
             </View>
             
@@ -80,8 +107,8 @@ export default class SettingPage extends Component {
                 <Text style={localStyles.settingItemText}>Simulator</Text>
               </View>
               <View style={{flex: 1, alignItems:'flex-end'}}>
-                <Switch style={{justifyContent: 'center'}} value={this.state.isSimulator}
-                  onValueChange={(value) => { this.setState({isSimulator: !this.state.isSimulator})}}></Switch>
+                <Switch style={{justifyContent: 'center'}} value={this.state.isSimulator == 'true'}
+                  onValueChange={(value) => { this.toggleSwitch('simulator')}}></Switch>
               </View>
             </View>
             
@@ -91,19 +118,19 @@ export default class SettingPage extends Component {
                   <Text style={localStyles.settingItemText}>Trading</Text>
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch style={{justifyContent: 'center'}} value={this.state.isTrading}
-                    onValueChange={(value) => {this.toggleTrading()}}></Switch>
+                  <Switch style={{justifyContent: 'center'}} value={this.state.isTrading == 'true'}
+                    onValueChange={(value) => {this.toggleSwitch('trading')}}></Switch>
                 </View>
               </View> 
 
               <View style={localStyles.settingItem}>
                 <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
-                  <Text style={localStyles.subItemText} value={this.state.isAuto}>Auto</Text>
+                  <Text style={localStyles.subItemText}>Auto</Text>
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch style={{justifyContent: 'center'}} value={this.state.isAuto}
+                  <Switch style={{justifyContent: 'center'}} value={this.state.isAuto == 'true'}
                     onValueChange={(value) => {this.toggleSemiAndAuto()}}
-                    disabled={!this.state.isTrading}></Switch>
+                    disabled={this.notBool(this.state.isTrading) == 'true'}></Switch>
                 </View>
               </View>
 
@@ -112,9 +139,9 @@ export default class SettingPage extends Component {
                   <Text style={localStyles.subItemText}>Semi-auto</Text>
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
-                  <Switch style={{justifyContent: 'center'}} value={this.state.isSemi}
+                  <Switch style={{justifyContent: 'center'}} value={this.state.isSemi == 'true'}
                     onValueChange={(value) => {this.toggleSemiAndAuto()}}
-                    disabled={!this.state.isTrading}></Switch>
+                    disabled={this.notBool(this.state.isTrading) == 'true'}></Switch>
                 </View>
               </View>
             </View>
