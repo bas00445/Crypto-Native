@@ -56,9 +56,7 @@ export default class TradingViewTab extends Component {
 
     return (
       <View style={{flex: 1, backgroundColor: Color.whiteGrey1}}>
-        <WebView
-          source={{html: htmlCode}}
-          style={{margin: 10}}/>
+        <WebView source={{html: htmlCode}}/>
       </View>
     );
   }

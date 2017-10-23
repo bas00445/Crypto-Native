@@ -46,16 +46,6 @@ export default class SettingPage extends Component {
     }
   }
 
-  toggleSemiAndAuto() {
-    var temp = this.state.isSemi, temp2 = this.state.isAuto;
-    this.setState({
-      isAuto: temp,
-      isSemi: temp2
-    });
-    AsyncStorage.setItem('isAuto', temp);              
-    AsyncStorage.setItem('isSemi', temp2);              
-  }
-
   notBool(sbool) {
     if(sbool == 'true'){
       return 'false';
@@ -72,18 +62,32 @@ export default class SettingPage extends Component {
           this.setState({isNotify: opposite});
           AsyncStorage.setItem('isNotify', opposite);          
         } break;
-       case 'simulator': 
-        {
-          var opposite = this.notBool(this.state.isSimulator);
-          this.setState({isSimulator: opposite});
-          AsyncStorage.setItem('isSimulator', opposite);                    
-        } break;
-       case 'trading': 
-        {
-          var opposite = this.notBool(this.state.isTrading);          
-          this.setState({isTrading: opposite});
-          AsyncStorage.setItem('isTrading', opposite);                              
-        } break;
+      case 'simulator': 
+      {
+        var opposite = this.notBool(this.state.isSimulator);
+        this.setState({isSimulator: opposite});
+        AsyncStorage.setItem('isSimulator', opposite);                    
+      } break;
+      case 'trading': 
+      {
+        var opposite = this.notBool(this.state.isTrading);          
+        this.setState({isTrading: opposite});
+        AsyncStorage.setItem('isTrading', opposite);                              
+      } break;
+      case 'isAuto':
+      {
+        var opposite = this.notBool(this.state.isAuto);          
+        this.setState({isSemi: this.state.isAuto, isAuto: opposite});
+        AsyncStorage.setItem('isSemi', this.state.isAuto);                              
+        AsyncStorage.setItem('isAuto', opposite);                              
+      } break;
+      case 'isSemi':
+      {
+        var opposite = this.notBool(this.state.isSemi);          
+        this.setState({isAuto: this.state.isSemi, isSemi: opposite});
+        AsyncStorage.setItem('isAuto', this.state.isSemi);                                      
+        AsyncStorage.setItem('isSemi', opposite);                              
+      } break;
       
     }
   }
@@ -143,7 +147,7 @@ export default class SettingPage extends Component {
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
                   <Switch style={{justifyContent: 'center'}} value={this.state.isAuto == 'true'}
-                    onValueChange={(value) => {this.toggleSemiAndAuto()}}
+                    onValueChange={(value) => {this.toggleSwitch('isAuto')}}
                     disabled={this.notBool(this.state.isTrading) == 'true'}></Switch>
                 </View>
               </View>
@@ -154,7 +158,7 @@ export default class SettingPage extends Component {
                 </View>
                 <View style={{flex: 1, alignItems:'flex-end'}}>
                   <Switch style={{justifyContent: 'center'}} value={this.state.isSemi == 'true'}
-                    onValueChange={(value) => {this.toggleSemiAndAuto()}}
+                    onValueChange={(value) => {this.toggleSwitch('isSemi')}}
                     disabled={this.notBool(this.state.isTrading) == 'true'}></Switch>
                 </View>
               </View>
