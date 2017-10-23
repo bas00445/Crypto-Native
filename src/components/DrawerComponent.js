@@ -79,7 +79,7 @@ export default class DrawerComponent extends Component {
         AsyncStorage.setItem('isNotify', 'true');
       }
       if (isSimulator == null) {
-        AsyncStorage.setItem('isSimulator', 'false');
+        AsyncStorage.setItem('isSimulator', 'true');
       }
       if (isTrading == null) {
         AsyncStorage.setItem('isTrading', 'false');

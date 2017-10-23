@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Theme from '../styles/GlobalStyles';
 import SignalTab from './home-subpages/SignalTab';
 import SimulatorTab from './home-subpages/SimulatorTab';
+import TradingViewTab from './home-subpages/TradingViewTab';
 import { TabNavigator } from 'react-navigation';
 import {
   StyleSheet,
@@ -21,6 +22,9 @@ const Tab = TabNavigator({
   SimulatorTab: {
     screen: SimulatorTab,
   },
+  TradingViewTab: {
+    screen: TradingViewTab
+  }
 }, {
   tabBarPosition: 'top',
   animationEnabled: true,

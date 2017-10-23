@@ -80,7 +80,7 @@ export default class SettingPage extends Component {
         } break;
        case 'trading': 
         {
-          var opposite = this.notBool(this.state.isSimulator);          
+          var opposite = this.notBool(this.state.isTrading);          
           this.setState({isTrading: opposite});
           AsyncStorage.setItem('isTrading', opposite);                              
         } break;
