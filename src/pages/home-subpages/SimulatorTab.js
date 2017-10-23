@@ -19,7 +19,7 @@ export default class SimulatorTab extends Component {
     title: 'Simulator',
     tabBarIcon: ({ tintColor }) => (
       <Image
-        source={require('../../assets/icons/line-chart.png')}
+        source={require('../../assets/icons/game.png')}
         style={[Style.icon, {tintColor: tintColor}]}
       />
     ),

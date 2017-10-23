@@ -21,7 +21,7 @@ export default class TradingViewTab extends Component {
     title: 'Trading View',
     tabBarIcon: ({ tintColor }) => (
       <Image
-        source={require('../../assets/icons/trend-up.png')}
+        source={require('../../assets/icons/line-chart.png')}
         style={[Style.icon, {tintColor: tintColor}]}
       />
     ),
