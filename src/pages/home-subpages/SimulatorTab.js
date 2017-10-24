@@ -41,7 +41,7 @@ export default class SimulatorTab extends Component {
       selectedDate: year + '/' + month + '/' + day
     }
 
-    this.generateBuySellComponent();
+    this.requestBuySell(year, month, day);
   }
   
   async openDatePicker() {
@@ -62,28 +62,36 @@ export default class SimulatorTab extends Component {
           date: selectedDate, 
           selectedDate: year + '/' + (month+1) + '/' + day
         });
-
+        
+        this.requestBuySell(year, month+1, day);        
       }
     } catch ({code, message}) {
       alert('Cannot open date picker', message);
     }
   }
 
+  async requestBuySell(year, month, day){
+    try {
+      var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_sell_orders?api_key=1&date=' + year + '-' + month + '-' + day);
+      var responseJson = await response.json();
+      var lst = JSON.parse(responseJson);
+      this.setState({buySellList: lst});
+      this.generateBuySellComponent();
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
   generateBuySellComponent() {
-    var views = [];
-    var coinList = ['Dash', 'BTC', 'QTUM'];
-    var typeList = ['buy', 'sellUp', 'sellDown']
-    for(var i=0; i < 7; i++) {
-      var stamp = new Date().toString();
-      var v1 = Math.random(), v3 = Math.random()*1000, 
-          v2 = Math.random()*1200, v4 = Math.random()*1100;
-      var coin = coinList[i%3];
-      var type = typeList[i%3];
-      views.push(<BuySellComponent value1={v1.toFixed(8)} value2={v2.toFixed(2)} key={i} signalType={type}
-        timeStamp={stamp} coinType={coin}></BuySellComponent>);
+    const views = [];
+    var buySellList = this.state.buySellList;
+    for(var x in buySellList) {
+      var obj = buySellList[x];      
+      views.push(<BuySellComponent value1={obj.price} value2={obj.profit} key={x} signalType={'buy'}
+        timeStamp={obj.datetime} coinType={obj.name}></BuySellComponent>);
     }
 
-    this.buySellList = views;
+    this.setState({buySellViews: views});
   }
 
   render() {
@@ -105,7 +113,7 @@ export default class SimulatorTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
-            {this.buySellList}
+            {this.state.buySellViews}
           </ScrollView>  
         </View>
       </View>

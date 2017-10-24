@@ -33,7 +33,7 @@ export default class SignalComponent extends Component {
           <View style={{flex: 8, borderBottomWidth: 1, borderBottomColor: Color.whiteGrey1, 
             paddingBottom: 5}}>
             <Text style={localStyles.coinTypeText}>{this.coinType}</Text>
-            <Text style={localStyles.timeStampText}>2017-10-19 19:00</Text>
+            <Text style={localStyles.timeStampText}>{this.timeStamp}</Text>
           </View>
 
           <View style={{flex: 2, justifyContent: 'center', paddingBottom: 5}}>

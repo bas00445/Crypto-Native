@@ -70,7 +70,7 @@ export default class BuySellComponent extends Component {
           </View>
 
           <View>
-            <Text style={localStyles.priceTitle}>Price (BTC)</Text>
+            <Text style={localStyles.priceTitle}>Profit (%)</Text>
             <Text style={localStyles.valueText}>{this.value2 + '%'}</Text>
           </View>
         </View> 

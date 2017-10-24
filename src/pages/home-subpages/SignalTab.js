@@ -42,16 +42,10 @@ export default class SignalTab extends Component {
         year: year
       },
       selectedDate: year + '/' + month + '/' + day,
-      signalList: null,
       showModal: false,
     }
 
-    
-    const value = AsyncStorage.getItem('isNotify').then(
-      (value) => {
-        console.log(value);
-      }
-    )
+    this.requestSignal(year, month, day);
   }
 
   async requestSignal(year, month, day){
@@ -61,7 +55,6 @@ export default class SignalTab extends Component {
       var lst = JSON.parse(responseJson);
       this.setState({signalList: lst});
       this.generateSignalComponent();
-      console.log(lst);
     } catch(err) {
       console.error(err);
     }
@@ -71,15 +64,14 @@ export default class SignalTab extends Component {
     const views = [];
     var signalList = this.state.signalList;
     for(var x in signalList) {
-      var signal = signalList[x];
+      var obj = signalList[x];
       views.push(
-        <SignalComponent value1={signal.price} value2={signal.base_volume} 
-          value3={signal.open_buy_order} value4={signal.open_sell_order} key={x}
-          timeStamp={signal.datetime} coinType={signal.name} onPress={this.showModal.bind(this, true)}>
+        <SignalComponent value1={obj.price} value2={obj.base_volume} 
+          value3={obj.open_buy_order} value4={obj.open_sell_order} key={x}
+          timeStamp={obj.datetime} coinType={obj.name} onPress={this.showModal.bind(this, true)}>
           </SignalComponent>
       );
     }
-
     this.setState({signalViews: views});
   }
 
