@@ -8,7 +8,8 @@ import {
   Image,
   DatePickerAndroid,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -38,7 +39,8 @@ export default class SimulatorTab extends Component {
         month: month,
         year: year
       },
-      selectedDate: year + '/' + month + '/' + day
+      selectedDate: year + '/' + month + '/' + day,
+      loadingBuySell: true
     }
 
     this.requestBuySell(year, month, day);
@@ -72,13 +74,18 @@ export default class SimulatorTab extends Component {
 
   async requestBuySell(year, month, day){
     try {
+      this.setState({loadingBuySell: true}); // start loading animation        
       var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_sell_orders?api_key=1&date=' + year + '-' + month + '-' + day);
       var responseJson = await response.json();
+
+      this.setState({loadingBuySell: false}); // stop loading animation    
+
       var lst = JSON.parse(responseJson);
       this.setState({buySellList: lst});
       this.generateBuySellComponent();
     } catch(err) {
       console.error(err);
+      this.setState({loadingBuySell: false}); // stop loading animation          
     }
   }
 
@@ -90,8 +97,24 @@ export default class SimulatorTab extends Component {
       views.push(<BuySellComponent value1={obj.price} value2={obj.profit} key={x} signalType={'buy'}
         timeStamp={obj.datetime} coinType={obj.name}></BuySellComponent>);
     }
+    views.reverse(); // Show lastest data first    
+    this.setState({buySellViews: views, loadingBuySell: false});
+  }
 
-    this.setState({buySellViews: views});
+  renderLoading() {
+    if(this.state.loadingBuySell) {
+      return(<ActivityIndicator animating={true} size={'large'} color={Color.pink}></ActivityIndicator>);
+    } else {
+      return null;
+    }
+  }
+
+  renderBuySellList() {
+    if(!this.state.loadingBuySell) {
+      return(<ScrollView>{this.state.buySellViews}</ScrollView>);
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -111,10 +134,9 @@ export default class SimulatorTab extends Component {
               </View>
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1, paddingBottom: 10}}>
-          <ScrollView>
-            {this.state.buySellViews}
-          </ScrollView>  
+        <View style={{flex: 1, paddingBottom: 10, justifyContent: 'center'}}>
+          {this.renderLoading()}
+          {this.renderBuySellList()}
         </View>
       </View>
     );

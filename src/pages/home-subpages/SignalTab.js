@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   Modal,
   Button,
-  AsyncStorage
+  ActivityIndicator
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -42,6 +42,7 @@ export default class SignalTab extends Component {
         year: year
       },
       selectedDate: year + '/' + month + '/' + day,
+      loadingSignal: true,
       showModal: false,
     }
 
@@ -50,13 +51,18 @@ export default class SignalTab extends Component {
 
   async requestSignal(year, month, day){
     try {
+      this.setState({loadingSignal: true}); // start loading animation          
       var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_signals?api_key=1&date=' + year + '-' + month + '-' + day);
       var responseJson = await response.json();
+
+      this.setState({loadingSignal: false}); // start loading animation          
+      
       var lst = JSON.parse(responseJson);
       this.setState({signalList: lst});
       this.generateSignalComponent();
     } catch(err) {
       console.error(err);
+      this.setState({loadingSignal: false}); // start loading animation                
     }
   }
 
@@ -72,6 +78,7 @@ export default class SignalTab extends Component {
           </SignalComponent>
       );
     }
+    views.reverse(); // Show lastest data first
     this.setState({signalViews: views});
   }
 
@@ -150,6 +157,22 @@ export default class SignalTab extends Component {
     );
   }
 
+  renderLoading() {
+    if(this.state.loadingSignal) {
+      return(<ActivityIndicator animating={true} size={'large'} color={Color.pink}></ActivityIndicator>);
+    } else {
+      return null;
+    }
+  }
+
+  renderSignalList() {
+    if(!this.state.loadingSignal) {
+      return(<ScrollView>{this.state.signalViews}</ScrollView>);
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1, paddingLeft: 10, paddingTop: 10, backgroundColor: Color.whiteGrey1}}>
@@ -168,10 +191,9 @@ export default class SignalTab extends Component {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1, paddingBottom: 10}}>
-          <ScrollView>
-            {this.state.signalViews}
-          </ScrollView>
+        <View style={{flex: 1, paddingBottom: 10, justifyContent: 'center'}}>
+          {this.renderLoading()}
+          {this.renderSignalList()}
         </View>
       </View>
     );
