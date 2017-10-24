@@ -16,11 +16,15 @@ export default class BuySellComponent extends Component {
     super(props);
 
     this.coinType = this.props.coinType;
-    this.signalType = this.props.signalType;
     this.timeStamp = this.props.timeStamp;
     this.value1 = this.props.value1;
     this.value2 = this.props.value2;
     this.type = '';
+    if (this.value2 == null) {
+      this.signalType = 'buy'
+    } else {
+      this.signalType = this.value2 >= 0 ? 'sellUp' : 'sellDown'
+    }
 
     switch(this.signalType) {
       case 'buy': {
@@ -40,6 +44,17 @@ export default class BuySellComponent extends Component {
       } break;
     }
 
+  }
+
+  renderProfitArea() {
+    if(this.value2 != null){
+      return(
+      <View>
+        <Text style={localStyles.priceTitle}>Profit (%)</Text>
+        <Text style={localStyles.valueText}>{this.value2 + '%'}</Text>
+      </View>
+      );
+    }
   }
 
   render() {
@@ -68,11 +83,7 @@ export default class BuySellComponent extends Component {
             <Text style={localStyles.priceTitle}>Price (BTC)</Text>
             <Text style={localStyles.valueText}>{this.value1}</Text>
           </View>
-
-          <View>
-            <Text style={localStyles.priceTitle}>Profit (%)</Text>
-            <Text style={localStyles.valueText}>{this.value2 + '%'}</Text>
-          </View>
+          {this.renderProfitArea()}
         </View> 
 
           

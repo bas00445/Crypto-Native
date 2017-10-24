@@ -40,7 +40,7 @@ export default class SimulatorTab extends Component {
         year: year
       },
       selectedDate: year + '/' + month + '/' + day,
-      loadingBuySell: true
+      loading: true
     }
 
     this.requestBuySell(year, month, day);
@@ -74,43 +74,55 @@ export default class SimulatorTab extends Component {
 
   async requestBuySell(year, month, day){
     try {
-      this.setState({loadingBuySell: true}); // start loading animation        
-      var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_sell_orders?api_key=1&date=' + year + '-' + month + '-' + day);
-      var responseJson = await response.json();
+      this.setState({loading: true}); // start loading animation        
+      
+      var responseSell = await fetch('http://pk-cryptobot.herokuapp.com/api/get_sell_orders?api_key=1&date=' + year + '-' + month + '-' + day);
+      var responseJsonSell = await responseSell.json();
 
-      this.setState({loadingBuySell: false}); // stop loading animation    
+      var responseBuy = await fetch('http://pk-cryptobot.herokuapp.com/api/get_buy_orders?api_key=1&date=' + year + '-' + month + '-' + day);
+      var responseJsonBuy = await responseBuy.json();
 
-      var lst = JSON.parse(responseJson);
-      this.setState({buySellList: lst});
+      var lstSell = JSON.parse(responseJsonSell);
+      var lstBuy = JSON.parse(responseJsonBuy);
+
+      var collection = [];
+      for(var s in lstSell) {
+        collection.push(lstSell[s]);
+      }
+
+      for(var b in lstBuy) {
+        collection.push(lstBuy[b]);
+      }
+
+      this.setState({collectionList: collection});
       this.generateBuySellComponent();
     } catch(err) {
       console.error(err);
-      this.setState({loadingBuySell: false}); // stop loading animation          
+      this.setState({loading: false}); // stop loading animation          
     }
   }
 
   generateBuySellComponent() {
     const views = [];
-    var buySellList = this.state.buySellList;
-    for(var x in buySellList) {
-      var obj = buySellList[x];      
-      views.push(<BuySellComponent value1={obj.price} value2={obj.profit} key={x} signalType={'buy'}
-        timeStamp={obj.datetime} coinType={obj.name}></BuySellComponent>);
+    var cList = this.state.collectionList;
+    for(var i=0; i< cList.length; i++) {
+      console.log(cList[i]);
+      views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
+        timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
     }
-    views.reverse(); // Show lastest data first    
-    this.setState({buySellViews: views, loadingBuySell: false});
+    this.setState({buySellViews: views, loading: false});
   }
 
   renderLoading() {
-    if(this.state.loadingBuySell) {
+    if(this.state.loading) {
       return(<ActivityIndicator animating={true} size={'large'} color={Color.pink}></ActivityIndicator>);
     } else {
       return null;
     }
   }
 
-  renderBuySellList() {
-    if(!this.state.loadingBuySell) {
+  rendersellList() {
+    if(!this.state.loading) {
       return(<ScrollView>{this.state.buySellViews}</ScrollView>);
     } else {
       return null;
@@ -136,7 +148,7 @@ export default class SimulatorTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10, justifyContent: 'center'}}>
           {this.renderLoading()}
-          {this.renderBuySellList()}
+          {this.rendersellList()}
         </View>
       </View>
     );
