@@ -55,15 +55,14 @@ export default class SimulatorTab extends Component {
         // If selected a date
         var selectedDate = {
           day: day,
-          month: month,
+          month: month + 1,
           year: year
         };
         this.setState({
           date: selectedDate, 
-          selectedDate: year + '/' + month + '/' + day
+          selectedDate: year + '/' + (month+1) + '/' + day
         });
-        
-        
+
       }
     } catch ({code, message}) {
       alert('Cannot open date picker', message);

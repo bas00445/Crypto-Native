@@ -42,6 +42,7 @@ export default class SignalTab extends Component {
         year: year
       },
       selectedDate: year + '/' + month + '/' + day,
+      signalList: null,
       showModal: false,
     }
 
@@ -51,47 +52,55 @@ export default class SignalTab extends Component {
         console.log(value);
       }
     )
-      
-    
-    this.generateSignalComponent();
+  }
+
+  async requestSignal(year, month, day){
+    try {
+      var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_signals?api_key=1&date=' + year + '-' + month + '-' + day);
+      var responseJson = await response.json();
+      var lst = JSON.parse(responseJson);
+      this.setState({signalList: lst});
+      this.generateSignalComponent();
+      console.log(lst);
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   generateSignalComponent() {
-    var views = [];
-    var coinList = ['Dash', 'BTC', 'QTUM']
-    for(var i=0; i < 7; i++) {
-      var stamp = new Date().toString();
-      var v1 = Math.random(), v3 = Math.random()*1000, 
-          v2 = Math.random()*1200, v4 = Math.random()*1100;
-      var coin = coinList[i%3];
+    const views = [];
+    var signalList = this.state.signalList;
+    for(var x in signalList) {
+      var signal = signalList[x];
       views.push(
-        <SignalComponent value1={v1.toFixed(6)} value2={v2.toFixed(2)} value3={v3.toFixed(2)} 
-          value4={v4.toFixed(2)} key={i}
-        timeStamp={stamp} coinType={coin} onPress={this.showModal.bind(this, true)}></SignalComponent>
+        <SignalComponent value1={signal.price} value2={signal.base_volume} 
+          value3={signal.open_buy_order} value4={signal.open_sell_order} key={x}
+          timeStamp={signal.datetime} coinType={signal.name} onPress={this.showModal.bind(this, true)}>
+          </SignalComponent>
       );
     }
 
-    this.signalList = views;
+    this.setState({signalViews: views});
   }
 
   async openDatePicker() {
     try {
       const {action, year, month, day} = await DatePickerAndroid.open({
-        // Use `new Date()` for current date.
-        // May 25 2020. Month 0 is January.
         date: new Date()
       });
       if (action !== DatePickerAndroid.dismissedAction) {
         // If selected a date
         var selectedDate = {
           day: day,
-          month: month,
+          month: (month+1),
           year: year
         };
         this.setState({
           date: selectedDate, 
-          selectedDate: year + '/' + month + '/' + day
+          selectedDate: year + '/' + (month+1) + '/' + day
         });
+
+        this.requestSignal(year, month+1, day);
       }
     } catch ({code, message}) {
       alert('Cannot open date picker', message);
@@ -104,7 +113,7 @@ export default class SignalTab extends Component {
     } else {
         this.setState({showModal: false});            
     }
-}
+  }
 
   buyOrder() {
     alert('Buying is successful');
@@ -169,7 +178,7 @@ export default class SignalTab extends Component {
         </View>
         <View style={{flex: 1, paddingBottom: 10}}>
           <ScrollView>
-            {this.signalList}
+            {this.state.signalViews}
           </ScrollView>
         </View>
       </View>
