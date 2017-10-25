@@ -79,10 +79,9 @@ export default class SignalComponent extends Component {
 
 var localStyles = StyleSheet.create({
   container: {
-    opacity: 0.7,
     padding: 10,
     paddingRight: 0,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#b9babc',
     borderTopLeftRadius: 4,
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,
@@ -108,7 +107,7 @@ var localStyles = StyleSheet.create({
     borderBottomLeftRadius: 4,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-    backgroundColor: '#808080', 
+    backgroundColor: Color.signalIcon, 
     padding: 5,
     alignItems: 'center',
   },

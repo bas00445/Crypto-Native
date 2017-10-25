@@ -42,6 +42,7 @@ export default class SignalTab extends Component {
         year: year
       },
       selectedDate: year + '/' + month + '/' + day,
+      selectedOrder: {},
       loadingSignal: true,
       showModal: false,
     }
@@ -64,22 +65,6 @@ export default class SignalTab extends Component {
       console.error(err);
       this.setState({loadingSignal: false}); // start loading animation                
     }
-  }
-
-  generateSignalComponent() {
-    const views = [];
-    var signalList = this.state.signalList;
-    for(var x in signalList) {
-      var obj = signalList[x];
-      views.push(
-        <SignalComponent value1={obj.price} value2={obj.base_volume} 
-          value3={obj.open_buy_order} value4={obj.open_sell_order} key={x}
-          timeStamp={obj.datetime} coinType={obj.name} onPress={this.showModal.bind(this, true)}>
-          </SignalComponent>
-      );
-    }
-    views.reverse(); // Show lastest data first
-    this.setState({signalViews: views});
   }
 
   async openDatePicker() {
@@ -106,6 +91,27 @@ export default class SignalTab extends Component {
     }
   }
 
+  generateSignalComponent() {
+    const views = [];
+    var signalList = this.state.signalList;
+    for(var x in signalList) {
+      var obj = signalList[x];
+      views.push(
+        <SignalComponent value1={obj.price} value2={obj.base_volume} 
+          value3={obj.open_buy_order} value4={obj.open_sell_order} key={x}
+          timeStamp={obj.datetime} coinType={obj.name} onPress={this.buySelectedOrder.bind(this, obj)}>
+          </SignalComponent>
+      );
+    }
+    views.reverse(); // Show lastest data first
+    this.setState({signalViews: views});
+  }
+
+  buySelectedOrder(obj) {
+    this.showModal(true);
+    this.setState({selectedOrder: obj});
+  }
+
   showModal(visible) {
     if (visible == true) {
         this.setState({showModal: true});
@@ -114,12 +120,14 @@ export default class SignalTab extends Component {
     }
   }
 
-  buyOrder() {
-    alert('Buying is successful');
+  comfirmOrder(selected) {
+    alert('Buy the order name: ' + selected.name);
     this.showModal(false);
+    this.setState({selectedOrder: {}});
   }
 
   renderModal() {
+    var s = this.state.selectedOrder;
     return(
       <Modal 
         animationType="slide"
@@ -130,16 +138,23 @@ export default class SignalTab extends Component {
         <View style={{flex: 1, padding: 20, backgroundColor: Color.grey, 
           justifyContent: 'center'}}>
 
-          <View style={{backgroundColor: '#f5f5f5', padding: 10, opacity: 0.7, borderRadius: 4}}>
-            <View style={{marginBottom: 10}}>
-              <Text style={{fontSize: 16, fontWeight: 'bold', color: Color.grey}}>
+          <View style={{backgroundColor: '#b9babc', padding: 10, borderRadius: 4}}>
+            <View style={{paddingHorizontal: 10}}>
+              <Text style={{fontSize: 18, fontWeight: 'bold', color: Color.grey}}>
                 Do you want to buy this order ?</Text>
             </View>
 
-            <View style={Style.colContent}>
+            <View style={{paddingRight: 10}}>
+              <SignalComponent value1={s.price} value2={s.base_volume} 
+                value3={s.open_buy_order} value4={s.open_sell_order}
+                timeStamp={s.datetime} coinType={s.name}>
+              </SignalComponent>
+            </View>
+
+            <View style={[Style.colContent, {marginTop: 10}]}>
               <View style={{flex: 1, padding: 5}}>
                   <Button
-                      onPress={this.buyOrder.bind(this)}
+                      onPress={this.comfirmOrder.bind(this, s)}
                       title="Yes"
                       color={Color.whiteGrey2}/>
               </View>

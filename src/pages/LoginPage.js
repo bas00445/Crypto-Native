@@ -235,7 +235,7 @@ export default class LoginPage extends Component {
                         style={{color: Color.pureWhite}}></TextInput>
                 </View>
 
-                <Spinner visible={this.state.loading} textContent={""} textStyle={{color: '#FFF'}}>
+                <Spinner visible={this.state.loading} textContent={""} color={Color.pink}>
                 </Spinner>
                 
 
