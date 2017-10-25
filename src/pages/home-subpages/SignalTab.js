@@ -135,7 +135,7 @@ export default class SignalTab extends Component {
         visible={this.state.showModal}
         onRequestClose={() => {this.showModal(this, false)}}>
 
-        <View style={{flex: 1, padding: 20, backgroundColor: Color.grey, 
+        <View style={{flex: 1, padding: 10, backgroundColor: Color.grey, 
           justifyContent: 'center'}}>
 
           <View style={{backgroundColor: '#b9babc', padding: 10, borderRadius: 4}}>

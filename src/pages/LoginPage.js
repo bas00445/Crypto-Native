@@ -29,17 +29,18 @@ export default class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            targetResetEmail: '',
             email: '',
             pass: '',
             newEmail: '',
             newPass: '',
             newPassConfirm: '',
+            reg_code: '',
             signupVisible: false,
-            api_key: '',
-            correctKey: true,
+            forgotVisible: false,
+            correctCode: false,
             loading: false,
         }
-
     }
     
     componentWillMount() {
@@ -47,28 +48,60 @@ export default class LoginPage extends Component {
         this.auth = firebase.auth().onAuthStateChanged(
             function(user) {
               if (user) {
-                
-                if (this.state.correctKey == true) {
-                    setUID(user.uid);
-                    this.setState({loading: true});
-                    setTimeout(() => {
-                        navigation.navigate('Main');
-                        this.setState({loading: false});
-                    }, 1000);
-                } else {
-                    firebase.auth().signOut();
-                    alert('Wrong API Key!');
-                }
-
+                setUID(user.uid);
+                this.setState({loading: true});
+                setTimeout(() => {
+                    navigation.navigate('Main');
+                    this.setState({loading: false});
+                }, 1000);
               } else {
                 setUID('');
               }
             }.bind(this)
         );
-
     }
 
-    sendUserUID(uid) {
+    async validateUser() {
+        try {
+        let data = {
+            method: 'POST',
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              reg_code: this.state.reg_code
+            })
+          }
+         var response = await fetch('http://pk-cryptobot.herokuapp.com/api/verify_code', data);
+         var responseJson = await response.json();
+         if (responseJson == 'Invalid reg_code') {
+             alert('Invalid Registeration Code');
+         } else {
+             this.signUp();
+         }
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+    signUp() {
+        if (this.state.newPass == this.state.newPassConfirm) {
+          firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass).then(
+              (user) => {
+                  this.openSignupModal(false);
+                  this.sendUserUID(user.uid);
+              },
+              (err) => {
+                  alert(err.toString());
+              }
+          );
+        } else {
+            alert('Passwords must be the same');
+        }
+      }  
+
+    async sendUserUID(uid) {
         let data = {
             method: 'POST',
             headers: {
@@ -77,53 +110,35 @@ export default class LoginPage extends Component {
             },
             body: JSON.stringify({
               uid: uid,
-              api_key: this.state.api_key
             })
           }
-         fetch('http://52.221.73.154:1521/api/register', data)
-        .then(
-            (res) => {
-                console.log(res.json());
-                var result = res.json();
-                if (result._55 == 'OK') {
-                    this.setState({correctKey: true});
-                } else if (result._55 == 'not found') {
-                    this.setState({correctKey: false});
-                }
-            }, 
-            (err) => {
-                console.log(err.json());
-                this.setState({correctKey: false});
-            },
-            () => {console.log('Done')})  // promise
+         var response = await fetch('http://pk-cryptobot.herokuapp.com/api/register', data);
+         var responseJson = await response.json();
+         if (responseJson == 'OK') {
+            this.openSignupModal(false);
+         } else if (responseJson == 'not found') {
+             // do something
+         }
     }
 
-    openSignupModal(isVisible) {
-        if (isVisible == true) {
+    openForgotModal(visible) {
+        if (visible == true) {
+            this.setState({forgotVisible: true});
+        } else {
+            this.setState({forgotVisible: false});            
+        }
+    }
+
+    openSignupModal(visible) {
+        if (visible == true) {
             this.setState({signupVisible: true});
         } else {
             this.setState({signupVisible: false});            
         }
     }
 
-    signUp() {
-      if (this.state.newPass == this.state.newPassConfirm) {
-        firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass).then(
-            (user) => {
-                this.openSignupModal(false);
-                this.sendUserUID(user.uid);
-            },
-            (err) => {
-                alert(err.toString());
-            }
-        );
-      } else {
-          alert('Passwords must be the same');
-      }
-    }  
-
-    forgotPassword(){
-        console.log('Forgot password !!');
+    forgotPassword() {
+        this.openForgotModal(true);
     }
 
     getFCMToken() {
@@ -133,13 +148,66 @@ export default class LoginPage extends Component {
         });
     }
 
-  async login() {
+  login() {
     try {
-        await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
     } catch (error) {
         alert(error.toString());
     }
 
+    }
+
+    confirmResetPassword() {
+        firebase.auth().sendPasswordResetEmail(this.state.targetResetEmail).then(
+            () => {
+                alert('Please check the new password in your email address');
+                this.openForgotModal(false);
+            }
+        ).catch(
+            (err) => {
+                alert(err);
+            }
+        )
+       
+    }
+    renderForgotPasswordModal() {
+        return(
+            <Modal
+                animationType="slide"
+                transparent={false}
+                visible={this.state.forgotVisible}
+                onRequestClose={() => {this.openForgotModal(this, false)}}>
+                <View style={{flex: 1, padding: 20, backgroundColor: Color.grey}}>
+                    <View style={{paddingBottom: 10}}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.pureWhite}}>
+                        Reset Password</Text>
+                    </View>
+
+                    <TextInput onChangeText={(text) => {this.setState({targetResetEmail:text})}} 
+                    placeholder={"Email"} selectionColor={Color.pureWhite}
+                    underlineColorAndroid={Color.white}
+                    placeholderTextColor={'#8c8c8c'}
+                    style={{color: Color.pureWhite}}>
+                    </TextInput>
+                            
+                    <View style={[Style.colContent, {marginTop: 10}]}>
+                    <View style={{flex: 1, padding: 5}}>
+                        <Button
+                            onPress={this.confirmResetPassword.bind(this)}
+                            title="ok"
+                            color={Color.whiteGrey2}/>
+                    </View>
+                    <View style={{flex: 1, padding: 5}}>
+                        <Button
+                            onPress={this.openForgotModal.bind(this, false)}
+                            title="cancel"
+                            color={Color.whiteGrey2}/>
+                    </View>
+                    </View>
+                </View>
+
+            </Modal>
+        );
     }
 
     renderModal() {
@@ -151,7 +219,8 @@ export default class LoginPage extends Component {
             onRequestClose={() => {this.openSignupModal(this, false)}}>
             <View style={{padding: 20, flex: 1, backgroundColor: Color.grey}}>
                 <View style={{marginBottom: 4}}>
-                    <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.pureWhite}}>Create a new account</Text>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', color: Color.pureWhite}}>
+                        Create a new account</Text>
                 </View>
 
                 <View style={{marginBottom: 4}}>
@@ -181,8 +250,8 @@ export default class LoginPage extends Component {
                 </View>
 
                 <View style={{marginBottom: 4}}>
-                    <TextInput onChangeText={(text) => {this.setState({api_key:text})}} 
-                        placeholder={"API Key"}
+                    <TextInput onChangeText={(text) => {this.setState({reg_code:text})}} 
+                        placeholder={"Registeration Code"}
                         selectionColor={Color.pureWhite}
                         underlineColorAndroid={Color.white}
                         placeholderTextColor={'#8c8c8c'}
@@ -192,7 +261,7 @@ export default class LoginPage extends Component {
                 <View style={Style.colContent}>
                     <View style={{flex: 6, padding: 5}}>
                         <Button
-                            onPress={this.signUp.bind(this)}
+                            onPress={this.validateUser.bind(this)}
                             title="Confirm"
                             color={Color.whiteGrey2}/>
                     </View>
@@ -213,6 +282,7 @@ export default class LoginPage extends Component {
     return (
       <View style={localStyles.container}>
         {this.renderModal()}
+        {this.renderForgotPasswordModal()}
         <View style={localStyles.imageContainer}>
             <Image style={{flex: 1, alignSelf: 'center', width: 150, height: 150, resizeMode: 'contain'}} 
             source={require('../assets/images/pk-black.png')}/>
