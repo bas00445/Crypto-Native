@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
 import BuySellComponent from '../../components/BuySellComponent';
+import SummaryComponent from '../../components/SummaryComponent';
 import {
   StyleSheet,
   Text,
@@ -40,7 +41,8 @@ export default class SimulatorTab extends Component {
         year: year
       },
       selectedDate: year + '/' + month + '/' + day,
-      loading: true
+      loading: true,
+      totalProfit: null
     }
 
     this.requestBuySell(year, month, day);
@@ -105,12 +107,20 @@ export default class SimulatorTab extends Component {
   generateBuySellComponent() {
     const views = [];
     var cList = this.state.collectionList;
+    var tProfit = Number(0);
+
     for(var i=0; i< cList.length; i++) {
-      console.log(cList[i]);
+      if(cList[i].profit != null){
+        profit = cList[i].profit;
+        tProfit += Number(profit);
+        console.log(tProfit);
+      }
+
       views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
         timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
     }
-    this.setState({buySellViews: views, loading: false});
+
+    this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
   }
 
   renderLoading() {
@@ -123,7 +133,11 @@ export default class SimulatorTab extends Component {
 
   rendersellList() {
     if(!this.state.loading) {
-      return(<ScrollView>{this.state.buySellViews}</ScrollView>);
+      return(
+      <ScrollView>
+        <SummaryComponent value1={this.state.totalProfit.toFixed(2)}></SummaryComponent>
+        {this.state.buySellViews}
+      </ScrollView>);
     } else {
       return null;
     }

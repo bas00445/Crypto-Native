@@ -86,7 +86,6 @@ export default class BuySellComponent extends Component {
           {this.renderProfitArea()}
         </View> 
 
-          
       </View>
     );
   }
