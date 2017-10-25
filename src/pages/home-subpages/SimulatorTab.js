@@ -109,6 +109,11 @@ export default class SimulatorTab extends Component {
     var cList = this.state.collectionList;
     var tProfit = Number(0);
 
+    
+    cList.sort(function(a, b){
+      return new Date(b.datetime) - new Date(a.datetime);
+    });    
+    
     for(var i=0; i< cList.length; i++) {
       if(cList[i].profit != null){
         profit = cList[i].profit;
@@ -119,6 +124,7 @@ export default class SimulatorTab extends Component {
       views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
         timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
     }
+    
 
     this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
   }
