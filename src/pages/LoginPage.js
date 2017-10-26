@@ -86,20 +86,24 @@ export default class LoginPage extends Component {
     }
 
     signUp() {
-        if (this.state.newPass == this.state.newPassConfirm) {
-          firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass).then(
-              (user) => {
-                  this.openSignupModal(false);
-                  this.sendUserUID(user.uid);
-              },
-              (err) => {
-                  alert(err.toString());
-              }
-          );
-        } else {
-            alert('Passwords must be the same');
+        try{
+            if (this.state.newPass == this.state.newPassConfirm) {
+            firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass).then(
+                (user) => {
+                    this.openSignupModal(false);
+                    this.sendUserUID(user.uid);
+                },
+                (err) => {
+                    alert(err.toString());
+                }
+            );
+            } else {
+                alert('Passwords must be the same');
+            }
+        }catch(err) {
+            alert(err.toString());
         }
-      }  
+    }  
 
     async sendUserUID(uid) {
         let data = {
