@@ -18,7 +18,7 @@ export default class BuySellComponent extends Component {
     this.timeStamp = this.props.timeStamp;
     this.value1 = this.props.value1;
     this.icon = require('../assets/icons/dollar.png');
-    this.tintColor = Color.yellow;
+    this.tintColor = Color.white;
   }
 
   render() {

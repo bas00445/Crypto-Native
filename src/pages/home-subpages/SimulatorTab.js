@@ -29,7 +29,9 @@ export default class SimulatorTab extends Component {
 
   constructor(props) {
     super(props);
+  }
 
+  componentWillMount() {
     var day = new Date().getDate();
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
@@ -47,6 +49,7 @@ export default class SimulatorTab extends Component {
 
     this.requestBuySell(year, month, day);
   }
+
   
   async openDatePicker() {
     try {
@@ -104,27 +107,37 @@ export default class SimulatorTab extends Component {
     }
   }
 
+  sortDatetime(lst) {
+    var date = this.state.date;
+
+    lst.sort(function(a, b){
+      var timeA = a.datetime.split(' ');
+      timeA = timeA[1].split(':');
+
+      var timeB = b.datetime.split(' ');
+      timeB = timeB[1].split(':');
+      
+      return (new Date(date.year, date.month, date.day, timeB[0], timeB[1], timeB[2]).getTime() -
+              new Date(date.year, date.month, date.day, timeA[0], timeA[1], timeA[2]).getTime());
+    });    
+  }
+
   generateBuySellComponent() {
     const views = [];
     var cList = this.state.collectionList;
     var tProfit = Number(0);
-
     
-    cList.sort(function(a, b){
-      return new Date(b.datetime) - new Date(a.datetime);
-    });    
+    this.sortDatetime(cList);
     
     for(var i=0; i< cList.length; i++) {
       if(cList[i].profit != null){
         profit = cList[i].profit;
         tProfit += Number(profit);
-        console.log(tProfit);
       }
 
       views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
         timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
     }
-    
 
     this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
   }
