@@ -166,7 +166,7 @@ export default class SettingPage extends Component {
 
             <View style={localStyles.settingItem}>
               <View style={{flex: 1, alignItems:'flex-start', justifyContent: 'center'}}>
-                <Text style={localStyles.settingItemText}>Bitrex API Key</Text>
+                <Text style={localStyles.settingItemText}>Bittrex API Key</Text>
               </View>
               <View style={{flex: 1}}>
                 <TextInput secureTextEntry={true} onChangeText={(text) => {this.setState({bitTrexKey: text})}}
@@ -176,8 +176,6 @@ export default class SettingPage extends Component {
                   style={{color: Color.whiteGrey1}}></TextInput>
               </View>
             </View>
-
-           
 
           </ScrollView>
         </View>

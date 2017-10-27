@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
 import BuySellComponent from '../../components/BuySellComponent';
 import SummaryComponent from '../../components/SummaryComponent';
+import { firebaseUID } from '../../globalvars/FirebaseConfig';
 import {
   StyleSheet,
   Text,
@@ -10,7 +11,8 @@ import {
   DatePickerAndroid,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -81,10 +83,10 @@ export default class SimulatorTab extends Component {
     try {
       this.setState({loading: true}); // start loading animation        
       
-      var responseSell = await fetch('http://pk-cryptobot.herokuapp.com/api/get_sell_orders?api_key=1&date=' + year + '-' + month + '-' + day);
+      var responseSell = await fetch('http://pk-cryptobot.herokuapp.com/api/get_sell_orders?api_key=' + firebaseUID +'&date=' + year + '-' + month + '-' + day);
       var responseJsonSell = await responseSell.json();
 
-      var responseBuy = await fetch('http://pk-cryptobot.herokuapp.com/api/get_buy_orders?api_key=1&date=' + year + '-' + month + '-' + day);
+      var responseBuy = await fetch('http://pk-cryptobot.herokuapp.com/api/get_buy_orders?api_key=' + firebaseUID + '&date=' + year + '-' + month + '-' + day);
       var responseJsonBuy = await responseBuy.json();
 
       var lstSell = JSON.parse(responseJsonSell);
@@ -142,6 +144,14 @@ export default class SimulatorTab extends Component {
     this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
   }
 
+  refreshList() {
+    var year = this.state.date.year;
+    var month = this.state.date.month;
+    var day = this.state.date.day;
+
+    this.requestBuySell(year, month, day);
+  }
+
   renderLoading() {
     if(this.state.loading) {
       return(<ActivityIndicator animating={true} size={'large'} color={Color.pink}></ActivityIndicator>);
@@ -153,7 +163,14 @@ export default class SimulatorTab extends Component {
   rendersellList() {
     if(!this.state.loading) {
       return(
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl 
+            refreshing={this.state.refreshing}
+            tintColor={Color.pink}
+            colors={[Color.pink]}
+            onRefresh={this.refreshList.bind(this)}/>
+        }>
         <SummaryComponent value1={this.state.totalProfit.toFixed(2)}></SummaryComponent>
         {this.state.buySellViews}
       </ScrollView>);

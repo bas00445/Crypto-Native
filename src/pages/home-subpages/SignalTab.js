@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Theme from '../../styles/GlobalStyles';
 import SignalComponent from '../../components/SignalComponent';
+import { firebaseUID } from '../../globalvars/FirebaseConfig';
 import {
   StyleSheet,
   Text,
@@ -11,7 +12,8 @@ import {
   TouchableOpacity,
   Modal,
   Button,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native';
 
 var Style = Theme.Style;
@@ -45,6 +47,7 @@ export default class SignalTab extends Component {
       selectedOrder: {},
       loadingSignal: true,
       showModal: false,
+      refreshing: false,
     }
 
     this.requestSignal(year, month, day);
@@ -53,7 +56,7 @@ export default class SignalTab extends Component {
   async requestSignal(year, month, day){
     try {
       this.setState({loadingSignal: true}); // start loading animation          
-      var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_signals?api_key=1&date=' + year + '-' + month + '-' + day);
+      var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_signals?api_key=' + firebaseUID + '&date=' + year + '-' + month + '-' + day);
       var responseJson = await response.json();
 
       this.setState({loadingSignal: false}); // start loading animation          
@@ -126,6 +129,14 @@ export default class SignalTab extends Component {
     this.setState({selectedOrder: {}});
   }
 
+  refreshList() {
+    var year = this.state.date.year;
+    var month = this.state.date.month;
+    var day = this.state.date.day;
+
+    this.requestSignal(year, month, day);
+  }
+
   renderModal() {
     var s = this.state.selectedOrder;
     return(
@@ -182,7 +193,18 @@ export default class SignalTab extends Component {
 
   renderSignalList() {
     if(!this.state.loadingSignal) {
-      return(<ScrollView>{this.state.signalViews}</ScrollView>);
+      return(
+      <ScrollView
+        refreshControl={
+          <RefreshControl 
+            refreshing={this.state.refreshing}
+            tintColor={Color.pink}
+            colors={[Color.pink]}
+            onRefresh={this.refreshList.bind(this)}/>
+        }>
+        {this.state.signalViews}
+      </ScrollView>
+    );
     } else {
       return null;
     }

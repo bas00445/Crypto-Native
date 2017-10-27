@@ -36,6 +36,7 @@ export default class LoginPage extends Component {
             newPass: '',
             newPassConfirm: '',
             reg_code: '',
+            fcm_token: '',
             signupVisible: false,
             forgotVisible: false,
             correctCode: false,
@@ -91,7 +92,10 @@ export default class LoginPage extends Component {
             firebase.auth().createUserWithEmailAndPassword(this.state.newEmail, this.state.newPass).then(
                 (user) => {
                     this.openSignupModal(false);
-                    this.sendUserUID(user.uid);
+                    FCM.getFCMToken().then(token => {
+                        // store fcm token in your server
+                        this.sendUserData(user.uid, token);
+                    });
                 },
                 (err) => {
                     alert(err.toString());
@@ -105,7 +109,7 @@ export default class LoginPage extends Component {
         }
     }  
 
-    async sendUserUID(uid) {
+    async sendUserData(uid, token) {
         let data = {
             method: 'POST',
             headers: {
@@ -114,6 +118,7 @@ export default class LoginPage extends Component {
             },
             body: JSON.stringify({
               uid: uid,
+              reg_id: token
             })
           }
          var response = await fetch('http://pk-cryptobot.herokuapp.com/api/register', data);
@@ -145,20 +150,10 @@ export default class LoginPage extends Component {
         this.openForgotModal(true);
     }
 
-    getFCMToken() {
-        FCM.getFCMToken().then(token => {
-            alert('Token' + token.toString());
-            // store fcm token in your server
-        });
-    }
-
   login() {
-    try {
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass);
-    } catch (error) {
-        alert(error.toString());
-    }
-
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(error => {
+            alert(error.toString());
+        });
     }
 
     confirmResetPassword() {
@@ -172,8 +167,8 @@ export default class LoginPage extends Component {
                 alert(err);
             }
         )
-       
     }
+
     renderForgotPasswordModal() {
         return(
             <Modal
@@ -267,7 +262,8 @@ export default class LoginPage extends Component {
                         <Button
                             onPress={this.validateUser.bind(this)}
                             title="Confirm"
-                            color={Color.whiteGrey2}/>
+                            color={Color.whiteGrey2}/> 
+                            
                     </View>
                     <View style={{flex: 4, padding: 5}}>
                         <Button
