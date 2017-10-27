@@ -47,15 +47,14 @@ export default class DrawerComponent extends Component {
              priority: notif.fcm.priority,
              title: notif.fcm.title,
              sound: "default", 
+             priority: "high",
+             auto_cancel: true,
              large_icon: "ic_launcher",// Android only
              icon: "ic_launcher",
-             show_in_foreground :true, /* notification when app is in foreground (local & remote)*/
-             vibrate: 300, /* Android only default: 300, no vibration if you pass null*/
-             lights: true, // Android only, LED blinking (default false)
-             status: notif.fcm.status,
              color: "red",
-             picture: null,
-             ticker: true
+             vibrate: 1000,
+             lights: true,
+             show_in_foreground :true, 
          });
       }
     });
