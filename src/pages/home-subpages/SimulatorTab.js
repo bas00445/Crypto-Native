@@ -110,50 +110,53 @@ export default class SimulatorTab extends Component {
   }
 
   sortDatetime(lst) {
-    try {
-      var date = this.state.date;
+    
+    var date = this.state.date;
 
-      lst.sort(function(a, b){
-        var timeA = a.datetime.split(' ');
-        timeA = timeA[1].split(':');
+    lst.sort(function(a, b){
+      var timeA = a.datetime.split(' ');
+      timeA = timeA[1].split(':');
 
-        var timeB = b.datetime.split(' ');
-        timeB = timeB[1].split(':');
-        
-        return (new Date(date.year, date.month, date.day, timeB[0], timeB[1], timeB[2]).getTime() -
-                new Date(date.year, date.month, date.day, timeA[0], timeA[1], timeA[2]).getTime());
-      }); 
-    } catch(error) {
-      alert(error.toString()); 
-    }
+      var timeB = b.datetime.split(' ');
+      timeB = timeB[1].split(':');
+      
+      return (new Date(date.year, date.month, date.day, timeB[0], timeB[1], timeB[2]).getTime() -
+              new Date(date.year, date.month, date.day, timeA[0], timeA[1], timeA[2]).getTime());
+    }); 
+
   }
 
   generateBuySellComponent() {
-    const views = [];
+    try {
+      const views = [];
 
-    this.setState({buySellViews: views});
-    
-    var cList = this.state.collectionList;
-    var tProfit = Number(0);
-    
-    this.sortDatetime(cList);
-    
-    for(var i=0; i< cList.length; i++) {
-      if(cList[i].profit != null){
-        profit = cList[i].profit;
-        tProfit += Number(profit);
+      this.setState({buySellViews: views});
+      
+      var cList = this.state.collectionList;
+      var tProfit = Number(0);
+      
+      this.sortDatetime(cList);
+      
+      for(var i=0; i< cList.length; i++) {
+        if(cList[i].profit != null){
+          profit = cList[i].profit;
+          tProfit += Number(profit);
+        }
+
+        views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
+          timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
       }
+      
+      // Push front
+      views.unshift(
+        <SummaryComponent value1={tProfit.toFixed(2)}></SummaryComponent>       
+      );
 
-      views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
-        timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
+      this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
+
+    } catch(error) {
+      
     }
-    
-    // Push front
-    views.unshift(
-      <SummaryComponent value1={tProfit.toFixed(2)}></SummaryComponent>       
-    );
-
-    this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
   }
 
   refreshList() {
