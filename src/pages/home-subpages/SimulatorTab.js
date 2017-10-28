@@ -38,7 +38,7 @@ export default class SimulatorTab extends Component {
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
 
-    this.state = {
+    this.setState({
       date: {
         day: day,
         month: month,
@@ -47,7 +47,7 @@ export default class SimulatorTab extends Component {
       selectedDate: year + '/' + month + '/' + day,
       loading: true,
       totalProfit: null
-    }
+    });
 
     this.requestBuySell(year, month, day);
   }
@@ -110,18 +110,22 @@ export default class SimulatorTab extends Component {
   }
 
   sortDatetime(lst) {
-    var date = this.state.date;
+    try {
+      var date = this.state.date;
 
-    lst.sort(function(a, b){
-      var timeA = a.datetime.split(' ');
-      timeA = timeA[1].split(':');
+      lst.sort(function(a, b){
+        var timeA = a.datetime.split(' ');
+        timeA = timeA[1].split(':');
 
-      var timeB = b.datetime.split(' ');
-      timeB = timeB[1].split(':');
-      
-      return (new Date(date.year, date.month, date.day, timeB[0], timeB[1], timeB[2]).getTime() -
-              new Date(date.year, date.month, date.day, timeA[0], timeA[1], timeA[2]).getTime());
-    });    
+        var timeB = b.datetime.split(' ');
+        timeB = timeB[1].split(':');
+        
+        return (new Date(date.year, date.month, date.day, timeB[0], timeB[1], timeB[2]).getTime() -
+                new Date(date.year, date.month, date.day, timeA[0], timeA[1], timeA[2]).getTime());
+      }); 
+    } catch(error) {
+      alert(error.toString()); 
+    }
   }
 
   generateBuySellComponent() {
