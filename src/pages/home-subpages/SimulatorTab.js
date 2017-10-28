@@ -126,6 +126,9 @@ export default class SimulatorTab extends Component {
 
   generateBuySellComponent() {
     const views = [];
+
+    this.setState({buySellViews: views});
+    
     var cList = this.state.collectionList;
     var tProfit = Number(0);
     
@@ -140,11 +143,17 @@ export default class SimulatorTab extends Component {
       views.push(<BuySellComponent value1={cList[i].price} value2={cList[i].profit} key={i}
         timeStamp={cList[i].datetime} coinType={cList[i].name}></BuySellComponent>);
     }
+    
+    // Push front
+    views.unshift(
+      <SummaryComponent value1={tProfit.toFixed(2)}></SummaryComponent>       
+    );
 
     this.setState({buySellViews: views, totalProfit: tProfit, loading: false});
   }
 
   refreshList() {
+    this.setState({loading: true});
     var year = this.state.date.year;
     var month = this.state.date.month;
     var day = this.state.date.day;
@@ -152,31 +161,19 @@ export default class SimulatorTab extends Component {
     this.requestBuySell(year, month, day);
   }
 
-  renderLoading() {
-    if(this.state.loading) {
-      return(<ActivityIndicator animating={true} size={'large'} color={Color.pink}></ActivityIndicator>);
-    } else {
-      return null;
-    }
-  }
-
   rendersellList() {
-    if(!this.state.loading) {
-      return(
-      <ScrollView
-        refreshControl={
-          <RefreshControl 
-            refreshing={this.state.refreshing}
-            tintColor={Color.pink}
-            colors={[Color.pink]}
-            onRefresh={this.refreshList.bind(this)}/>
-        }>
-        <SummaryComponent value1={this.state.totalProfit.toFixed(2)}></SummaryComponent>
-        {this.state.buySellViews}
-      </ScrollView>);
-    } else {
-      return null;
-    }
+    return(
+    <ScrollView
+      refreshControl={
+        <RefreshControl 
+          refreshing={this.state.loading}
+          tintColor={Color.pink}
+          colors={[Color.pink]}
+          onRefresh={this.refreshList.bind(this)}/>
+      }>
+      {this.state.buySellViews}
+    </ScrollView>);
+    
   }
 
   render() {
@@ -197,7 +194,6 @@ export default class SimulatorTab extends Component {
           </TouchableOpacity>
         </View>
         <View style={{flex: 1, paddingBottom: 10, justifyContent: 'center'}}>
-          {this.renderLoading()}
           {this.rendersellList()}
         </View>
       </View>

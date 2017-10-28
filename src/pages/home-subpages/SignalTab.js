@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   Modal,
   Button,
-  ActivityIndicator,
   RefreshControl
 } from 'react-native';
 
@@ -47,7 +46,6 @@ export default class SignalTab extends Component {
       selectedOrder: {},
       loadingSignal: true,
       showModal: false,
-      refreshing: false,
     }
 
     this.requestSignal(year, month, day);
@@ -59,8 +57,6 @@ export default class SignalTab extends Component {
       var response = await fetch('http://pk-cryptobot.herokuapp.com/api/get_signals?api_key=' + firebaseUID + '&date=' + year + '-' + month + '-' + day);
       var responseJson = await response.json();
 
-      this.setState({loadingSignal: false}); // start loading animation          
-      
       var lst = JSON.parse(responseJson);
       this.setState({signalList: lst});
       this.generateSignalComponent();
@@ -107,7 +103,7 @@ export default class SignalTab extends Component {
       );
     }
     views.reverse(); // Show lastest data first
-    this.setState({signalViews: views});
+    this.setState({signalViews: views, loadingSignal: false});
   }
 
   buySelectedOrder(obj) {
@@ -183,31 +179,19 @@ export default class SignalTab extends Component {
     );
   }
 
-  renderLoading() {
-    if(this.state.loadingSignal) {
-      return(<ActivityIndicator animating={true} size={'large'} color={Color.pink}></ActivityIndicator>);
-    } else {
-      return null;
-    }
-  }
-
   renderSignalList() {
-    if(!this.state.loadingSignal) {
-      return(
-      <ScrollView
-        refreshControl={
-          <RefreshControl 
-            refreshing={this.state.refreshing}
-            tintColor={Color.pink}
-            colors={[Color.pink]}
-            onRefresh={this.refreshList.bind(this)}/>
-        }>
-        {this.state.signalViews}
-      </ScrollView>
-    );
-    } else {
-      return null;
-    }
+    return(
+    <ScrollView
+      refreshControl={
+        <RefreshControl 
+          refreshing={this.state.loadingSignal}
+          tintColor={Color.pink}
+          colors={[Color.pink]}
+          onRefresh={this.refreshList.bind(this)}/>
+      }>
+      {this.state.signalViews}
+    </ScrollView>
+  );
   }
 
   render() {
@@ -229,7 +213,6 @@ export default class SignalTab extends Component {
           </TouchableOpacity>
         </View>
         <View style={{flex: 1, paddingBottom: 10, justifyContent: 'center'}}>
-          {this.renderLoading()}
           {this.renderSignalList()}
         </View>
       </View>
